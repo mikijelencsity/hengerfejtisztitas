@@ -181,6 +181,12 @@ h1 .amber{color:var(--walnut)}
   display:flex;gap:clamp(24px,5vw,70px);margin-top:clamp(50px,8vh,90px);
   padding-top:34px;border-top:1px solid var(--line);flex-wrap:wrap;
 }
+@media(max-width:768px){
+  .hero-meta{
+    flex-direction:column;
+    gap:16px;
+  }
+}
 .hm-item{font-family:var(--mono)}
 .hm-item b{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(1.4rem,2.6vw,2.1rem);color:var(--ink)}
 .hm-item b em{font-style:normal;color:var(--walnut)}
