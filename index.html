@@ -137,11 +137,18 @@ header{
   letter-spacing:.3em;text-transform:uppercase;color:var(--walnut);margin-bottom:28px;
   border:1px solid rgba(138,90,43,.4);padding:9px 16px;width:fit-content;background:rgba(250,246,238,.6);
 }
+@media(max-width:768px){
+  .hero-tag{
+    font-size:.62rem;
+    letter-spacing:.2em;
+    padding:7px 12px;
+  }
+}
 .hero-tag::before{content:'';width:7px;height:7px;background:var(--walnut);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(138,90,43,.45)}50%{box-shadow:0 0 0 8px rgba(138,90,43,0)}}
 h1{
   font-family:var(--disp);font-weight:900;
-  font-size:clamp(3.2rem,9vw,6rem);line-height:1.02;letter-spacing:-.015em;
+  font-size:clamp(2.2rem,7vw,6rem);line-height:1.02;letter-spacing:-.015em;
   text-transform:uppercase;max-width:15ch;
 }
 h1 .hollow{
@@ -188,11 +195,12 @@ h1 .amber{color:var(--walnut)}
 
 @media(max-width:768px){
   header{
+    min-height:unset;
     padding:110px clamp(12px,3vw,40px) 60px;
-    min-height:auto;
+    background:inherit;
   }
 }
-@media (max-width:1440px) and (max-height:900px){
+@media (max-width:1440px) and (max-height:900px) and (min-width:769px){
   header{
     min-height:auto;
     padding:32px clamp(20px,3vw,40px) 16px;
@@ -548,7 +556,6 @@ footer a:hover{color:var(--walnut)}
     </div>
     <div class="hero-meta hr hr-5">
       <div class="hm-item"><b data-count="100"><em>0</em>%</b><span>lerakódás eltávolítva</span></div>
-      <div class="hm-item"><b><em>0</em> db</b><span>megbontott hengerfej</span></div>
       <div class="hm-item"><b data-count="4" data-suffix=" óra">0 óra</b><span>átlagos munkaidő</span></div>
       <div class="hm-item"><b>100% <em>BIO</em></b><span>lebomló granulátum</span></div>
     </div>
