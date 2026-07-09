@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dióhéjas Szeleptisztítás Ózd — Bontás nélküli motorkoksztalanítás</title>
+<meta name="description" content="Professzionális dióhéjas szívószelep-tisztítás Ózdon. GDI, TSI, TFSI és dízelmotorok bontás nélküli koksztalanítása biológiailag lebomló dióhéj-granulátummal. Visszaadjuk a motor eredeti teljesítményét.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;
+  --paper-2:#ede6d6;
+  --paper-3:#e3d9c4;
+  --card:#faf6ee;
+  --ink:#241c12;
+  --ink-dim:#71634f;
+  --walnut:#8a5a2b;      /* dióhéj barna */
+  --walnut-hot:#a46c33;
+  --walnut-deep:#5c3a18;
+  --line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;
+  --disp:'Unbounded',sans-serif;
+  --body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--walnut);color:var(--paper)}
+img{display:block;max-width:100%}
+
+/* ---------- grain + texture ---------- */
+body::before{
+  content:'';position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- preloader (clean) ---------- */
+#preloader{
+  position:fixed;inset:0;z-index:9999;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .6s ease;
+}
+#preloader.done{opacity:0;pointer-events:none}
+.pl-inner{display:flex;flex-direction:column;align-items:center;gap:24px}
+.pl-mark{
+  width:40px;height:40px;border:1.5px solid var(--walnut);transform:rotate(45deg);
+  position:relative;opacity:0;animation:plMark .7s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.pl-mark::before{content:'';position:absolute;inset:0;margin:auto;width:12px;height:12px;background:var(--walnut);border-radius:50%}
+@keyframes plMark{from{opacity:0;transform:rotate(45deg) scale(.7)}to{opacity:1;transform:rotate(45deg) scale(1)}}
+.pl-word{
+  font-family:var(--disp);font-weight:700;font-size:.8rem;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--ink);
+}
+.pl-track{width:148px;height:1px;background:var(--line);position:relative;overflow:hidden}
+.pl-track i{position:absolute;left:0;top:0;height:100%;width:0;background:var(--walnut)}
+
+/* ---------- custom cursor ---------- */
+.cursor{position:fixed;z-index:9000;pointer-events:none;top:0;left:0}
+.cursor .c-dot{width:6px;height:6px;background:var(--walnut);border-radius:50%;position:absolute;transform:translate(-50%,-50%)}
+.cursor .c-ring{
+  width:34px;height:34px;border:1px solid rgba(138,90,43,.55);border-radius:50%;
+  position:absolute;transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,border-color .25s;
+}
+body.c-hover .cursor .c-ring{width:58px;height:58px;border-color:var(--walnut)}
+@media (pointer:coarse){.cursor{display:none}}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,4vw,56px);height:76px;
+  border-bottom:1px solid transparent;
+  transition:background .4s,border-color .4s,height .4s;
+  opacity:0;transform:translateY(-10px);
+}
+body.loaded nav{opacity:1;transform:none;transition:opacity .8s .3s,transform .8s .3s,background .4s,border-color .4s}
+nav.scrolled{background:rgba(245,240,230,.88);backdrop-filter:blur(14px);border-color:var(--line);height:64px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.logo-mark{
+  width:34px;height:34px;border:1.5px solid var(--walnut);position:relative;flex-shrink:0;
+  transform:rotate(45deg);display:flex;align-items:center;justify-content:center;
+}
+.logo-mark::before{content:'';width:12px;height:12px;background:var(--walnut);border-radius:50%}
+.logo-text{font-family:var(--disp);font-weight:700;font-size:.86rem;letter-spacing:.06em;line-height:1.15}
+.logo-text small{display:block;font-family:var(--mono);font-weight:400;font-size:.58rem;letter-spacing:.3em;color:var(--walnut);text-transform:uppercase}
+.nav-cta{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--paper);background:var(--walnut);padding:11px 20px;text-decoration:none;
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+  transition:background .25s;font-weight:700;
+}
+.nav-cta:hover{background:var(--walnut-hot)}
+@media(max-width:640px){
+  nav{padding:0 16px}
+  .logo-text{font-size:.76rem}
+  .logo-text small{display:none}
+  .nav-cta{padding:10px 13px;font-size:.6rem;letter-spacing:.04em}
+}
+@media(max-width:360px){
+  .logo-text{font-size:.7rem}
+  .nav-cta{padding:9px 11px;font-size:.56rem}
+}
+
+/* ---------- hero ---------- */
+header{
+  min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:center;
+  padding:120px clamp(20px,4vw,56px) 60px;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse 80% 60% at 75% 20%,rgba(138,90,43,.12),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 15% 85%,rgba(138,90,43,.07),transparent 60%),
+    var(--paper);
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:-1;opacity:.6;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 90% 80% at 50% 40%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 80% at 50% 40%,#000 30%,transparent 75%);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--walnut);margin-bottom:28px;
+  border:1px solid rgba(138,90,43,.4);padding:9px 16px;width:fit-content;background:rgba(250,246,238,.6);
+}
+.hero-tag::before{content:'';width:7px;height:7px;background:var(--walnut);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(138,90,43,.45)}50%{box-shadow:0 0 0 8px rgba(138,90,43,0)}}
+h1{
+  font-family:var(--disp);font-weight:900;
+  font-size:clamp(2.3rem,7.2vw,6rem);line-height:1.02;letter-spacing:-.015em;
+  text-transform:uppercase;max-width:none;
+}
+h1 .hollow{
+  color:transparent;-webkit-text-stroke:1.5px var(--ink);
+}
+h1 .amber{color:var(--walnut)}
+.hero-sub{
+  max-width:52ch;color:var(--ink-dim);margin-top:30px;font-size:clamp(1rem,1.4vw,1.15rem);
+}
+.hero-sub strong{color:var(--ink);font-weight:600}
+.hero-actions{display:flex;gap:18px;margin-top:44px;flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  padding:17px 32px;text-decoration:none;transition:.25s;display:inline-flex;align-items:center;gap:12px;
+}
+.btn-solid{
+  color:var(--paper);background:var(--walnut);
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+}
+.btn-solid:hover{background:var(--walnut-hot);gap:18px}
+.btn-ghost{color:var(--ink);border:1px solid rgba(36,28,18,.3)}
+.btn-ghost:hover{border-color:var(--walnut);color:var(--walnut)}
+.hero-meta{
+  display:flex;gap:clamp(24px,5vw,70px);margin-top:clamp(50px,8vh,90px);
+  padding-top:34px;border-top:1px solid var(--line);flex-wrap:wrap;
+}
+.hm-item{font-family:var(--mono)}
+.hm-item b{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(1.4rem,2.6vw,2.1rem);color:var(--ink)}
+.hm-item b em{font-style:normal;color:var(--walnut)}
+.hm-item span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
+.hero-scroll{
+  position:absolute;right:clamp(20px,4vw,56px);bottom:34px;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);
+  writing-mode:vertical-rl;display:flex;align-items:center;gap:14px;
+}
+.hero-scroll::after{content:'';width:1px;height:56px;background:linear-gradient(var(--walnut),transparent);animation:drip 2s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+@media (max-width:1440px) and (max-height:900px){
+  header{
+    min-height:auto;
+    padding:32px clamp(20px,3vw,40px) 16px;
+  }
+  .hero-tag{
+    margin-bottom:8px;
+    padding:5px 10px;
+    font-size:.58rem;
+  }
+  h1{
+    font-size:clamp(1.5rem,3.5vw,2.6rem);
+    max-width:10ch;
+    line-height:0.96;
+    margin-bottom:8px;
+  }
+  .hero-sub{
+    margin-top:8px;
+    font-size:clamp(.85rem,.9vw,.92rem);
+    max-width:42ch;
+    line-height:1.4;
+  }
+  .hero-actions{margin-top:12px;gap:10px}
+  .btn{padding:10px 16px;font-size:.64rem}
+  .hero-meta{display:none}
+  .hero-scroll{display:none}
+}
+
+/* hero load-in */
+.hr{opacity:0;transform:translateY(34px)}
+body.loaded .hr{animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+body.loaded .hr-1{animation-delay:.15s}
+body.loaded .hr-2{animation-delay:.3s}
+body.loaded .hr-3{animation-delay:.5s}
+body.loaded .hr-4{animation-delay:.65s}
+body.loaded .hr-5{animation-delay:.85s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- marquee ---------- */
+.marquee{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;padding:16px 0;background:var(--paper-2);
+}
+.marquee-track{display:flex;gap:60px;width:max-content;animation:scrolltrack 30s linear infinite}
+.marquee span{
+  font-family:var(--disp);font-weight:600;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-dim);display:flex;align-items:center;gap:60px;white-space:nowrap;
+}
+.marquee span::after{content:'◆';color:var(--walnut);font-size:.6rem}
+@keyframes scrolltrack{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{padding:clamp(80px,12vh,150px) clamp(20px,4vw,56px);position:relative}
+.wrap{max-width:1240px;margin:0 auto}
+.sec-head{margin-bottom:clamp(44px,7vh,80px)}
+.sec-index{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;color:var(--walnut);
+  text-transform:uppercase;display:flex;align-items:center;gap:16px;margin-bottom:20px;
+}
+.sec-index::after{content:'';height:1px;width:64px;background:rgba(138,90,43,.5)}
+h2{
+  font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,4.4vw,3.2rem);
+  line-height:1.08;text-transform:uppercase;letter-spacing:-.01em;max-width:22ch;
+}
+h2 .amber{color:var(--walnut)}
+.sec-lead{color:var(--ink-dim);max-width:60ch;margin-top:22px;font-size:1.05rem}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
+
+/* ---------- problem section ---------- */
+.problem-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,70px);align-items:start}
+@media(max-width:940px){.problem-grid{grid-template-columns:1fr}}
+.problem-copy p{color:var(--ink-dim);margin-bottom:18px}
+.problem-copy p strong{color:var(--ink)}
+.problem-copy .callout{
+  border-left:2px solid var(--walnut);padding:18px 22px;background:var(--card);
+  margin:26px 0;color:var(--ink);font-size:.98rem;box-shadow:0 6px 24px rgba(36,28,18,.05);
+}
+.problem-img{position:relative}
+.problem-img img{border:1px solid var(--line);box-shadow:0 18px 50px rgba(36,28,18,.14)}
+.img-tag{
+  position:absolute;left:-1px;bottom:-1px;background:var(--paper);border:1px solid var(--line);
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:10px 16px;color:var(--walnut);
+}
+.symptoms{margin-top:clamp(50px,8vh,90px);display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:1080px){.symptoms{grid-template-columns:repeat(2,1fr)}.symptoms .symptom:last-child{grid-column:1 / -1}}
+@media(max-width:560px){.symptoms{grid-template-columns:1fr}.symptoms .symptom:last-child{grid-column:auto}}
+.symptom{
+  background:var(--card);padding:30px 26px;transition:background .3s;position:relative;overflow:hidden;
+}
+.symptom::before{
+  content:attr(data-i);position:absolute;right:14px;top:10px;font-family:var(--disp);font-weight:900;
+  font-size:2.6rem;color:transparent;-webkit-text-stroke:1px rgba(36,28,18,.1);transition:.3s;
+}
+.symptom:hover{background:var(--paper-2)}
+.symptom:hover::before{-webkit-text-stroke-color:rgba(138,90,43,.45)}
+.symptom h3{font-family:var(--body);font-weight:700;font-size:1.02rem;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.symptom h3::before{content:'▸';color:var(--walnut)}
+.symptom p{font-size:.9rem;color:var(--ink-dim)}
+
+/* ---------- process ---------- */
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);counter-reset:step}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);padding:clamp(28px,4vw,44px);position:relative;counter-increment:step;transition:background .3s}
+.step:hover{background:var(--paper-2)}
+.step-num{
+  font-family:var(--mono);font-weight:700;font-size:.95rem;letter-spacing:.14em;
+  color:var(--walnut);line-height:1;margin-bottom:22px;display:flex;align-items:center;gap:14px;
+}
+.step-num::after{content:'';flex:0 0 40px;height:1px;background:rgba(138,90,43,.4);transition:.3s}
+.step:hover .step-num::after{flex-basis:60px;background:var(--walnut)}
+.step h3{font-family:var(--disp);font-weight:600;font-size:1.05rem;text-transform:uppercase;letter-spacing:.03em;margin-bottom:14px}
+.step p{color:var(--ink-dim);font-size:.95rem}
+.step .step-tag{
+  position:absolute;top:26px;right:26px;font-family:var(--mono);font-size:.6rem;
+  letter-spacing:.2em;color:var(--ink-dim);text-transform:uppercase;border:1px solid var(--line);padding:5px 10px;background:var(--paper);
+}
+
+/* ---------- why walnut / specs ---------- */
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(20px,3vw,32px)}
+.spec{
+  border:1px solid var(--line);padding:32px 28px;position:relative;background:var(--card);
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+}
+.spec:hover{border-color:rgba(138,90,43,.5);transform:translateY(-4px);box-shadow:0 18px 44px rgba(36,28,18,.1)}
+.spec-icon{
+  width:46px;height:46px;border:1px solid var(--walnut);display:flex;align-items:center;justify-content:center;
+  margin-bottom:22px;color:var(--walnut);font-size:1.2rem;background:rgba(138,90,43,.07);
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+}
+.spec h3{font-family:var(--body);font-weight:700;font-size:1.05rem;margin-bottom:12px}
+.spec p{font-size:.92rem;color:var(--ink-dim)}
+.spec .spec-mono{
+  display:block;margin-top:18px;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--walnut);
+}
+
+/* ---------- gallery marquee ---------- */
+.gallery-marquee{display:flex;flex-direction:column;gap:16px}
+.gm-row{
+  overflow:hidden;position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+}
+.gm-track{display:flex;gap:16px;width:max-content;will-change:transform}
+.gm-row.left  .gm-track{animation:gmLeft 52s linear infinite}
+.gm-row.right .gm-track{animation:gmRight 52s linear infinite}
+.gallery-marquee:hover .gm-track{animation-play-state:paused}
+@keyframes gmLeft{to{transform:translateX(-50%)}}
+@keyframes gmRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.gm-item{
+  position:relative;flex-shrink:0;width:clamp(240px,26vw,330px);aspect-ratio:4/3;
+  overflow:hidden;border:1px solid var(--line);cursor:pointer;background:var(--paper-2);
+}
+.gm-item img{width:100%;height:100%;object-fit:cover;filter:saturate(.92);transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s}
+.gm-item:hover img{transform:scale(1.05);filter:saturate(1.05)}
+.gm-tag{
+  position:absolute;top:10px;left:10px;font-family:var(--mono);font-size:.56rem;
+  letter-spacing:.16em;text-transform:uppercase;padding:5px 9px;color:var(--walnut-deep);
+  background:rgba(245,240,230,.9);border:1px solid var(--line);backdrop-filter:blur(4px);
+}
+@media(prefers-reduced-motion:reduce){
+  .gm-row.left .gm-track,.gm-row.right .gm-track{animation:none}
+  .gm-row{overflow-x:auto}
+}
+
+/* lightbox */
+.lightbox{
+  position:fixed;inset:0;z-index:1500;background:rgba(24,18,10,.92);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;padding:5vmin;
+  opacity:0;pointer-events:none;transition:opacity .35s;
+}
+.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox img{max-width:100%;max-height:100%;border:1px solid rgba(245,240,230,.2);box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.lightbox .lb-close{
+  position:absolute;top:26px;right:30px;font-family:var(--mono);color:#f5f0e6;background:none;
+  border:1px solid rgba(245,240,230,.35);padding:10px 18px;font-size:.7rem;letter-spacing:.2em;cursor:pointer;
+  text-transform:uppercase;transition:.25s;
+}
+.lightbox .lb-close:hover{border-color:var(--walnut-hot);color:var(--walnut-hot)}
+
+/* ---------- engines ---------- */
+.engines{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.engine-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.engine-col{background:var(--card);padding:30px 26px}
+.engine-col h3{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--walnut);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line);
+}
+.engine-col ul{list-style:none}
+.engine-col li{
+  font-size:.92rem;color:var(--ink-dim);padding:7px 0 7px 20px;position:relative;
+}
+.engine-col li::before{content:'—';position:absolute;left:0;color:rgba(138,90,43,.6)}
+.engine-note{
+  margin-top:26px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--ink-dim);
+  border:1px dashed rgba(138,90,43,.45);padding:16px 20px;background:var(--card);
+}
+.engine-note b{color:var(--walnut)}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:860px;margin:0 auto}
+details{border-bottom:1px solid var(--line)}
+details summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:26px 4px;font-family:var(--body);font-weight:600;font-size:1.05rem;transition:color .25s;
+}
+details summary::-webkit-details-marker{display:none}
+details summary::after{
+  content:'+';font-family:var(--mono);color:var(--walnut);font-size:1.3rem;transition:transform .3s;flex-shrink:0;
+}
+details[open] summary::after{transform:rotate(45deg)}
+details summary:hover{color:var(--walnut)}
+details .faq-body{padding:0 4px 26px;color:var(--ink-dim);max-width:65ch}
+
+/* ---------- CTA / contact ---------- */
+.cta{
+  position:relative;overflow:hidden;text-align:center;
+  border-top:1px solid var(--line);background:var(--paper-2);
+}
+.cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 70% at 50% 100%,rgba(138,90,43,.14),transparent 65%);
+  pointer-events:none;
+}
+.cta h2{max-width:none;margin:0 auto}
+.cta .big-phone{
+  display:inline-block;font-family:var(--disp);font-weight:700;font-size:clamp(1.5rem,4.5vw,3rem);
+  color:var(--walnut);text-decoration:none;margin-top:36px;letter-spacing:.01em;transition:.3s;position:relative;
+}
+.cta .big-phone:hover{color:var(--walnut-hot);transform:scale(1.02)}
+.cta-meta{display:none}
+
+.contact-lead{max-width:56ch;margin:22px auto 0;text-align:center;color:var(--ink-dim)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);
+  margin-top:clamp(44px,6vh,72px);text-align:left;align-items:start;
+}
+@media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:40px}}
+.contact-info .big-phone{margin-top:0;display:inline-block}
+.ci-rows{display:flex;flex-direction:column;gap:22px;margin-top:32px}
+.ci-rows>div{border-left:1px solid rgba(138,90,43,.4);padding-left:20px;font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;color:var(--ink-dim);line-height:1.7}
+.ci-rows b{display:block;color:var(--ink);text-transform:uppercase;letter-spacing:.22em;font-size:.62rem;margin-bottom:7px}
+.ci-rows a{color:var(--walnut);text-decoration:none}
+.ci-rows a:hover{color:var(--walnut-hot)}
+
+/* ---------- contact form ---------- */
+.contact-form{
+  background:var(--card);border:1px solid var(--line);padding:clamp(24px,3vw,38px);
+  display:flex;flex-direction:column;gap:18px;box-shadow:0 18px 50px rgba(36,28,18,.07);
+}
+.field{display:flex;flex-direction:column;gap:8px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:460px){.field-row{grid-template-columns:1fr}}
+.field label{font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+.field input,.field textarea{
+  font-family:var(--body);font-size:.98rem;color:var(--ink);background:var(--paper);
+  border:1px solid var(--line);padding:13px 15px;transition:border-color .2s,box-shadow .2s;resize:vertical;width:100%;
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(113,99,79,.55)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--walnut);box-shadow:0 0 0 3px rgba(138,90,43,.12)}
+.field.error input,.field.error textarea{border-color:#b5462f;box-shadow:0 0 0 3px rgba(181,70,47,.12)}
+.cf-submit{border:none;cursor:pointer;justify-content:center;margin-top:6px;width:100%}
+.cf-note{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--walnut-deep);min-height:1.1em;text-align:center;line-height:1.5}
+.cf-note.err{color:#b5462f}
+
+/* ---------- sticky call button ---------- */
+.sticky-call{
+  position:fixed;left:clamp(16px,3vw,28px);bottom:clamp(16px,3vw,28px);z-index:1200;
+  display:inline-flex;align-items:center;text-decoration:none;background:var(--walnut);color:var(--paper);
+  height:56px;border-radius:40px;padding:0 4px;box-shadow:0 12px 30px rgba(92,58,24,.34);
+  transition:background .25s,box-shadow .25s;font-family:var(--mono);font-weight:700;
+}
+.sticky-call:hover{background:var(--walnut-hot);box-shadow:0 16px 40px rgba(92,58,24,.42)}
+.sticky-call .sc-ic{position:relative;width:48px;height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.sticky-call .sc-ic svg{width:20px;height:20px;fill:var(--paper);position:relative;z-index:2}
+.sticky-call .sc-ic::before{
+  content:'';position:absolute;top:50%;left:50%;width:50px;height:50px;border-radius:50%;
+  border:1.5px solid var(--walnut);transform:translate(-50%,-50%) scale(.7);opacity:.5;
+  animation:scPulse 2.6s ease-out infinite;pointer-events:none;
+}
+@keyframes scPulse{0%{transform:translate(-50%,-50%) scale(.7);opacity:.5}70%,100%{transform:translate(-50%,-50%) scale(1.35);opacity:0}}
+.sticky-call .sc-num{
+  overflow:hidden;max-width:0;opacity:0;white-space:nowrap;font-size:.82rem;letter-spacing:.04em;
+  transition:max-width .35s cubic-bezier(.2,.7,.2,1),opacity .3s,padding .35s;
+}
+.sticky-call:hover .sc-num,.sticky-call:focus-visible .sc-num{max-width:200px;opacity:1;padding:0 18px 0 4px}
+@media (prefers-reduced-motion:reduce){.sticky-call .sc-ic::before{animation:none;display:none}}
+@media(max-width:520px){
+  .sticky-call{padding:0;height:54px;width:54px;justify-content:center;border-radius:50%}
+  .sticky-call .sc-ic{width:54px;height:54px}
+  .sticky-call .sc-num{display:none}
+}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--line);padding:36px clamp(20px,4vw,56px);
+  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);
+}
+footer a{color:var(--ink-dim);text-decoration:none}
+footer a:hover{color:var(--walnut)}
+
+/* misc */
+#problema,#miert{overflow:hidden}
+.hollow-bg{
+  position:absolute;right:-2vw;top:8%;font-family:var(--disp);font-weight:900;
+  font-size:clamp(6rem,16vw,15rem);color:transparent;-webkit-text-stroke:1px rgba(36,28,18,.07);
+  pointer-events:none;user-select:none;line-height:1;text-transform:uppercase;white-space:nowrap;
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader">
+  <div class="pl-inner">
+    <div class="pl-mark"></div>
+    <div class="pl-word">Dióhéjas Tisztítás</div>
+    <div class="pl-track"><i id="plBar"></i></div>
+  </div>
+</div>
+
+<!-- ============ CURSOR ============ -->
+<div class="cursor"><div class="c-ring"></div><div class="c-dot"></div></div>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <span class="logo-mark"></span>
+    <span class="logo-text">DIÓHÉJAS<br>TISZTÍTÁS<small>ÓZD · MOTORKOKSZTALANÍTÁS</small></span>
+  </a>
+  <a href="#kapcsolat" class="nav-cta">Kapcsolatfelvétel</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap">
+    <div class="hero-tag hr hr-1">Bontás nélküli technológia · Ózd</div>
+    <h1 class="hr hr-2">A motorod megfullad a <span class="amber">koksztól.</span></h1>
+    <p class="hero-sub hr hr-3">Dióhéjas szívószelep-tisztítás közvetlen befecskendezéses <strong>GDI / TSI / TFSI benzin-</strong> és <strong>dízelmotorokhoz</strong>. Nagynyomású levegővel szórt, biológiailag lebomló dióhéj-granulátum — kíméletes a fémhez, könyörtelen a lerakódáshoz. <strong>Hengerfej-bontás nélkül.</strong></p>
+    <div class="hero-actions hr hr-4">
+      <a href="#kapcsolat" class="btn btn-solid">Kérj árajánlatot ▸</a>
+      <a href="#galeria" class="btn btn-ghost">Nézd meg az eredményt</a>
+    </div>
+    <div class="hero-meta hr hr-5">
+      <div class="hm-item"><b data-count="100"><em>0</em>%</b><span>lerakódás eltávolítva</span></div>
+      <div class="hm-item"><b><em>0</em> db</b><span>megbontott hengerfej</span></div>
+      <div class="hm-item"><b data-count="4" data-suffix=" óra">0 óra</b><span>átlagos munkaidő</span></div>
+      <div class="hm-item"><b>100% <em>BIO</em></b><span>lebomló granulátum</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">görgess lejjebb</div>
+</header>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>Szívószelep-koksztalanítás</span><span>GDI · TSI · TFSI · EcoBoost</span><span>Dízel EGR-lerakódás</span><span>Endoszkópos átvizsgálás</span><span>Bontás nélkül</span><span>Biológiailag lebomló</span>
+  </div>
+</div>
+
+<!-- ============ PROBLÉMA ============ -->
+<section id="problema">
+  <div class="hollow-bg">KOKSZ</div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-index">01 / Diagnózis</div>
+      <h2>Miért kokszolódik a <span class="amber">modern motor?</span></h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-copy rv rv-d1">
+        <p>A közvetlen befecskendezéses motorokban az üzemanyag <strong>már nem a szívócsatornán át érkezik</strong>, hanem egyenesen a hengerbe. Ez hatékonyabb égést ad — de van egy ára: <strong>a benzin többé nem mossa át a szívószelepeket.</strong></p>
+        <p>Közben a kartergáz-visszavezetés (PCV) és az EGR-rendszer olajpárát és kipufogógázt juttat a szívóoldalra. A forró szelepekre ez a keverék <strong>rétegről rétegre ráég</strong> — kemény, kátrányos koksszá alakul, amely elszűkíti a csatornákat és megzavarja a levegő áramlását.</p>
+        <div class="callout">Ez nem meghibásodás, hanem <strong>konstrukciós tulajdonság</strong> — minden GDI/TSI motort érint, jellemzően már 80–120 ezer km után mérhető teljesítményvesztést okozva.</div>
+        <p>A hagyományos "adalékos" tisztítók ide már nem érnek el. A vegyszeres áztatás kockázatos, a hengerfej-bontás pedig sokszoros költség. <strong>A dióhéjas szemcseszórás az egyetlen módszer, amely bontás nélkül, mechanikusan és maradéktalanul eltávolítja a lerakódást.</strong></p>
+      </div>
+      <div class="problem-img rv rv-d2">
+        <img src="images/before-koksz-szivocsatorna.jpg" alt="Erősen kokszos szívócsatornák tisztítás előtt" loading="lazy">
+        <div class="img-tag">◉ Valós ügyfélautó — tisztítás előtt</div>
+      </div>
+    </div>
+    <div class="symptoms">
+      <div class="symptom rv" data-i="01"><h3>Teljesítményvesztés</h3><p>A szűkülő csatornák fojtják a motort — érezhetően lomhább gyorsulás, "eltűnt lóerők".</p></div>
+      <div class="symptom rv rv-d1" data-i="02"><h3>Egyenetlen alapjárat</h3><p>Remegő, rázkódó üresjárat, ingadozó fordulatszám — a hengerek eltérő töltése miatt.</p></div>
+      <div class="symptom rv rv-d2" data-i="03"><h3>Megnőtt fogyasztás</h3><p>A rossz keverékképzés miatt a motor többet fogyaszt ugyanahhoz a teljesítményhez.</p></div>
+      <div class="symptom rv rv-d3" data-i="04"><h3>Hidegindítási gondok</h3><p>Nehéz indulás, rángatás hidegen, gyújtáskihagyás-hibakódok (misfire).</p></div>
+      <div class="symptom rv" data-i="05"><h3>Hibakódok, check engine</h3><p>P0300-as sorozatú kihagyáskódok, keverék- és levegőmennyiség-hibák.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EREDMÉNY / GALÉRIA ============ -->
+<section id="galeria">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-index">02 / Eredmény</div>
+      <h2>Valós munkák, <span class="amber">valós eredmények</span></h2>
+      <p class="sec-lead">Nem stockfotók — ezek a mi kezünk munkái, retusálás nélkül. Vidd az egeret a sávra a megállításhoz, és kattints bármelyik képre a nagyításhoz.</p>
+    </div>
+  </div>
+  <div class="gallery-marquee rv">
+    <div class="gm-row left">
+      <div class="gm-track">
+        <div class="gm-item"><img src="images/before-koksz-szivocsatorna.jpg" alt="Erősen kokszos szívócsatorna tisztítás előtt" loading="lazy"><span class="gm-tag">Előtte</span></div>
+        <div class="gm-item"><img src="images/after-csatorna-tiszta.jpg" alt="Fémtiszta szívócsatorna tisztítás után" loading="lazy"><span class="gm-tag">Utána</span></div>
+        <div class="gm-item"><img src="images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés a szívócsatornában" loading="lazy"><span class="gm-tag">Folyamat</span></div>
+        <div class="gm-item"><img src="images/before-szelepek-koksz.jpg" alt="Kokszos szívószelepek tisztítás előtt" loading="lazy"><span class="gm-tag">Előtte</span></div>
+        <div class="gm-item"><img src="images/after-szelepek-tiszta.jpg" alt="Szívószelepek dióhéjas tisztítás után" loading="lazy"><span class="gm-tag">Utána</span></div>
+        <div class="gm-item"><img src="images/process-maszkolas.jpg" alt="Precíz maszkolás szórás előtt" loading="lazy"><span class="gm-tag">Folyamat</span></div>
+      </div>
+    </div>
+    <div class="gm-row right">
+      <div class="gm-track">
+        <div class="gm-item"><img src="images/compare-tiszta-vs-koszos.jpg" alt="Tisztított és kokszos csatorna egymás mellett" loading="lazy"><span class="gm-tag">Összevetés</span></div>
+        <div class="gm-item"><img src="images/process-hengerfej-sor.jpg" alt="Hengerfej-sor a bontás után" loading="lazy"><span class="gm-tag">Folyamat</span></div>
+        <div class="gm-item"><img src="images/before-csatorna-koszos.jpg" alt="Kokszos csatorna tisztítás előtt" loading="lazy"><span class="gm-tag">Előtte</span></div>
+        <div class="gm-item"><img src="images/after-kerek-csatorna.jpg" alt="Fémtiszta kerek csatorna tisztítás után" loading="lazy"><span class="gm-tag">Utána</span></div>
+        <div class="gm-item"><img src="images/process-szoras-utan.jpg" alt="Csatorna közvetlenül a szórás után" loading="lazy"><span class="gm-tag">Folyamat</span></div>
+        <div class="gm-item"><img src="images/process-motorter-bmw.jpg" alt="Motortér a szívósor bontása után" loading="lazy"><span class="gm-tag">Folyamat</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOLYAMAT ============ -->
+<section id="folyamat">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-index">03 / Technológia</div>
+      <h2>Így dolgozunk — <span class="amber">lépésről lépésre</span></h2>
+      <p class="sec-lead">Sebészi precizitás, dokumentált folyamat. Minden munkafázisról fotót kapsz, az endoszkópos ellenőrzést a saját szemeddel láthatod.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="step-tag">~30 perc</div><div class="step-num">01</div><h3>Diagnosztika &amp; endoszkópia</h3><p>Hibakód-olvasás, majd endoszkópos kamerával belenézünk a szívócsatornákba. Még a bontás előtt pontosan látod, mennyire kokszos a motorod.</p></div>
+      <div class="step rv rv-d1"><div class="step-tag">Bontás</div><div class="step-num">02</div><h3>Szívósor eltávolítása</h3><p>Leszereljük a szívócsonkot — csak ennyit bontunk. A hengerfej, a vezérlés és a tömítési rendszer érintetlen marad.</p></div>
+      <div class="step rv"><div class="step-tag">Védelem</div><div class="step-num">03</div><h3>Precíz maszkolás</h3><p>A nem tisztítandó nyílásokat lezárjuk, az adott henger szelepeit zárt állásba forgatjuk — így egyetlen szemcse sem juthat az égéstérbe.</p></div>
+      <div class="step rv rv-d1"><div class="step-tag">Fő fázis</div><div class="step-num">04</div><h3>Dióhéjas szemcseszórás</h3><p>Nagynyomású levegővel dióhéj-granulátumot szórunk a csatornákba, miközben ipari vákuum szívja el a leváló kokszot és a szemcsét — zárt körfolyamatban.</p></div>
+      <div class="step rv"><div class="step-tag">QC</div><div class="step-num">05</div><h3>Ellenőrzés kamerával</h3><p>Hengerről hengerre endoszkóppal ellenőrizzük és fotózzuk az eredményt. Ami nem fémtiszta, azt újraszórjuk.</p></div>
+      <div class="step rv rv-d1"><div class="step-tag">Átadás</div><div class="step-num">06</div><h3>Összeszerelés &amp; próba</h3><p>Új tömítésekkel szereljük vissza a szívósort, töröljük a hibakódokat, majd próbaút után előtte–utána fotódokumentációval adjuk át az autót.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MIÉRT DIÓHÉJ ============ -->
+<section id="miert">
+  <div class="hollow-bg" style="top:auto;bottom:6%">DIÓHÉJ</div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-index">04 / Miért pont dióhéj?</div>
+      <h2>Kemény a kokszhoz, <span class="amber">kíméletes a fémhez</span></h2>
+    </div>
+    <div class="spec-grid">
+      <div class="spec rv"><div class="spec-icon">◆</div><h3>Ideális keménység</h3><p>A dióhéj a Mohs-skálán kb. 2,5–3,5 — keményebb a ráégett koksznál, de lágyabb az alumíniumnál és az acélnál. Lepattintja a lerakódást, a szelepet és a hengerfejet viszont nem karcolja.</p><span class="spec-mono">MOHS 2.5–3.5 / ALU-BIZTOS</span></div>
+      <div class="spec rv rv-d1"><div class="spec-icon">✦</div><h3>100% természetes</h3><p>Őrölt dióhéj — biológiailag lebomló, vegyszermentes szóróanyag. Nincs oldószer, nincs agresszív kémia, nincs kockázatos "áztatás" a motorodban.</p><span class="spec-mono">BIO GRANULÁTUM / 0% VEGYSZER</span></div>
+      <div class="spec rv rv-d2"><div class="spec-icon">◈</div><h3>Zárt rendszer</h3><p>A szórás és az elszívás egyszerre történik: a granulátum és a leváló koksz azonnal távozik. Semmi nem marad a szívórendszerben.</p><span class="spec-mono">SZÓRÁS + VÁKUUM EGYIDŐBEN</span></div>
+      <div class="spec rv rv-d3"><div class="spec-icon">▣</div><h3>Gyári szintű eredmény</h3><p>Ugyanezt az eljárást használják a BMW, VW és Audi márkaszervizek is a szívószelep-koksz eltávolítására — mert mechanikusan, láthatóan, ellenőrizhetően tisztít.</p><span class="spec-mono">OEM-SZERVIZEK ÁLTAL IS ALKALMAZOTT</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÉRINTETT MOTOROK ============ -->
+<section class="engines">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-index">05 / Kompatibilitás</div>
+      <h2>Ezekben a motorokban <span class="amber">szinte garantált</span> a koksz</h2>
+    </div>
+    <div class="engine-cols rv">
+      <div class="engine-col"><h3>VW / Audi / Škoda / Seat</h3><ul><li>1.2 / 1.4 / 1.5 TSI</li><li>1.8 / 2.0 TFSI (EA888)</li><li>2.0 / 3.0 TDI (EGR-koksz)</li><li>3.0 TFSI V6</li></ul></div>
+      <div class="engine-col"><h3>BMW / Mini</h3><ul><li>N43 / N53 síkbefecskendezés</li><li>N54 / N55 / B48 / B58 turbó</li><li>N47 / B47 dízel (EGR)</li><li>Mini Cooper S (N14/N18)</li></ul></div>
+      <div class="engine-col"><h3>Hyundai / Kia / Ford</h3><ul><li>1.6 / 2.0 GDI, T-GDI</li><li>1.0 / 1.5 EcoBoost</li><li>2.0 EcoBlue dízel</li><li>1.6 CRDi (EGR-koksz)</li></ul></div>
+      <div class="engine-col"><h3>Egyéb GDI / dízel</h3><ul><li>Mercedes CGI motorok</li><li>Opel / PSA turbóbenzin</li><li>Mazda Skyactiv-G</li><li>Toyota D-4D dízelek</li></ul></div>
+    </div>
+    <div class="engine-note rv">◉ <b>Nem találod a motorod?</b> Hívj fel — típus és motorkód alapján 2 percben megmondjuk, érintett-e, és mennyibe kerülne a tisztítás.</div>
+  </div>
+</section>
+
+<!-- ============ GYIK ============ -->
+<section id="gyik">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-index">06 / Kérdések</div>
+      <h2>Amit mindenki <span class="amber">megkérdez</span></h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>Nem kerülhet dióhéj a motorba?</summary><div class="faq-body">Nem. A tisztítandó henger szelepeit minden esetben zárt állásba forgatjuk, mielőtt hozzákezdünk, a szórófej és az ipari elszívás pedig zárt körben dolgozik — a leváló koksz és a granulátum azonnal távozik. A folyamat végén endoszkóppal minden csatornát átnézünk, így a szívórendszerben nem marad szóróanyag.</div></details>
+      <details><summary>Mennyi ideig tart a tisztítás?</summary><div class="faq-body">Motortípustól függően jellemzően 3–5 óra. A legtöbb autót aznap átadjuk: reggel hozod, délutánra kész — a folyamatról készült fotókkal együtt.</div></details>
+      <details><summary>Milyen gyakran érdemes elvégezni?</summary><div class="faq-body">Közvetlen befecskendezéses motoroknál nagyjából 80–100 ezer kilométerenként ajánljuk. Sok városi, rövid távú használat és gyakori hidegindítás mellett ez az intervallum rövidülhet.</div></details>
+      <details><summary>Nem elég egy üzemanyag-adalék vagy „hidrogénes tisztítás”?</summary><div class="faq-body">GDI/TSI motoroknál nem. Az adalék az üzemanyaggal a hengerbe jut, a szívószelepeket meg sem érinti — a ráégett koksz mechanikai eltávolítás nélkül nem tűnik el. A dióhéjas szórás az egyetlen bontásmentes módszer, amelynek az eredménye kamerával is ellenőrizhető.</div></details>
+      <details><summary>Mennyibe kerül?</summary><div class="faq-body">Az ár a motor felépítésétől függ: a hengerszámtól és attól, mennyire munkaigényes a szívósor bontása. Hívj fel a típussal és a motorkóddal, és fix, előre tudott árat mondunk — rejtett költségek nélkül.</div></details>
+      <details><summary>Mit veszek észre a tisztítás után?</summary><div class="faq-body">Visszatér a gázreakció, kisimul az alapjárat, könnyebb a hidegindítás, és jellemzően csökken a fogyasztás. A kihagyásból eredő hibakódok megszűnnek, a motor pedig újra kiegyensúlyozottan jár.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KAPCSOLAT ============ -->
+<section id="kapcsolat" class="cta">
+  <div class="wrap">
+    <div class="sec-index rv" style="justify-content:center">07 / Kapcsolat</div>
+    <h2 class="rv rv-d1" style="text-align:center;margin:0 auto">Add vissza a motorod<br><span class="amber">eredeti erejét.</span></h2>
+    <p class="contact-lead rv rv-d1">Írd meg a motor típusát és a motorkódot — 24 órán belül fix árajánlattal válaszolunk. Sürgős esetben hívj közvetlenül.</p>
+    <div class="contact-grid">
+      <div class="contact-info rv rv-d2">
+        <a href="tel:+36708031160" class="big-phone">+36 70 803 1160</a>
+        <div class="ci-rows">
+          <div><b>Telephely</b>Ózd, [utca házszám]<br>Borsod-Abaúj-Zemplén vm.</div>
+          <div><b>E-mail</b><a href="mailto:info@pelda.hu">info@pelda.hu</a><br>Válasz 24 órán belül</div>
+        </div>
+      </div>
+      <form class="contact-form rv rv-d3" id="contactForm" novalidate>
+        <div class="field">
+          <label for="name">Név</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Telefonszám</label>
+            <input id="phone" name="phone" type="tel" required>
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email">
+          </div>
+        </div>
+        <div class="field">
+          <label for="car">Autó típusa / motorkód</label>
+          <input id="car" name="car" type="text" placeholder="pl. Audi A4 2.0 TFSI — CDNC">
+        </div>
+        <div class="field">
+          <label for="message">Üzenet</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tünetek, futásteljesítmény, bármi, ami segít az ajánlatban…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid cf-submit">Ajánlatot kérek ▸</button>
+        <p class="cf-note" id="cfNote" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Dióhéjas Motortisztítás Ózd — Minden jog fenntartva</div>
+  <div><a href="#problema">A probléma</a> · <a href="#folyamat">Folyamat</a> · <a href="#kapcsolat">Kapcsolat</a></div>
+</footer>
+
+<a href="tel:+36708031160" class="sticky-call" aria-label="Hívj minket most">
+  <span class="sc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/></svg></span>
+  <span class="sc-num">+36 70 803 1160</span>
+</a>
+
+<div class="lightbox" id="lightbox"><button class="lb-close">Bezárás ✕</button><img src="" alt=""></div>
+
+<script>
+/* ================= PRELOADER ================= */
+(function(){
+  const pl=document.getElementById('preloader'),bar=document.getElementById('plBar');
+  const t0=performance.now(),dur=1100;
+  function tick(now){
+    const r=Math.min(1,(now-t0)/dur);
+    bar.style.width=(r*100)+'%';
+    if(r<1){requestAnimationFrame(tick);}
+    else{
+      setTimeout(()=>{
+        pl.classList.add('done');
+        document.body.classList.add('loaded');
+        setTimeout(()=>pl.remove(),650);
+      },200);
+    }
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ================= CURSOR ================= */
+(function(){
+  const cur=document.querySelector('.cursor');
+  if(!cur||matchMedia('(pointer:coarse)').matches)return;
+  let x=innerWidth/2,y=innerHeight/2,rx=x,ry=y;
+  addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;
+    cur.querySelector('.c-dot').style.transform=`translate(${x}px,${y}px) translate(-50%,-50%)`;});
+  (function loop(){rx+=(x-rx)*.16;ry+=(y-ry)*.16;
+    cur.querySelector('.c-ring').style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,summary,.gm-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('c-hover'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('c-hover'));
+  });
+})();
+
+/* ================= NAV ================= */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* ================= CONTACT FORM ================= */
+(function(){
+  const form=document.getElementById('contactForm');
+  if(!form)return;
+
+  const note=document.getElementById('cfNote');
+  const EMAIL='info@pelda.hu';
+
+  function getVal(id){
+    const el=document.getElementById(id);
+    return el?el.value.trim():'';
+  }
+
+  function setError(id,show){
+    const el=document.getElementById(id);
+    if(!el)return;
+    const field=el.closest('.field');
+    if(field){
+      if(show)field.classList.add('error');
+      else field.classList.remove('error');
+    }
+  }
+
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    note.textContent='';
+    note.classList.remove('err');
+
+    let valid=true;
+    const name=getVal('name');
+    const phone=getVal('phone');
+    const email=getVal('email');
+
+    if(!name){setError('name',true);valid=false;}else{setError('name',false);}
+    if(!phone){setError('phone',true);valid=false;}else{setError('phone',false);}
+    if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){setError('email',true);valid=false;}else{setError('email',false);}
+
+    if(!valid){
+      note.textContent='Kérlek add meg a neved és a telefonszámod.';
+      note.classList.add('err');
+      return;
+    }
+
+    note.textContent='✓ Köszönöm! Az üzeneted sikeresen elküldve.';
+    note.classList.remove('err');
+    form.reset();
+  });
+})();
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+}),{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ================= COUNTERS ================= */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const b=e.target,target=+b.dataset.count,suf=b.dataset.suffix||'%',em=b.querySelector('em');
+  const t0=performance.now();
+  (function c(n){const r=Math.min(1,(n-t0)/1400),v=Math.round(target*(1-Math.pow(1-r,3)));
+    if(em){em.textContent=v;}else{b.textContent=v+suf;}
+    if(r<1)requestAnimationFrame(c);})(t0);
+  cio.unobserve(b);
+}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* ================= GALLERY MARQUEE + LIGHTBOX ================= */
+(function(){
+  // duplicate each image track for a seamless loop
+  document.querySelectorAll('.gm-track').forEach(t=>t.innerHTML+=t.innerHTML);
+  // duplicate the keyword marquee too
+  const kw=document.getElementById('marqueeTrack');
+  if(kw)kw.innerHTML+=kw.innerHTML;
+  // lightbox (attach after duplication so clones are covered)
+  const lb=document.getElementById('lightbox'),img=lb.querySelector('img');
+  document.querySelectorAll('.gm-item img').forEach(g=>{
+    g.parentElement.addEventListener('click',()=>{img.src=g.src;img.alt=g.alt;lb.classList.add('open');});
+  });
+  lb.addEventListener('click',()=>lb.classList.remove('open'));
+  addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open');});
+})();
+</script>
+</body>
+</html>
