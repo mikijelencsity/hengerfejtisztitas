@@ -80,7 +80,7 @@ body.c-hover .cursor .c-ring{width:58px;height:58px;border-color:var(--walnut)}
 nav{
   position:fixed;top:0;left:0;right:0;z-index:900;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(20px,4vw,56px);height:76px;
+  padding:0 clamp(12px,3vw,56px);height:76px;
   border-bottom:1px solid transparent;
   transition:background .4s,border-color .4s,height .4s;
   opacity:0;transform:translateY(-10px);
@@ -116,7 +116,7 @@ nav.scrolled{background:rgba(245,240,230,.88);backdrop-filter:blur(14px);border-
 /* ---------- hero ---------- */
 header{
   min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:center;
-  padding:120px clamp(20px,4vw,56px) 60px;overflow:hidden;
+  padding:120px clamp(12px,3vw,56px) 60px;overflow:hidden;
 }
 .hero-bg{
   position:absolute;inset:0;z-index:-2;
@@ -184,6 +184,11 @@ h1 .amber{color:var(--walnut)}
 .hero-scroll::after{content:'';width:1px;height:56px;background:linear-gradient(var(--walnut),transparent);animation:drip 2s infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
+@media(max-width:768px){
+  header{
+    padding:90px clamp(12px,3vw,40px) 50px;
+  }
+}
 @media (max-width:1440px) and (max-height:900px){
   header{
     min-height:auto;
@@ -236,7 +241,7 @@ body.loaded .hr-5{animation-delay:.85s}
 @keyframes scrolltrack{to{transform:translateX(-50%)}}
 
 /* ---------- sections ---------- */
-section{padding:clamp(80px,12vh,150px) clamp(20px,4vw,56px);position:relative}
+section{padding:clamp(80px,12vh,150px) clamp(12px,3vw,56px);position:relative}
 .wrap{max-width:1240px;margin:0 auto}
 .sec-head{margin-bottom:clamp(44px,7vh,80px)}
 .sec-index{
@@ -484,7 +489,7 @@ details .faq-body{padding:0 4px 26px;color:var(--ink-dim);max-width:65ch}
 
 /* ---------- footer ---------- */
 footer{
-  border-top:1px solid var(--line);padding:36px clamp(20px,4vw,56px);
+  border-top:1px solid var(--line);padding:36px clamp(12px,3vw,56px);
   display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
   font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);
 }
