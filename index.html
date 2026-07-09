@@ -142,7 +142,11 @@ header{
 h1{
   font-family:var(--disp);font-weight:900;
   font-size:clamp(2.3rem,7.2vw,6rem);line-height:1.02;letter-spacing:-.015em;
-  text-transform:uppercase;max-width:none;
+  text-transform:uppercase;max-width:15ch;
+}
+@media(min-width:1200px){
+  h1{max-width:none}
+  h1 br{display:none}
 }
 h1 .hollow{
   color:transparent;-webkit-text-stroke:1.5px var(--ink);
@@ -528,7 +532,7 @@ footer a:hover{color:var(--walnut)}
   <div class="hero-grid"></div>
   <div class="wrap">
     <div class="hero-tag hr hr-1">Bontás nélküli technológia · Ózd</div>
-    <h1 class="hr hr-2">A motorod megfullad a <span class="amber">koksztól.</span></h1>
+    <h1 class="hr hr-2">A motorod<br>megfullad<br>a <span class="amber">koksztól.</span></h1>
     <p class="hero-sub hr hr-3">Dióhéjas szívószelep-tisztítás közvetlen befecskendezéses <strong>GDI / TSI / TFSI benzin-</strong> és <strong>dízelmotorokhoz</strong>. Nagynyomású levegővel szórt, biológiailag lebomló dióhéj-granulátum — kíméletes a fémhez, könyörtelen a lerakódáshoz. <strong>Hengerfej-bontás nélkül.</strong></p>
     <div class="hero-actions hr hr-4">
       <a href="#kapcsolat" class="btn btn-solid">Kérj árajánlatot ▸</a>
