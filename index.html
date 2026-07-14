@@ -376,21 +376,6 @@ h2 .amber{color:var(--walnut)}
 .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
 
 /* ---------- problem section ---------- */
-.problem-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,70px);align-items:start}
-@media(max-width:940px){.problem-grid{grid-template-columns:1fr}}
-.problem-copy p{color:var(--ink-dim);margin-bottom:18px}
-.problem-copy p strong{color:var(--ink)}
-.problem-copy .callout{
-  border-left:2px solid var(--walnut);padding:18px 22px;background:var(--card);
-  margin:26px 0;color:var(--ink);font-size:.98rem;box-shadow:0 6px 24px rgba(36,28,18,.05);
-}
-.problem-img{position:relative}
-.problem-img img{border:1px solid var(--line);box-shadow:0 18px 50px rgba(36,28,18,.14)}
-.img-tag{
-  position:absolute;left:-1px;bottom:-1px;background:var(--paper);border:1px solid var(--line);
-  font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
-  padding:10px 16px;color:var(--walnut);
-}
 .symptoms{margin-top:clamp(50px,8vh,90px);display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 @media(max-width:1080px){.symptoms{grid-template-columns:repeat(2,1fr)}.symptoms .symptom:last-child{grid-column:1 / -1}}
 @media(max-width:560px){.symptoms{grid-template-columns:1fr}.symptoms .symptom:last-child{grid-column:auto}}
@@ -653,21 +638,10 @@ footer a:hover{color:var(--walnut)}
   <div class="hollow-bg">KOKSZ</div>
   <div class="wrap">
     <div class="sec-head rv">
-      <div class="sec-index">01 / Diagnózis</div>
-      <h2>Miért kokszolódik a <span class="amber">modern motor?</span></h2>
+      <div class="sec-index">01 / Ismerős?</div>
+      <h2>5 jel, hogy a motorod <span class="amber">segítségért kiált</span></h2>
+      <p class="sec-lead" style="margin-top:8px">Ha csak egyet is felismersz az alábbiak közül, valószínűleg már most is ezzel küzdesz — és pontosan tudjuk, min mész keresztül.</p>
     </div>
-    <div class="problem-grid">
-      <div class="problem-copy rv rv-d1">
-        <p>Közvetlen befecskendezésnél az üzemanyag egyenesen a hengerbe jut — <strong>a szívószelepeket többé nem mossa át a benzin.</strong> A PCV- és EGR-rendszer olajpárája és kipufogógáza viszont igen, és a forró szelepekre rétegről rétegre ráég: kemény koksszá válik, ami elszűkíti a csatornákat.</p>
-        <div class="callout">Ez nem meghibásodás, hanem <strong>konstrukciós tulajdonság</strong> — minden GDI/TSI motort érint, jellemzően már 80–120 ezer km után mérhető teljesítményvesztést okozva.</div>
-        <p>Adalékos tisztító ide már nem ér el, a hengerfej-bontás pedig sokszoros költség. <strong>A dióhéjas szemcseszórás az egyetlen bontásmentes módszer, amely mechanikusan és maradéktalanul eltávolítja a lerakódást.</strong></p>
-      </div>
-      <div class="problem-img rv rv-d2">
-        <img src="images/before-koksz-szivocsatorna.jpg" alt="Erősen kokszos szívócsatornák tisztítás előtt" loading="lazy" width="1200" height="900">
-        <div class="img-tag">◉ Valós ügyfélautó — tisztítás előtt</div>
-      </div>
-    </div>
-    <p class="sec-lead rv" style="margin-bottom:8px">Ha csak egyet is felismersz az alábbiak közül, valószínűleg már most is ezzel küzdesz — és pontosan tudjuk, min mész keresztül.</p>
     <div class="symptoms">
       <div class="symptom rv" data-i="01"><h3>Tapod a gázt, és az autó nem reagál</h3><p>Rálépsz, és fél másodpercet vár, mielőtt bármi történne. Tudod, hogy ott vannak a lóerők — csak nem engedi ki őket a motor. Ez a legelárulóbb jel, és a legtöbben ilyenkor kezdenek gyanakodni.</p></div>
       <div class="symptom rv rv-d1" data-i="02"><h3>A motor remeg, mintha küszködne</h3><p>Lámpánál állsz, és érzed, ahogy rázkódik alattad az autó. Kellemetlen, és tudod, hogy ez nem így volt régen — csak nem tudod pontosan, mit lehetne ellene tenni.</p></div>
