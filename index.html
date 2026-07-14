@@ -376,21 +376,26 @@ h2 .amber{color:var(--walnut)}
 .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
 
 /* ---------- problem section ---------- */
-.symptoms{margin-top:clamp(50px,8vh,90px);display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.symptoms-band{
+  margin-top:clamp(50px,8vh,90px);background:var(--walnut-deep);
+  padding:clamp(28px,4vw,44px);position:relative;
+  clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);
+}
+.symptoms{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(245,240,230,.14)}
 @media(max-width:1080px){.symptoms{grid-template-columns:repeat(2,1fr)}.symptoms .symptom:last-child{grid-column:1 / -1}}
 @media(max-width:560px){.symptoms{grid-template-columns:1fr}.symptoms .symptom:last-child{grid-column:auto}}
 .symptom{
-  background:var(--card);padding:30px 26px;transition:background .3s;position:relative;overflow:hidden;
+  background:var(--walnut-deep);padding:30px 26px;transition:background .3s;position:relative;overflow:hidden;
 }
 .symptom::before{
-  content:attr(data-i);position:absolute;right:14px;top:10px;font-family:var(--disp);font-weight:900;
-  font-size:2.6rem;color:transparent;-webkit-text-stroke:1px rgba(36,28,18,.1);transition:.3s;
+  content:attr(data-i);position:absolute;right:14px;top:6px;font-family:var(--disp);font-weight:900;
+  font-size:2.8rem;color:transparent;-webkit-text-stroke:1px rgba(245,240,230,.22);transition:.3s;
 }
-.symptom:hover{background:var(--paper-2)}
-.symptom:hover::before{-webkit-text-stroke-color:rgba(138,90,43,.45)}
-.symptom h3{font-family:var(--body);font-weight:700;font-size:1.02rem;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-.symptom h3::before{content:'▸';color:var(--walnut)}
-.symptom p{font-size:.9rem;color:var(--ink-dim)}
+.symptom:hover{background:#4a2f13}
+.symptom:hover::before{-webkit-text-stroke-color:rgba(245,240,230,.5)}
+.symptom h3{font-family:var(--body);font-weight:700;font-size:1.02rem;margin-bottom:10px;display:flex;align-items:center;gap:10px;color:var(--paper)}
+.symptom h3::before{content:'⚠';color:var(--walnut-hot);font-size:.9rem}
+.symptom p{font-size:.9rem;color:rgba(245,240,230,.62)}
 
 /* ---------- process ---------- */
 .steps{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);counter-reset:step}
@@ -642,14 +647,16 @@ footer a:hover{color:var(--walnut)}
       <h2>5 jel, hogy a motorod <span class="amber">segítségért kiált</span></h2>
       <p class="sec-lead" style="margin-top:8px">Ha csak egyet is felismersz az alábbiak közül, valószínűleg már most is ezzel küzdesz — és pontosan tudjuk, min mész keresztül.</p>
     </div>
-    <div class="symptoms">
-      <div class="symptom rv" data-i="01"><h3>Tapod a gázt, és az autó nem reagál</h3><p>Rálépsz, és fél másodpercet vár, mielőtt bármi történne. Tudod, hogy ott vannak a lóerők — csak nem engedi ki őket a motor. Ez a legelárulóbb jel, és a legtöbben ilyenkor kezdenek gyanakodni.</p></div>
-      <div class="symptom rv rv-d1" data-i="02"><h3>A motor remeg, mintha küszködne</h3><p>Lámpánál állsz, és érzed, ahogy rázkódik alattad az autó. Kellemetlen, és tudod, hogy ez nem így volt régen — csak nem tudod pontosan, mit lehetne ellene tenni.</p></div>
-      <div class="symptom rv rv-d2" data-i="03"><h3>Egyre többet fizetsz a kútnál</h3><p>Ugyanazt az utat jársz, ugyanúgy vezetsz — mégis gyakrabban állsz meg tankolni. Ez nem a képzeleted: a motor egyszerűen többet éget el ugyanahhoz a teljesítményhez.</p></div>
-      <div class="symptom rv rv-d3" data-i="04"><h3>Reggelente könyörögsz, hogy induljon</h3><p>Hidegben rángat, akadozik, mielőtt beállna az alapjárat. Ismerős érzés, amikor félsz elfordítani a slusszkulcsot, mert nem tudod, ma pont mennyit kell rá várni.</p></div>
-      <div class="symptom rv" data-i="05"><h3>Kigyullad a Check Engine, és senki nem tudja megmondani, miért</h3><p>Beviszed diagnosztikára, törlik a hibakódot, pár nap múlva visszajön. Ez a legfrusztrálóbb: amikor úgy érzed, senki nem jut el a probléma gyökeréig — csak a tünetet kezelik.</p></div>
+    <div class="symptoms-band rv">
+      <div class="symptoms">
+        <div class="symptom" data-i="01"><h3>Tapod a gázt, és az autó nem reagál</h3><p>Rálépsz, és fél másodpercet vár, mielőtt bármi történne. Tudod, hogy ott vannak a lóerők — csak nem engedi ki őket a motor. Ez a legelárulóbb jel, és a legtöbben ilyenkor kezdenek gyanakodni.</p></div>
+        <div class="symptom" data-i="02"><h3>A motor remeg, mintha küszködne</h3><p>Lámpánál állsz, és érzed, ahogy rázkódik alattad az autó. Kellemetlen, és tudod, hogy ez nem így volt régen — csak nem tudod pontosan, mit lehetne ellene tenni.</p></div>
+        <div class="symptom" data-i="03"><h3>Egyre többet fizetsz a kútnál</h3><p>Ugyanazt az utat jársz, ugyanúgy vezetsz — mégis gyakrabban állsz meg tankolni. Ez nem a képzeleted: a motor egyszerűen többet éget el ugyanahhoz a teljesítményhez.</p></div>
+        <div class="symptom" data-i="04"><h3>Reggelente könyörögsz, hogy induljon</h3><p>Hidegben rángat, akadozik, mielőtt beállna az alapjárat. Ismerős érzés, amikor félsz elfordítani a slusszkulcsot, mert nem tudod, ma pont mennyit kell rá várni.</p></div>
+        <div class="symptom" data-i="05"><h3>Kigyullad a Check Engine, és senki nem tudja megmondani, miért</h3><p>Beviszed diagnosztikára, törlik a hibakódot, pár nap múlva visszajön. Ez a legfrusztrálóbb: amikor úgy érzed, senki nem jut el a probléma gyökeréig — csak a tünetet kezelik.</p></div>
+      </div>
+      <p style="margin-top:clamp(24px,4vh,40px);max-width:70ch;color:rgba(245,240,230,.8);font-size:1.02rem">Ha idáig eljutottál, valószínűleg már máshol is jártál — és nem kaptál igazi választ. Mi pontosan azért csináljuk ezt, mert megértjük, mennyire idegesítő, ha a saját autódban nem bízol többé. <strong style="color:var(--paper)">Ez nem adalék, nem trükk: ez az egyetlen módszer, ami tényleg a gyökerét kezeli a problémának, bontás nélkül.</strong></p>
     </div>
-    <p class="sec-lead rv" style="margin-top:clamp(30px,5vh,50px);max-width:70ch">Ha idáig eljutottál, valószínűleg már máshol is jártál — és nem kaptál igazi választ. Mi pontosan azért csináljuk ezt, mert megértjük, mennyire idegesítő, ha a saját autódban nem bízol többé. Ez nem adalék, nem trükk: ez az egyetlen módszer, ami tényleg a gyökerét kezeli a problémának, bontás nélkül.</p>
   </div>
 </section>
 
