@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folyamat szekció — 5 fotó-vezérelt, látványos variáció</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--paper-2:#ede6d6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
+  --walnut:#8a5a2b;--walnut-hot:#a46c33;--walnut-deep:#5c3a18;--line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(12px,3vw,56px)}
+section{padding:clamp(56px,8vh,100px) 0;overflow:hidden}
+.variant-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:20px;display:inline-block;margin-bottom:6px}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,3vw,1.9rem);text-transform:uppercase;margin-bottom:8px}
+h1 span{color:var(--walnut)}
+.why{font-size:.86rem;color:var(--ink-dim);margin-bottom:36px;max-width:70ch}
+.divider{border:none;border-top:2px dashed rgba(138,90,43,.35)}
+.step-tagpill{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut);border:1px solid rgba(138,90,43,.4);padding:4px 10px;border-radius:3px;white-space:nowrap;display:inline-block}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ================= I1: alternating bold photo/text rows ================= */
+.i1-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,60px);align-items:center;padding:clamp(30px,5vh,54px) 0;border-bottom:1px solid var(--line)}
+.i1-row:last-child{border-bottom:none}
+.i1-row.rev .i1-photo{order:2}
+.i1-photo{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;box-shadow:0 24px 50px rgba(36,28,18,.16)}
+.i1-photo .i1-ghost{position:absolute;bottom:-.15em;left:14px;font-family:var(--disp);font-weight:900;font-size:5.5rem;color:rgba(245,240,230,.85);line-height:1;text-shadow:0 4px 20px rgba(0,0,0,.3)}
+.i1-text .step-tagpill{margin-bottom:14px}
+.i1-text h3{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,2.6vw,1.8rem);text-transform:uppercase;margin-bottom:12px;line-height:1.15}
+.i1-text p{color:var(--ink-dim)}
+@media(max-width:760px){
+  .i1-row,.i1-row.rev{grid-template-columns:1fr}
+  .i1-row.rev .i1-photo{order:0}
+}
+
+/* ================= I2: immersive snap-scroll photo cards ================= */
+.i2-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px}
+.i2-card{
+  scroll-snap-align:start;flex:0 0 78%;max-width:420px;position:relative;aspect-ratio:3/4;border-radius:16px;
+  overflow:hidden;box-shadow:0 26px 54px rgba(36,28,18,.22);
+}
+.i2-card .i2-scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,7,3,.88) 0%,rgba(10,7,3,.25) 55%,transparent 80%)}
+.i2-card .i2-num{position:absolute;top:18px;left:20px;font-family:var(--disp);font-weight:900;font-size:2.6rem;color:rgba(245,240,230,.9)}
+.i2-card .i2-body{position:absolute;left:20px;right:20px;bottom:20px;color:var(--paper)}
+.i2-card h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.1rem;margin-bottom:6px}
+.i2-card p{font-size:.86rem;color:rgba(245,240,230,.8)}
+@media(max-width:640px){.i2-card{flex-basis:82%}}
+
+/* ================= I3: giant editorial numbers with circular photo inset ================= */
+.i3-list{display:flex;flex-direction:column}
+.i3-row{display:flex;align-items:center;gap:28px;padding:30px 0;border-bottom:1px solid var(--line);position:relative}
+.i3-row:last-child{border-bottom:none}
+.i3-num{font-family:var(--disp);font-weight:900;font-size:clamp(3.4rem,8vw,6rem);line-height:1;color:transparent;-webkit-text-stroke:2px rgba(138,90,43,.45);flex-shrink:0;width:clamp(90px,12vw,150px)}
+.i3-photo{width:84px;height:84px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid var(--paper);box-shadow:0 10px 26px rgba(36,28,18,.22)}
+.i3-text h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.05rem;margin-bottom:6px}
+.i3-text p{color:var(--ink-dim);font-size:.9rem}
+@media(max-width:640px){
+  .i3-row{gap:16px}
+  .i3-photo{width:60px;height:60px}
+}
+
+/* ================= I4: sticky photo + scrolling step list (scrollytelling-lite) ================= */
+.i4-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,60px)}
+.i4-sticky{position:sticky;top:100px;align-self:start;aspect-ratio:4/3;border-radius:16px;overflow:hidden;box-shadow:0 26px 54px rgba(36,28,18,.2)}
+.i4-sticky img{transition:opacity .25s}
+.i4-steps{display:flex;flex-direction:column}
+.i4-step{padding:34px 0;border-bottom:1px solid var(--line);cursor:pointer;opacity:.45;transition:opacity .25s}
+.i4-step.active{opacity:1}
+.i4-step .step-tagpill{margin-bottom:10px}
+.i4-step h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.3rem;margin-bottom:8px}
+.i4-step p{color:var(--ink-dim)}
+@media(max-width:760px){
+  .i4-wrap{grid-template-columns:1fr}
+  .i4-sticky{position:static;margin-bottom:20px}
+}
+
+/* ================= I5: bold alternating color slide bands ================= */
+.i5-slide{display:grid;grid-template-columns:.7fr 1fr;align-items:center;gap:clamp(20px,4vw,50px);padding:clamp(36px,6vh,64px) clamp(20px,4vw,50px);border-radius:16px;margin-bottom:16px}
+.i5-slide.dark{background:var(--walnut-deep);color:var(--paper)}
+.i5-slide.light{background:var(--card);border:1px solid var(--line)}
+.i5-num{font-family:var(--disp);font-weight:900;font-size:clamp(3rem,7vw,5rem);line-height:1}
+.i5-slide.dark .i5-num{color:rgba(245,240,230,.9)}
+.i5-slide.light .i5-num{color:var(--walnut)}
+.i5-photo{aspect-ratio:16/10;border-radius:12px;overflow:hidden}
+.i5-slide h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.2rem;margin-bottom:10px}
+.i5-slide.dark p{color:rgba(245,240,230,.75)}
+.i5-slide.light p{color:var(--ink-dim)}
+.i5-slide .step-tagpill{margin-bottom:12px}
+.i5-slide.dark .step-tagpill{color:var(--paper);border-color:rgba(245,240,230,.4)}
+@media(max-width:700px){.i5-slide{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">I1</span>
+    <h1>Nagy, váltakozó fotó/szöveg sorok</h1>
+    <p class="why">Minden lépés egy nagy, valódi fotóval — a szöveg csak kísérő. Kevés elem, de mindegyik nagy méretben, dráma a képekben van, nem díszítésben.</p>
+    <div>
+      <div class="i1-row">
+        <div class="i1-photo"><img src="../images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés"><span class="i1-ghost">01</span></div>
+        <div class="i1-text"><span class="step-tagpill">~30 perc</span><h3>Diagnosztika &amp; endoszkópia</h3><p>Hibakód-olvasás, majd endoszkópos kamerával belenézek a szívócsatornákba.</p></div>
+      </div>
+      <div class="i1-row rev">
+        <div class="i1-photo"><img src="../images/process-hengerfej-sor.jpg" alt="Hengerfej-sor"><span class="i1-ghost">02</span></div>
+        <div class="i1-text"><span class="step-tagpill">Bontás</span><h3>Szívósor eltávolítása</h3><p>Leszerelem a szívócsonkot — csak ennyit bontok, a hengerfej érintetlen marad.</p></div>
+      </div>
+      <div class="i1-row">
+        <div class="i1-photo"><img src="../images/process-maszkolas.jpg" alt="Precíz maszkolás"><span class="i1-ghost">03</span></div>
+        <div class="i1-text"><span class="step-tagpill">Védelem</span><h3>Precíz maszkolás</h3><p>A nyílásokat lezárom, a szelepeket zárt állásba forgatom.</p></div>
+      </div>
+      <div class="i1-row rev">
+        <div class="i1-photo"><img src="../images/process-szoras-utan.jpg" alt="Csatorna szórás után"><span class="i1-ghost">04</span></div>
+        <div class="i1-text"><span class="step-tagpill">Fő fázis</span><h3>Dióhéjas szemcseszórás</h3><p>Nagynyomású levegővel szórok, közben vákuum szívja el a leváló kokszot.</p></div>
+      </div>
+      <div class="i1-row">
+        <div class="i1-photo"><img src="../images/compare-tiszta-vs-koszos.jpg" alt="Tisztított és kokszos csatorna összevetése"><span class="i1-ghost">05</span></div>
+        <div class="i1-text"><span class="step-tagpill">QC</span><h3>Ellenőrzés kamerával</h3><p>Hengerről hengerre endoszkóppal ellenőrzöm és fotózom az eredményt.</p></div>
+      </div>
+      <div class="i1-row rev">
+        <div class="i1-photo"><img src="../images/process-motorter-bmw.jpg" alt="Motortér összeszerelés után"><span class="i1-ghost">06</span></div>
+        <div class="i1-text"><span class="step-tagpill">Átadás</span><h3>Összeszerelés &amp; próba</h3><p>Új tömítés, próbaút, előtte-utána fotódokumentációval átadva.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">I2</span>
+    <h1>Magával ragadó, görgethető fotókártyák</h1>
+    <p class="why">Egyszerre csak egy lépés van fókuszban — teljes képes kártya, ráúsztatott óriás szám, minimál szöveg. Oldalra görgetve/lapozva halad a folyamat, mint egy story-sor.</p>
+    <div class="i2-track">
+      <div class="i2-card"><img src="../images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés"><div class="i2-scrim"></div><div class="i2-num">01</div><div class="i2-body"><h3>Diagnosztika &amp; endoszkópia</h3><p>Hibakód-olvasás, endoszkópos betekintés.</p></div></div>
+      <div class="i2-card"><img src="../images/process-hengerfej-sor.jpg" alt="Hengerfej-sor"><div class="i2-scrim"></div><div class="i2-num">02</div><div class="i2-body"><h3>Szívósor eltávolítása</h3><p>Csak a szívócsonkot bontom le.</p></div></div>
+      <div class="i2-card"><img src="../images/process-maszkolas.jpg" alt="Precíz maszkolás"><div class="i2-scrim"></div><div class="i2-num">03</div><div class="i2-body"><h3>Precíz maszkolás</h3><p>Nyílások lezárva, szelepek zárt állásban.</p></div></div>
+      <div class="i2-card"><img src="../images/process-szoras-utan.jpg" alt="Csatorna szórás után"><div class="i2-scrim"></div><div class="i2-num">04</div><div class="i2-body"><h3>Dióhéjas szemcseszórás</h3><p>Szórás és vákuum egyszerre.</p></div></div>
+      <div class="i2-card"><img src="../images/compare-tiszta-vs-koszos.jpg" alt="Összevetés"><div class="i2-scrim"></div><div class="i2-num">05</div><div class="i2-body"><h3>Ellenőrzés kamerával</h3><p>Hengerenkénti endoszkópos ellenőrzés.</p></div></div>
+      <div class="i2-card"><img src="../images/process-motorter-bmw.jpg" alt="Motortér"><div class="i2-scrim"></div><div class="i2-num">06</div><div class="i2-body"><h3>Összeszerelés &amp; próba</h3><p>Próbaút, fotódokumentáció.</p></div></div>
+    </div>
+    <p style="font-family:var(--mono);font-size:.7rem;color:var(--ink-dim);margin-top:6px">◂ görgesd oldalra ▸</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">I3</span>
+    <h1>Óriás körvonal-számok, kör alakú fotóval</h1>
+    <p class="why">A méretkontraszt hozza a látványt: hatalmas, halvány számok mellett egy kis, éles fotó-medalion — editorial hatás, mégis mindössze két elem soronként.</p>
+    <div class="i3-list">
+      <div class="i3-row"><div class="i3-num">01</div><div class="i3-photo"><img src="../images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés"></div><div class="i3-text"><h3>Diagnosztika &amp; endoszkópia</h3><p>Hibakód-olvasás, majd endoszkópos betekintés a csatornákba.</p></div></div>
+      <div class="i3-row"><div class="i3-num">02</div><div class="i3-photo"><img src="../images/process-hengerfej-sor.jpg" alt="Hengerfej-sor"></div><div class="i3-text"><h3>Szívósor eltávolítása</h3><p>Csak a szívócsonkot bontom le.</p></div></div>
+      <div class="i3-row"><div class="i3-num">03</div><div class="i3-photo"><img src="../images/process-maszkolas.jpg" alt="Precíz maszkolás"></div><div class="i3-text"><h3>Precíz maszkolás</h3><p>Nyílások lezárva, szelepek zárt állásban.</p></div></div>
+      <div class="i3-row"><div class="i3-num">04</div><div class="i3-photo"><img src="../images/process-szoras-utan.jpg" alt="Szórás után"></div><div class="i3-text"><h3>Dióhéjas szemcseszórás</h3><p>Szórás és vákuum egyszerre, zárt körfolyamatban.</p></div></div>
+      <div class="i3-row"><div class="i3-num">05</div><div class="i3-photo"><img src="../images/compare-tiszta-vs-koszos.jpg" alt="Összevetés"></div><div class="i3-text"><h3>Ellenőrzés kamerával</h3><p>Hengerenkénti endoszkópos ellenőrzés.</p></div></div>
+      <div class="i3-row"><div class="i3-num">06</div><div class="i3-photo"><img src="../images/process-motorter-bmw.jpg" alt="Motortér"></div><div class="i3-text"><h3>Összeszerelés &amp; próba</h3><p>Próbaút, fotódokumentáció.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">I4</span>
+    <h1>Ragadós fotó + görgethető lépéslista</h1>
+    <p class="why">Bal oldalt egy fotó "beragad" görgetés közben és lépésenként cserélődik, jobb oldalt nagy, letisztult címek futnak — mozgás és látvány, mégis csak egyetlen kép látszik egyszerre.</p>
+    <div class="i4-wrap">
+      <div class="i4-sticky"><img id="i4img" src="../images/process-endoszkop.jpg" alt="Folyamat fotó"></div>
+      <div class="i4-steps">
+        <div class="i4-step active" onmouseover="document.getElementById('i4img').src='../images/process-endoszkop.jpg'"><span class="step-tagpill">~30 perc</span><h3>Diagnosztika &amp; endoszkópia</h3><p>Hibakód-olvasás, majd endoszkópos betekintés a csatornákba.</p></div>
+        <div class="i4-step" onmouseover="document.getElementById('i4img').src='../images/process-hengerfej-sor.jpg'"><span class="step-tagpill">Bontás</span><h3>Szívósor eltávolítása</h3><p>Csak a szívócsonkot bontom le.</p></div>
+        <div class="i4-step" onmouseover="document.getElementById('i4img').src='../images/process-maszkolas.jpg'"><span class="step-tagpill">Védelem</span><h3>Precíz maszkolás</h3><p>Nyílások lezárva, szelepek zárt állásban.</p></div>
+        <div class="i4-step" onmouseover="document.getElementById('i4img').src='../images/process-szoras-utan.jpg'"><span class="step-tagpill">Fő fázis</span><h3>Dióhéjas szemcseszórás</h3><p>Szórás és vákuum egyszerre.</p></div>
+        <div class="i4-step" onmouseover="document.getElementById('i4img').src='../images/compare-tiszta-vs-koszos.jpg'"><span class="step-tagpill">QC</span><h3>Ellenőrzés kamerával</h3><p>Hengerenkénti endoszkópos ellenőrzés.</p></div>
+        <div class="i4-step" onmouseover="document.getElementById('i4img').src='../images/process-motorter-bmw.jpg'"><span class="step-tagpill">Átadás</span><h3>Összeszerelés &amp; próba</h3><p>Próbaút, fotódokumentáció.</p></div>
+      </div>
+    </div>
+    <p style="font-family:var(--mono);font-size:.7rem;color:var(--ink-dim);margin-top:10px">◂ vidd az egeret a lépések fölé — a kép cserélődik (élesben scrollra készülne)</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">I5</span>
+    <h1>Váltakozó, erős színsávos "diák"</h1>
+    <p class="why">Sötét dió-barna és világos papír sávok váltják egymást, mindegyikben egy óriás szám és egy fotó — a szín- és méretkontraszt adja a drámát, nem a sok elem.</p>
+    <div>
+      <div class="i5-slide dark">
+        <div><div class="i5-num">01</div><span class="step-tagpill">~30 perc</span><h3>Diagnosztika &amp; endoszkópia</h3><p>Hibakód-olvasás, majd endoszkópos betekintés a csatornákba.</p></div>
+        <div class="i5-photo"><img src="../images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés"></div>
+      </div>
+      <div class="i5-slide light">
+        <div><div class="i5-num">02</div><span class="step-tagpill">Bontás</span><h3>Szívósor eltávolítása</h3><p>Csak a szívócsonkot bontom le, a hengerfej érintetlen marad.</p></div>
+        <div class="i5-photo"><img src="../images/process-hengerfej-sor.jpg" alt="Hengerfej-sor"></div>
+      </div>
+      <div class="i5-slide dark">
+        <div><div class="i5-num">03</div><span class="step-tagpill">Védelem</span><h3>Precíz maszkolás</h3><p>Nyílások lezárva, szelepek zárt állásban.</p></div>
+        <div class="i5-photo"><img src="../images/process-maszkolas.jpg" alt="Precíz maszkolás"></div>
+      </div>
+      <div class="i5-slide light">
+        <div><div class="i5-num">04</div><span class="step-tagpill">Fő fázis</span><h3>Dióhéjas szemcseszórás</h3><p>Szórás és vákuum egyszerre, zárt körfolyamatban.</p></div>
+        <div class="i5-photo"><img src="../images/process-szoras-utan.jpg" alt="Szórás után"></div>
+      </div>
+      <div class="i5-slide dark">
+        <div><div class="i5-num">05</div><span class="step-tagpill">QC</span><h3>Ellenőrzés kamerával</h3><p>Hengerenkénti endoszkópos ellenőrzés.</p></div>
+        <div class="i5-photo"><img src="../images/compare-tiszta-vs-koszos.jpg" alt="Összevetés"></div>
+      </div>
+      <div class="i5-slide light">
+        <div><div class="i5-num">06</div><span class="step-tagpill">Átadás</span><h3>Összeszerelés &amp; próba</h3><p>Próbaút, előtte-utána fotódokumentáció.</p></div>
+        <div class="i5-photo"><img src="../images/process-motorter-bmw.jpg" alt="Motortér"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

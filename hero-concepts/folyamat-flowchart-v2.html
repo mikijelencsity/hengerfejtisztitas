@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folyamat szekció — 5 áttekinthető variáció</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--paper-2:#ede6d6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
+  --walnut:#8a5a2b;--walnut-hot:#a46c33;--walnut-deep:#5c3a18;--line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(12px,3vw,56px)}
+section{padding:clamp(56px,8vh,100px) 0}
+.variant-label{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:20px;display:inline-block;margin-bottom:6px;
+}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,3vw,1.9rem);text-transform:uppercase;margin-bottom:8px}
+h1 span{color:var(--walnut)}
+.why{font-size:.86rem;color:var(--ink-dim);margin-bottom:30px;max-width:70ch}
+.divider{border:none;border-top:2px dashed rgba(138,90,43,.35)}
+.step-tagpill{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-dim);border:1px solid var(--line);padding:3px 9px;background:var(--paper);border-radius:3px;white-space:nowrap;
+}
+.step-title{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.step-desc{color:var(--ink-dim);font-size:.88rem}
+
+/* ================= G1: clean numbered row-list ================= */
+.g1-list{border-top:1px solid var(--line)}
+.g1-row{display:grid;grid-template-columns:56px 1fr auto;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+.g1-num{font-family:var(--disp);font-weight:900;font-size:1.6rem;color:var(--walnut)}
+.g1-row .step-title{font-size:1rem;margin-bottom:4px}
+@media(max-width:640px){
+  .g1-row{grid-template-columns:40px 1fr;}
+  .g1-row .step-tagpill{grid-column:2;justify-self:start;margin-top:8px}
+  .g1-num{font-size:1.3rem}
+}
+
+/* ================= G2: uniform flat grid, no connectors ================= */
+.g2-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.g2-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.g2-grid{grid-template-columns:1fr}}
+.g2-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px}
+.g2-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.g2-num{font-family:var(--disp);font-weight:700;font-size:1.3rem;color:var(--walnut)}
+.g2-card .step-title{font-size:.92rem;margin-bottom:6px}
+
+/* ================= G3: top stepper overview + list detail ================= */
+.g3-stepper{display:flex;align-items:center;margin-bottom:36px}
+.g3-node{width:36px;height:36px;border-radius:50%;background:var(--walnut);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:.82rem;flex-shrink:0}
+.g3-seg{flex:1;height:2px;background:rgba(138,90,43,.3)}
+@media(max-width:640px){.g3-stepper{display:none}}
+.g3-list{border-top:1px solid var(--line)}
+.g3-row{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.g3-row .g3-mini{font-family:var(--mono);color:var(--walnut);font-size:.8rem;flex-shrink:0;width:24px}
+.g3-row .step-title{font-size:.94rem;display:inline}
+.g3-row .step-desc{display:inline;margin-left:8px}
+
+/* ================= G4: two-column spec table ================= */
+.g4-table{width:100%;border-collapse:collapse}
+.g4-table tr{border-bottom:1px solid var(--line)}
+.g4-table td{padding:18px 12px;vertical-align:top}
+.g4-table td:first-child{width:130px;font-family:var(--mono);color:var(--walnut);font-weight:700;white-space:nowrap}
+.g4-table .step-title{font-size:.96rem;margin-bottom:4px;display:block}
+@media(max-width:600px){
+  .g4-table td:first-child{width:70px;font-size:.72rem}
+}
+
+/* ================= G5: stacked editorial rows, ghost numbers ================= */
+.g5-list{display:flex;flex-direction:column}
+.g5-row{display:flex;gap:20px;padding:26px 0;border-bottom:1px solid var(--line);align-items:center}
+.g5-ghost{
+  font-family:var(--disp);font-weight:900;font-size:3.2rem;line-height:1;color:transparent;
+  -webkit-text-stroke:1.5px rgba(138,90,43,.4);flex-shrink:0;width:70px;
+}
+.g5-row .step-title{font-size:1.02rem;margin-bottom:5px}
+@media(max-width:600px){
+  .g5-ghost{font-size:2.2rem;width:50px}
+}
+</style>
+</head>
+<body>
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">G1</span>
+    <h1>Tiszta, számozott soros lista</h1>
+    <p class="why">Egyetlen oszlop, nagy számok, vízszintes elválasztók — felülről lefelé pörgetve azonnal átlátható, semmi grafikai zaj nem tereli el a figyelmet a szövegtől.</p>
+    <div class="g1-list">
+      <div class="g1-row"><div class="g1-num">01</div><div><div class="step-title">Diagnosztika &amp; endoszkópia</div><div class="step-desc">Hibakód-olvasás, majd endoszkópos betekintés a szívócsatornákba.</div></div><span class="step-tagpill">~30 perc</span></div>
+      <div class="g1-row"><div class="g1-num">02</div><div><div class="step-title">Szívósor eltávolítása</div><div class="step-desc">Csak a szívócsonkot bontom le, a hengerfej érintetlen marad.</div></div><span class="step-tagpill">Bontás</span></div>
+      <div class="g1-row"><div class="g1-num">03</div><div><div class="step-title">Precíz maszkolás</div><div class="step-desc">A nyílásokat lezárom, a szelepeket zárt állásba forgatom.</div></div><span class="step-tagpill">Védelem</span></div>
+      <div class="g1-row"><div class="g1-num">04</div><div><div class="step-title">Dióhéjas szemcseszórás</div><div class="step-desc">Szórás és vákuum egyszerre, zárt körfolyamatban.</div></div><span class="step-tagpill">Fő fázis</span></div>
+      <div class="g1-row"><div class="g1-num">05</div><div><div class="step-title">Ellenőrzés kamerával</div><div class="step-desc">Hengerről hengerre endoszkóppal ellenőrzöm és fotózom.</div></div><span class="step-tagpill">QC</span></div>
+      <div class="g1-row"><div class="g1-num">06</div><div><div class="step-title">Összeszerelés &amp; próba</div><div class="step-desc">Új tömítés, próbaút, előtte-utána fotódokumentáció.</div></div><span class="step-tagpill">Átadás</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">G2</span>
+    <h1>Egyenletes rács, összekötők nélkül</h1>
+    <p class="why">6 egyforma méretű kártya, 3×2 rácsban — nincs nyíl, nincs vonal, csak tiszta összehasonlítás egymás mellett, mint egy specifikáció-tábla.</p>
+    <div class="g2-grid">
+      <div class="g2-card"><div class="g2-top"><div class="g2-num">01</div><span class="step-tagpill">~30 perc</span></div><div class="step-title">Diagnosztika &amp; endoszkópia</div><div class="step-desc">Hibakód-olvasás, endoszkópos betekintés.</div></div>
+      <div class="g2-card"><div class="g2-top"><div class="g2-num">02</div><span class="step-tagpill">Bontás</span></div><div class="step-title">Szívósor eltávolítása</div><div class="step-desc">Csak a szívócsonkot bontom le.</div></div>
+      <div class="g2-card"><div class="g2-top"><div class="g2-num">03</div><span class="step-tagpill">Védelem</span></div><div class="step-title">Precíz maszkolás</div><div class="step-desc">Nyílások lezárva, szelepek zárt állásban.</div></div>
+      <div class="g2-card"><div class="g2-top"><div class="g2-num">04</div><span class="step-tagpill">Fő fázis</span></div><div class="step-title">Dióhéjas szemcseszórás</div><div class="step-desc">Szórás és vákuum egyszerre.</div></div>
+      <div class="g2-card"><div class="g2-top"><div class="g2-num">05</div><span class="step-tagpill">QC</span></div><div class="step-title">Ellenőrzés kamerával</div><div class="step-desc">Hengerenkénti endoszkópos ellenőrzés.</div></div>
+      <div class="g2-card"><div class="g2-top"><div class="g2-num">06</div><span class="step-tagpill">Átadás</span></div><div class="step-title">Összeszerelés &amp; próba</div><div class="step-desc">Próbaút, fotódokumentáció.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">G3</span>
+    <h1>Fent az áttekintés, lent a részletek</h1>
+    <p class="why">Egy pillantásra látszik a teljes folyamat (fenti sáv), majd alatta soronként a részletek — két olvasási sebességet szolgál ki egyszerre.</p>
+    <div class="g3-stepper">
+      <div class="g3-node">01</div><div class="g3-seg"></div>
+      <div class="g3-node">02</div><div class="g3-seg"></div>
+      <div class="g3-node">03</div><div class="g3-seg"></div>
+      <div class="g3-node">04</div><div class="g3-seg"></div>
+      <div class="g3-node">05</div><div class="g3-seg"></div>
+      <div class="g3-node">06</div>
+    </div>
+    <div class="g3-list">
+      <div class="g3-row"><span class="g3-mini">01</span><span class="step-title">Diagnosztika &amp; endoszkópia —</span><span class="step-desc">hibakód-olvasás, majd endoszkópos betekintés.</span></div>
+      <div class="g3-row"><span class="g3-mini">02</span><span class="step-title">Szívósor eltávolítása —</span><span class="step-desc">csak a szívócsonkot bontom le.</span></div>
+      <div class="g3-row"><span class="g3-mini">03</span><span class="step-title">Precíz maszkolás —</span><span class="step-desc">nyílások lezárva, szelepek zárt állásban.</span></div>
+      <div class="g3-row"><span class="g3-mini">04</span><span class="step-title">Dióhéjas szemcseszórás —</span><span class="step-desc">szórás és vákuum egyszerre.</span></div>
+      <div class="g3-row"><span class="g3-mini">05</span><span class="step-title">Ellenőrzés kamerával —</span><span class="step-desc">hengerenkénti endoszkópos ellenőrzés.</span></div>
+      <div class="g3-row"><span class="g3-mini">06</span><span class="step-title">Összeszerelés &amp; próba —</span><span class="step-desc">próbaút, fotódokumentáció.</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">G4</span>
+    <h1>Kétoszlopos "spec-tábla"</h1>
+    <p class="why">Szám/címke bal oldalt, magyarázat jobb oldalt, vízszintes elválasztókkal — olyan letisztult, mint egy műszaki adatlap, gyorsan pásztázható.</p>
+    <table class="g4-table">
+      <tr><td>01 · ~30 perc</td><td><span class="step-title">Diagnosztika &amp; endoszkópia</span><span class="step-desc">Hibakód-olvasás, majd endoszkópos betekintés a szívócsatornákba.</span></td></tr>
+      <tr><td>02 · Bontás</td><td><span class="step-title">Szívósor eltávolítása</span><span class="step-desc">Csak a szívócsonkot bontom le, a hengerfej érintetlen marad.</span></td></tr>
+      <tr><td>03 · Védelem</td><td><span class="step-title">Precíz maszkolás</span><span class="step-desc">A nyílásokat lezárom, a szelepeket zárt állásba forgatom.</span></td></tr>
+      <tr><td>04 · Fő fázis</td><td><span class="step-title">Dióhéjas szemcseszórás</span><span class="step-desc">Szórás és vákuum egyszerre, zárt körfolyamatban.</span></td></tr>
+      <tr><td>05 · QC</td><td><span class="step-title">Ellenőrzés kamerával</span><span class="step-desc">Hengerről hengerre endoszkóppal ellenőrzöm és fotózom.</span></td></tr>
+      <tr><td>06 · Átadás</td><td><span class="step-title">Összeszerelés &amp; próba</span><span class="step-desc">Új tömítés, próbaút, előtte-utána fotódokumentáció.</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">G5</span>
+    <h1>Szerkesztőségi lista, körvonalas számokkal</h1>
+    <p class="why">Nagy, halvány körvonal-számok vezetik a szemet soronként lefelé — editorial stílus, minimál díszítés, maximális olvashatóság.</p>
+    <div class="g5-list">
+      <div class="g5-row"><div class="g5-ghost">01</div><div><div class="step-title">Diagnosztika &amp; endoszkópia</div><div class="step-desc">Hibakód-olvasás, majd endoszkópos betekintés a szívócsatornákba.</div></div></div>
+      <div class="g5-row"><div class="g5-ghost">02</div><div><div class="step-title">Szívósor eltávolítása</div><div class="step-desc">Csak a szívócsonkot bontom le, a hengerfej érintetlen marad.</div></div></div>
+      <div class="g5-row"><div class="g5-ghost">03</div><div><div class="step-title">Precíz maszkolás</div><div class="step-desc">A nyílásokat lezárom, a szelepeket zárt állásba forgatom.</div></div></div>
+      <div class="g5-row"><div class="g5-ghost">04</div><div><div class="step-title">Dióhéjas szemcseszórás</div><div class="step-desc">Szórás és vákuum egyszerre, zárt körfolyamatban.</div></div></div>
+      <div class="g5-row"><div class="g5-ghost">05</div><div><div class="step-title">Ellenőrzés kamerával</div><div class="step-desc">Hengerről hengerre endoszkóppal ellenőrzöm és fotózom.</div></div></div>
+      <div class="g5-row"><div class="g5-ghost">06</div><div><div class="step-title">Összeszerelés &amp; próba</div><div class="step-desc">Új tömítés, próbaút, előtte-utána fotódokumentáció.</div></div></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

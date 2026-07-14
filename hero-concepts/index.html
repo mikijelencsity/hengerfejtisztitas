@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero koncepciók — válogató</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f5f0e6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;--walnut:#8a5a2b;--walnut-hot:#a46c33;--line:rgba(36,28,18,.14);--mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);padding:clamp(24px,5vw,60px)}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(1.6rem,4vw,2.6rem);text-transform:uppercase;margin-bottom:12px}
+h1 span{color:var(--walnut)}
+p.lead{color:var(--ink-dim);max-width:60ch;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px;
+  text-decoration:none;color:var(--ink);display:block;transition:transform .2s,box-shadow .2s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(36,28,18,.12)}
+.card b{display:block;font-family:var(--mono);color:var(--walnut);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+.card h2{font-family:var(--disp);font-weight:700;font-size:1.15rem;text-transform:uppercase;margin-bottom:10px}
+.card p{font-size:.9rem;color:var(--ink-dim)}
+</style>
+</head>
+<body>
+<h1>Hero <span>koncepciók</span></h1>
+<p class="lead">5 önálló hero-variáció, mindegyik teljes egészében látszik görgetés nélkül (100vh). Kattints egyre a megnyitáshoz.</p>
+<div class="grid">
+  <a class="card" href="concept1.html" target="_blank"><b>01</b><h2>Minimalista manifesztó</h2><p>Középre rendezett, óriás cím, semmi felesleg — a legbiztosabban fér el minden képernyőn.</p></a>
+  <a class="card" href="concept2.html" target="_blank"><b>02</b><h2>Split-screen előtte/utána</h2><p>Szöveg balra, nagy előtte/utána fotópáros jobbra.</p></a>
+  <a class="card" href="concept3.html" target="_blank"><b>03</b><h2>Full-bleed háttérfotó</h2><p>Sötét overlay-es motortér-fotó háttérben, kompakt stat-badge-ek sarokban.</p></a>
+  <a class="card" href="concept4.html" target="_blank"><b>04</b><h2>Élő folyamat háttér</h2><p>Automatikusan váltakozó munkafolyamat-fotók, mozgásérzettel (Ken Burns).</p></a>
+  <a class="card" href="concept5.html" target="_blank"><b>05</b><h2>Interaktív csúszka</h2><p>Húzható előtte/utána comparison slider tölti ki a teljes hátteret.</p></a>
+</div>
+<h1 style="margin-top:48px">2. kör — <span>kép nem háttérben, díszesebb</span></h1>
+<p class="lead">Kép formába zárva (nem full-bleed), díszített háttér, erős CTA gombok.</p>
+<div class="grid">
+  <a class="card" href="concept6.html" target="_blank"><b>06</b><h2>Nyolcszög keretes showcase</h2><p>Nyolcszögbe vágott kép forgó gyűrűkkel, rácsos háttérrel, jobb oldalon.</p></a>
+  <a class="card" href="concept7.html" target="_blank"><b>07</b><h2>Kitűzött műhelyfotó</h2><p>Enyhén elforgatott, ragasztószalagos "kitűzött" fotó papírtextúrás háttéren, firka-díszekkel.</p></a>
+  <a class="card" href="concept8.html" target="_blank"><b>08</b><h2>Körkeretes, keringő gyűrűvel</h2><p>Kör alakú kép lassan forgó szaggatott gyűrűkkel és lebegő statisztika-kártyával.</p></a>
+  <a class="card" href="concept9.html" target="_blank"><b>09</b><h2>Műszaki rajz / blueprint keret</h2><p>Kép sarokjelölős, méretvonalas "mérnöki rajz" keretben, blueprint rácsos háttéren.</p></a>
+  <a class="card" href="concept10.html" target="_blank"><b>10</b><h2>Legyezett polaroid-köteg</h2><p>3 elforgatott polaroid-fotó legyezőben (előtte/folyamat/utána), átlós vonalas háttéren.</p></a>
+</div>
+<h1 style="margin-top:48px">Problema szekció — <span>záró blokk 4 variáció</span></h1>
+<p class="lead">A jelenlegi "Ha idáig eljutottál..." bekezdés helyére, személyes segítő-felhívással, Rüsztök Zoltán névvel aláírva.</p>
+<div class="grid">
+  <a class="card" href="problema-block.html" target="_blank"><b>A–D</b><h2>4 variáció egy oldalon</h2><p>Aláírt idézet-kártya, split banner kapcsolat-kártyával, minimál CTA sor, vízszintes "testimonial" csík — görgetve összehasonlítható.</p></a>
+</div>
+</body>
+</html>

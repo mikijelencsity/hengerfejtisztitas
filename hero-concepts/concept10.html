@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koncepció 10 — Legyezett polaroid-köteg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
+  --walnut:#8a5a2b;--walnut-hot:#a46c33;--line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:var(--body)}
+.badge{position:fixed;top:16px;left:16px;z-index:50;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:6px 12px;border-radius:20px}
+header{height:100vh;position:relative;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;overflow:hidden;padding:0 clamp(20px,4vw,60px)}
+@media(max-width:900px){header{grid-template-columns:1fr;padding-top:70px}}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(ellipse 70% 55% at 82% 30%,rgba(138,90,43,.18),transparent 62%),
+  radial-gradient(ellipse 55% 50% at 12% 88%,rgba(138,90,43,.08),transparent 60%),
+  var(--paper);}
+.diag-lines{position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:repeating-linear-gradient(-45deg,var(--line) 0 1px,transparent 1px 44px);
+  mask-image:radial-gradient(ellipse 80% 70% at 70% 45%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 70% 45%,#000 30%,transparent 75%);}
+.hero-text{position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--walnut);margin-bottom:clamp(16px,3vh,26px);border:1px solid rgba(138,90,43,.4);padding:8px 14px;width:fit-content}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--walnut);border-radius:50%}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(1.9rem,4.6vw,4.4rem);line-height:1.02;letter-spacing:-.015em;text-transform:uppercase;max-width:13ch}
+h1 .amber{color:var(--walnut)}
+.hero-sub{max-width:44ch;color:var(--ink-dim);margin-top:clamp(16px,2.6vh,24px);font-size:clamp(.88rem,1.2vw,1.05rem)}
+.hero-sub strong{color:var(--ink);font-weight:600}
+.hero-actions{display:flex;gap:14px;margin-top:clamp(22px,3.4vh,34px);flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;padding:15px 28px;text-decoration:none;transition:.25s;display:inline-flex;align-items:center;gap:10px}
+.btn-solid{color:var(--paper);background:var(--walnut);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+.btn-solid:hover{background:var(--walnut-hot);gap:16px}
+.btn-ghost{color:var(--ink);border:1px solid rgba(36,28,18,.3)}
+.btn-ghost:hover{border-color:var(--walnut);color:var(--walnut)}
+.fan-stage{position:relative;display:flex;align-items:center;justify-content:center;height:min(70vh,540px)}
+.polaroid{
+  position:absolute;width:52%;aspect-ratio:4/5;background:var(--card);padding:10px 10px 40px;
+  box-shadow:0 24px 50px rgba(36,28,18,.22);border:1px solid var(--line);transition:transform .3s;
+}
+.polaroid .ph{width:100%;height:100%;overflow:hidden}
+.polaroid img{width:100%;height:100%;object-fit:cover;filter:saturate(1.02) sepia(.05)}
+.polaroid span.cap{position:absolute;left:10px;right:10px;bottom:12px;font-family:var(--mono);font-size:.62rem;color:var(--ink-dim);text-align:center}
+.p1{transform:rotate(-10deg) translate(-58%,4%);z-index:1}
+.p2{transform:rotate(3deg) translate(4%,-6%);z-index:2}
+.p3{transform:rotate(14deg) translate(58%,6%);z-index:1}
+.fan-stage:hover .p1{transform:rotate(-14deg) translate(-64%,0)}
+.fan-stage:hover .p3{transform:rotate(18deg) translate(64%,2%)}
+</style>
+</head>
+<body>
+<div class="badge">10 / Legyezett polaroid-köteg</div>
+<header>
+  <div class="hero-bg"></div>
+  <div class="diag-lines"></div>
+  <div class="hero-text">
+    <div class="hero-tag">Bontás nélküli technológia · Ózd</div>
+    <h1>A motorod<br>megfullad<br>a <span class="amber">koksztól.</span></h1>
+    <p class="hero-sub">Dióhéjas szívószelep-tisztítás <strong>GDI / TSI / TFSI</strong> és dízelmotorokhoz — hengerfej-bontás nélkül.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-solid">Kérj árajánlatot ▸</a>
+      <a href="#" class="btn btn-ghost">Nézd meg az eredményt</a>
+    </div>
+  </div>
+  <div class="fan-stage">
+    <div class="polaroid p1"><div class="ph"><img src="../images/before-szelepek-koksz.jpg" alt="Kokszos szelepek"></div><span class="cap">Előtte</span></div>
+    <div class="polaroid p2"><div class="ph"><img src="../images/process-maszkolas.jpg" alt="Maszkolás"></div><span class="cap">Folyamat</span></div>
+    <div class="polaroid p3"><div class="ph"><img src="../images/after-szelepek-tiszta.jpg" alt="Tiszta szelepek"></div><span class="cap">Utána</span></div>
+  </div>
+</header>
+</body>
+</html>

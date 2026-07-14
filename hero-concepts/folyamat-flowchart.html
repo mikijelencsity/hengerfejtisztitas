@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folyamat szekció — 5 flowchart variáció</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--paper-2:#ede6d6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
+  --walnut:#8a5a2b;--walnut-hot:#a46c33;--walnut-deep:#5c3a18;--line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(12px,3vw,56px)}
+section{padding:clamp(60px,9vh,110px) 0}
+.variant-label{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:20px;display:inline-block;margin-bottom:10px;
+}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,3vw,1.9rem);text-transform:uppercase;margin-bottom:30px}
+h1 span{color:var(--walnut)}
+.divider{border:none;border-top:2px dashed rgba(138,90,43,.35)}
+.step-tagpill{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-dim);border:1px solid var(--line);padding:3px 9px;background:var(--paper);border-radius:3px;
+}
+
+/* shared step data styling bits */
+.node-num{font-family:var(--disp);font-weight:700}
+.step-title{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.step-desc{color:var(--ink-dim);font-size:.9rem}
+
+/* ================= F1: horizontal timeline ================= */
+.f1-track{position:relative;display:flex;gap:8px;padding-top:10px}
+.f1-line{position:absolute;top:34px;left:4%;right:4%;height:2px;background:rgba(138,90,43,.3);z-index:0}
+.f1-node{flex:1;position:relative;z-index:1;text-align:center;padding:0 6px}
+.f1-dot{
+  width:44px;height:44px;border-radius:50%;background:var(--walnut);color:var(--paper);margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 0 0 6px var(--paper);
+}
+.f1-node .step-title{font-size:.82rem;margin-bottom:6px}
+.f1-node .step-desc{font-size:.76rem}
+.f1-node .step-tagpill{margin-top:10px;display:inline-block}
+@media(max-width:900px){
+  .f1-track{flex-direction:column;gap:26px}
+  .f1-line{display:none}
+  .f1-node{text-align:left;display:flex;gap:16px;padding:0}
+  .f1-dot{margin:0;flex-shrink:0}
+}
+
+/* ================= F2: vertical spine ================= */
+.f2-track{position:relative;padding-left:64px}
+.f2-spine{position:absolute;left:27px;top:6px;bottom:6px;width:2px;background:rgba(138,90,43,.3)}
+.f2-item{position:relative;padding-bottom:40px}
+.f2-item:last-child{padding-bottom:0}
+.f2-dot{
+  position:absolute;left:-64px;top:0;width:54px;height:54px;border-radius:50%;background:var(--walnut);
+  color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:1.1rem;z-index:1;
+}
+.f2-item .step-title{font-size:1rem;margin-bottom:6px}
+.f2-item .step-tagpill{margin-bottom:10px;display:inline-block}
+@media(max-width:600px){
+  .f2-track{padding-left:52px}
+  .f2-spine{left:21px}
+  .f2-dot{left:-52px;width:42px;height:42px;font-size:.9rem}
+}
+
+/* ================= F3: zigzag winding path ================= */
+.f3-track{display:flex;flex-direction:column;gap:0}
+.f3-item{display:flex;align-items:center;gap:28px;position:relative;padding:22px 0}
+.f3-item.rev{flex-direction:row-reverse}
+.f3-card{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 26px;
+  box-shadow:0 10px 24px rgba(36,28,18,.06);
+}
+.f3-node{
+  width:58px;height:58px;border-radius:50%;background:var(--walnut);color:var(--paper);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;position:relative;z-index:1;
+}
+.f3-connector{
+  position:absolute;left:50%;bottom:-6px;width:2px;height:34px;background:rgba(138,90,43,.35);
+  transform:translateX(-50%);z-index:0;
+}
+.f3-item:last-child .f3-connector{display:none}
+.f3-card .step-title{font-size:1rem;margin-bottom:6px}
+@media(max-width:760px){
+  .f3-item,.f3-item.rev{flex-direction:row;gap:18px}
+  .f3-connector{left:29px;transform:none}
+}
+
+/* ================= F4: circular ring ================= */
+.f4-wrap{position:relative;width:min(560px,90vw);aspect-ratio:1/1;margin:0 auto}
+.f4-center{
+  position:absolute;inset:0;margin:auto;width:34%;height:34%;border-radius:50%;background:var(--card);
+  border:1px dashed rgba(138,90,43,.4);display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--walnut);padding:10px;
+}
+.f4-ring{position:absolute;inset:8%;border-radius:50%;border:1px dashed rgba(138,90,43,.25)}
+.f4-wrap{--r:230px}
+.f4-item{position:absolute;top:50%;left:50%;width:0;height:0;transform:rotate(var(--a)) translate(var(--r)) rotate(calc(-1 * var(--a)))}
+.f4-item .f4-inner{position:absolute;width:120px;transform:translate(-50%,-50%);text-align:center}
+.f4-dot{
+  width:50px;height:50px;border-radius:50%;background:var(--walnut);color:var(--paper);margin:0 auto 8px;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 0 0 6px var(--paper);
+}
+.f4-inner .step-title{font-size:.74rem;line-height:1.25}
+@media(max-width:640px){
+  .f4-wrap{width:100%;--r:38vw}
+  .f4-inner{width:92px}
+  .f4-dot{width:40px;height:40px;font-size:.85rem}
+  .f4-inner .step-title{font-size:.64rem}
+}
+@media(max-width:380px){
+  .f4-wrap{--r:34vw}
+  .f4-inner{width:78px}
+}
+
+/* ================= F5: horizontal arrow-chain ================= */
+.f5-track{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:10px;scrollbar-width:thin}
+.f5-card{
+  flex:0 0 200px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;
+}
+.f5-dot{width:38px;height:38px;border-radius:50%;background:var(--walnut);color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:.85rem;margin-bottom:14px}
+.f5-card .step-title{font-size:.86rem;margin-bottom:6px}
+.f5-card .step-desc{font-size:.78rem}
+.f5-arrow{flex:0 0 40px;display:flex;align-items:center;justify-content:center;color:var(--walnut);font-size:1.3rem}
+@media(max-width:640px){.f5-card{flex-basis:170px}}
+</style>
+</head>
+<body>
+
+<section>
+  <div class="wrap">
+    <h1>F1 — <span>Vízszintes idővonal, pontokkal</span></h1>
+    <div class="f1-track">
+      <div class="f1-line"></div>
+      <div class="f1-node"><div class="f1-dot node-num">01</div><div class="step-title">Diagnosztika &amp; endoszkópia</div><div class="step-desc">Hibakód-olvasás, majd endoszkópos betekintés.</div><span class="step-tagpill">~30 perc</span></div>
+      <div class="f1-node"><div class="f1-dot node-num">02</div><div class="step-title">Szívósor eltávolítása</div><div class="step-desc">Csak a szívócsonkot bontom le.</div><span class="step-tagpill">Bontás</span></div>
+      <div class="f1-node"><div class="f1-dot node-num">03</div><div class="step-title">Precíz maszkolás</div><div class="step-desc">Nyílások lezárva, szelepek zárt állásban.</div><span class="step-tagpill">Védelem</span></div>
+      <div class="f1-node"><div class="f1-dot node-num">04</div><div class="step-title">Dióhéjas szemcseszórás</div><div class="step-desc">Szórás és vákuum egyszerre, zárt körben.</div><span class="step-tagpill">Fő fázis</span></div>
+      <div class="f1-node"><div class="f1-dot node-num">05</div><div class="step-title">Ellenőrzés kamerával</div><div class="step-desc">Hengerenként endoszkóppal ellenőrzöm.</div><span class="step-tagpill">QC</span></div>
+      <div class="f1-node"><div class="f1-dot node-num">06</div><div class="step-title">Összeszerelés &amp; próba</div><div class="step-desc">Új tömítés, próbaút, fotódokumentáció.</div><span class="step-tagpill">Átadás</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <h1>F2 — <span>Függőleges gerinc, oldalt csomópontokkal</span></h1>
+    <div class="f2-track">
+      <div class="f2-spine"></div>
+      <div class="f2-item"><div class="f2-dot node-num">01</div><span class="step-tagpill">~30 perc</span><div class="step-title">Diagnosztika &amp; endoszkópia</div><p class="step-desc">Hibakód-olvasás, majd endoszkópos kamerával belenézek a szívócsatornákba.</p></div>
+      <div class="f2-item"><div class="f2-dot node-num">02</div><span class="step-tagpill">Bontás</span><div class="step-title">Szívósor eltávolítása</div><p class="step-desc">Leszerelem a szívócsonkot — csak ennyit bontok.</p></div>
+      <div class="f2-item"><div class="f2-dot node-num">03</div><span class="step-tagpill">Védelem</span><div class="step-title">Precíz maszkolás</div><p class="step-desc">A nyílásokat lezárom, a szelepeket zárt állásba forgatom.</p></div>
+      <div class="f2-item"><div class="f2-dot node-num">04</div><span class="step-tagpill">Fő fázis</span><div class="step-title">Dióhéjas szemcseszórás</div><p class="step-desc">Nagynyomású levegővel szórok, közben vákuum szív el mindent.</p></div>
+      <div class="f2-item"><div class="f2-dot node-num">05</div><span class="step-tagpill">QC</span><div class="step-title">Ellenőrzés kamerával</div><p class="step-desc">Hengerről hengerre endoszkóppal ellenőrzöm és fotózom.</p></div>
+      <div class="f2-item"><div class="f2-dot node-num">06</div><span class="step-tagpill">Átadás</span><div class="step-title">Összeszerelés &amp; próba</div><p class="step-desc">Új tömítés, próbaút, előtte-utána fotódokumentáció.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <h1>F3 — <span>Cikk-cakk (zigzag) folyamatút</span></h1>
+    <div class="f3-track">
+      <div class="f3-item">
+        <div class="f3-node node-num">01</div>
+        <div class="f3-card"><span class="step-tagpill">~30 perc</span><div class="step-title">Diagnosztika &amp; endoszkópia</div><p class="step-desc">Hibakód-olvasás, majd endoszkópos betekintés a csatornákba.</p></div>
+        <div class="f3-connector"></div>
+      </div>
+      <div class="f3-item rev">
+        <div class="f3-node node-num">02</div>
+        <div class="f3-card"><span class="step-tagpill">Bontás</span><div class="step-title">Szívósor eltávolítása</div><p class="step-desc">Csak a szívócsonkot bontom le, a hengerfej érintetlen.</p></div>
+        <div class="f3-connector"></div>
+      </div>
+      <div class="f3-item">
+        <div class="f3-node node-num">03</div>
+        <div class="f3-card"><span class="step-tagpill">Védelem</span><div class="step-title">Precíz maszkolás</div><p class="step-desc">Nyílások lezárva, szelepek zárt állásban.</p></div>
+        <div class="f3-connector"></div>
+      </div>
+      <div class="f3-item rev">
+        <div class="f3-node node-num">04</div>
+        <div class="f3-card"><span class="step-tagpill">Fő fázis</span><div class="step-title">Dióhéjas szemcseszórás</div><p class="step-desc">Szórás és vákuum egyszerre, zárt körfolyamatban.</p></div>
+        <div class="f3-connector"></div>
+      </div>
+      <div class="f3-item">
+        <div class="f3-node node-num">05</div>
+        <div class="f3-card"><span class="step-tagpill">QC</span><div class="step-title">Ellenőrzés kamerával</div><p class="step-desc">Hengerenként endoszkóppal ellenőrzöm az eredményt.</p></div>
+        <div class="f3-connector"></div>
+      </div>
+      <div class="f3-item rev">
+        <div class="f3-node node-num">06</div>
+        <div class="f3-card"><span class="step-tagpill">Átadás</span><div class="step-title">Összeszerelés &amp; próba</div><p class="step-desc">Új tömítés, próbaút, fotódokumentációval átadva.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <h1>F4 — <span>Körkörös folyamat-gyűrű</span></h1>
+    <div class="f4-wrap">
+      <div class="f4-ring"></div>
+      <div class="f4-center">Így<br>dolgozom</div>
+      <div class="f4-item" style="--a:-90deg"><div class="f4-inner"><div class="f4-dot node-num">01</div><div class="step-title">Diagnosztika</div></div></div>
+      <div class="f4-item" style="--a:-30deg"><div class="f4-inner"><div class="f4-dot node-num">02</div><div class="step-title">Szívósor eltávolítása</div></div></div>
+      <div class="f4-item" style="--a:30deg"><div class="f4-inner"><div class="f4-dot node-num">03</div><div class="step-title">Maszkolás</div></div></div>
+      <div class="f4-item" style="--a:90deg"><div class="f4-inner"><div class="f4-dot node-num">04</div><div class="step-title">Szemcseszórás</div></div></div>
+      <div class="f4-item" style="--a:150deg"><div class="f4-inner"><div class="f4-dot node-num">05</div><div class="step-title">Ellenőrzés kamerával</div></div></div>
+      <div class="f4-item" style="--a:210deg"><div class="f4-inner"><div class="f4-dot node-num">06</div><div class="step-title">Összeszerelés &amp; próba</div></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <h1>F5 — <span>Vízszintes, nyilakkal összekötött kártyalánc</span></h1>
+    <div class="f5-track">
+      <div class="f5-card"><div class="f5-dot node-num">01</div><span class="step-tagpill">~30 perc</span><div class="step-title">Diagnosztika &amp; endoszkópia</div><p class="step-desc">Hibakód-olvasás, endoszkópos betekintés.</p></div>
+      <div class="f5-arrow">→</div>
+      <div class="f5-card"><div class="f5-dot node-num">02</div><span class="step-tagpill">Bontás</span><div class="step-title">Szívósor eltávolítása</div><p class="step-desc">Csak a szívócsonkot bontom le.</p></div>
+      <div class="f5-arrow">→</div>
+      <div class="f5-card"><div class="f5-dot node-num">03</div><span class="step-tagpill">Védelem</span><div class="step-title">Precíz maszkolás</div><p class="step-desc">Nyílások lezárva, szelepek zárva.</p></div>
+      <div class="f5-arrow">→</div>
+      <div class="f5-card"><div class="f5-dot node-num">04</div><span class="step-tagpill">Fő fázis</span><div class="step-title">Dióhéjas szórás</div><p class="step-desc">Szórás és vákuum egyszerre.</p></div>
+      <div class="f5-arrow">→</div>
+      <div class="f5-card"><div class="f5-dot node-num">05</div><span class="step-tagpill">QC</span><div class="step-title">Ellenőrzés kamerával</div><p class="step-desc">Hengerenkénti endoszkópos ellenőrzés.</p></div>
+      <div class="f5-arrow">→</div>
+      <div class="f5-card"><div class="f5-dot node-num">06</div><span class="step-tagpill">Átadás</span><div class="step-title">Összeszerelés &amp; próba</div><p class="step-desc">Próbaút, fotódokumentáció.</p></div>
+    </div>
+    <p style="font-family:var(--mono);font-size:.7rem;color:var(--ink-dim);margin-top:10px">◂ görgethető mobilon és keskeny nézetben ▸</p>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problema szekció záró blokk — 4 variáció</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--paper-2:#ede6d6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
+  --walnut:#8a5a2b;--walnut-hot:#a46c33;--walnut-deep:#5c3a18;--line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(12px,3vw,56px)}
+section{padding:clamp(50px,8vh,90px) 0}
+.sec-index{font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;color:var(--walnut);text-transform:uppercase;display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.sec-index::after{content:'';height:1px;width:64px;background:rgba(138,90,43,.5)}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,4.4vw,3.2rem);line-height:1.08;text-transform:uppercase;letter-spacing:-.01em;max-width:22ch}
+h2 .amber{color:var(--walnut)}
+.sec-lead{color:var(--ink-dim);max-width:60ch;margin-top:22px;font-size:1.05rem}
+.symptoms{margin-top:clamp(30px,5vh,50px);display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media(max-width:1080px){.symptoms{grid-template-columns:repeat(2,1fr)}.symptoms .symptom:last-child{grid-column:1 / -1}}
+.symptom{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.symptom .sy-photo{position:relative;aspect-ratio:4/3;overflow:hidden}
+.symptom .sy-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) sepia(.12) saturate(1.2) contrast(1.05)}
+.symptom .sy-n{position:absolute;top:10px;left:10px;background:var(--walnut);color:var(--paper);font-family:var(--mono);font-weight:700;font-size:.72rem;padding:3px 9px;border-radius:4px}
+.symptom .sy-body{padding:16px 16px 18px}
+.symptom h3{font-family:var(--body);font-weight:700;font-size:.92rem;margin-bottom:6px}
+.symptom p{font-size:.82rem;color:var(--ink-dim)}
+
+.variant-label{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--paper);background:var(--ink);padding:6px 14px;border-radius:20px;display:inline-block;margin-bottom:24px;
+}
+.divider{border-top:2px dashed rgba(138,90,43,.35);margin:0}
+
+/* ---------- variant A: signature quote card ---------- */
+.quote-card{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:clamp(28px,4vw,48px);margin-top:clamp(30px,5vh,50px);position:relative;max-width:900px;
+}
+.quote-mark{font-family:var(--disp);font-size:4rem;color:rgba(138,90,43,.25);line-height:1;position:absolute;top:14px;left:24px}
+.quote-card p{position:relative;font-size:1.15rem;color:var(--ink);max-width:60ch;padding-left:8px}
+.quote-card p strong{color:var(--walnut-deep)}
+.signature-row{display:flex;align-items:center;gap:16px;margin-top:26px}
+.monogram{width:54px;height:54px;border-radius:50%;background:var(--walnut);color:var(--paper);font-family:var(--disp);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.sig-name{font-family:var(--disp);font-weight:700;font-size:1rem}
+.sig-role{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* ---------- variant B: split banner with contact card ---------- */
+.split-banner{
+  margin-top:clamp(30px,5vh,50px);display:grid;grid-template-columns:1.4fr 1fr;gap:1px;
+  background:var(--line);border:1px solid var(--line);max-width:1000px;
+}
+@media(max-width:760px){.split-banner{grid-template-columns:1fr}}
+.split-msg{background:var(--card);padding:clamp(28px,4vw,40px)}
+.split-msg p{font-size:1.02rem;color:var(--ink-dim)}
+.split-msg p strong{color:var(--ink)}
+.split-contact{background:var(--walnut);color:var(--paper);padding:clamp(24px,3.5vw,36px);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.split-contact .monogram{background:var(--paper);color:var(--walnut)}
+.split-contact .sig-name{color:var(--paper)}
+.split-contact .sig-role{color:rgba(245,240,230,.75)}
+.split-phone{
+  font-family:var(--mono);font-weight:700;color:var(--paper);text-decoration:none;font-size:1.1rem;
+  border:1px solid rgba(245,240,230,.4);padding:12px 18px;text-align:center;margin-top:6px;transition:.2s;
+}
+.split-phone:hover{background:rgba(245,240,230,.15)}
+
+/* ---------- variant C: minimal inline signed line ---------- */
+.inline-cta{margin-top:clamp(30px,5vh,50px);max-width:70ch}
+.inline-cta p{color:var(--ink-dim);font-size:1.02rem}
+.inline-cta p strong{color:var(--ink)}
+.inline-sign{
+  display:flex;align-items:center;gap:14px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line);
+}
+.inline-sign .name{font-family:var(--disp);font-weight:700;color:var(--ink)}
+.inline-sign .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut)}
+.inline-cta-btn{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  color:var(--paper);background:var(--walnut);padding:13px 24px;text-decoration:none;margin-left:auto;
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+}
+
+/* ---------- variant D: horizontal testimonial-style strip ---------- */
+.strip{
+  margin-top:clamp(30px,5vh,50px);background:var(--card);border:1px solid var(--line);border-radius:100px;
+  display:flex;align-items:center;gap:24px;padding:14px 28px 14px 14px;max-width:920px;flex-wrap:wrap;
+}
+.strip .monogram{width:64px;height:64px;font-size:1.2rem}
+.strip-text{flex:1;min-width:240px}
+.strip-text p{font-size:.98rem;color:var(--ink)}
+.strip-text span{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut-hot);display:block;margin-top:6px}
+.strip-btn{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  color:var(--paper);background:var(--walnut);padding:13px 22px;text-decoration:none;border-radius:40px;white-space:nowrap;
+}
+
+/* ---------- D1: pulse-ring avatar, like sticky-call ---------- */
+.d1-strip{
+  margin-top:clamp(30px,5vh,50px);background:var(--card);border:1px solid var(--line);border-radius:100px;
+  display:flex;align-items:center;gap:22px;padding:12px 26px 12px 12px;max-width:900px;flex-wrap:wrap;
+}
+.d1-avatar{position:relative;width:60px;height:60px;flex-shrink:0}
+.d1-avatar .ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--walnut);opacity:.5;animation:d1Pulse 2.4s ease-out infinite}
+.d1-avatar .core{position:absolute;inset:6px;border-radius:50%;background:var(--walnut);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700;font-size:1rem}
+@keyframes d1Pulse{0%{transform:scale(.85);opacity:.6}70%,100%{transform:scale(1.25);opacity:0}}
+.d1-text{flex:1;min-width:220px}
+.d1-text p{font-size:.98rem;color:var(--ink)}
+.d1-text span{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut-hot);display:block;margin-top:5px}
+.d1-btn{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--paper);background:var(--walnut);padding:13px 22px;text-decoration:none;border-radius:40px;white-space:nowrap}
+
+/* ---------- D2: left accent-bar strip, no full pill ---------- */
+.d2-strip{
+  margin-top:clamp(30px,5vh,50px);background:var(--card);border:1px solid var(--line);border-left:5px solid var(--walnut);
+  display:flex;align-items:center;gap:20px;padding:22px 26px;max-width:900px;flex-wrap:wrap;
+}
+.d2-mono{font-family:var(--disp);font-weight:700;font-size:1.4rem;color:var(--walnut);flex-shrink:0}
+.d2-text{flex:1;min-width:220px}
+.d2-text p{font-size:.98rem;color:var(--ink)}
+.d2-text b{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin-top:6px;font-weight:400}
+.d2-btn{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--walnut);border:1px solid var(--walnut);padding:12px 20px;text-decoration:none;white-space:nowrap;transition:.2s}
+.d2-btn:hover{background:var(--walnut);color:var(--paper)}
+
+/* ---------- D3: chat-bubble tail pointing to phone icon ---------- */
+.d3-strip{
+  margin-top:clamp(30px,5vh,50px);display:flex;align-items:center;gap:18px;max-width:900px;flex-wrap:wrap;
+}
+.d3-bubble{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 24px;flex:1;min-width:240px}
+.d3-bubble::after{
+  content:'';position:absolute;right:-9px;top:50%;transform:translateY(-50%);width:0;height:0;
+  border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:10px solid var(--card);
+}
+.d3-bubble p{font-size:.98rem;color:var(--ink)}
+.d3-bubble span{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut-hot);display:block;margin-top:6px}
+.d3-call{
+  width:76px;height:76px;border-radius:50%;background:var(--walnut);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;text-decoration:none;box-shadow:0 12px 28px rgba(92,58,24,.32);
+}
+.d3-call svg{width:26px;height:26px;fill:var(--paper)}
+
+/* ---------- D4: two-tone segmented pill ---------- */
+.d4-strip{margin:clamp(30px,5vh,50px) auto 0;display:flex;max-width:900px;flex-wrap:wrap;justify-content:center;border-radius:100px;overflow:hidden;box-shadow:0 10px 24px rgba(36,28,18,.1)}
+.d4-msg{background:var(--card);flex:1;min-width:240px;padding:18px 26px;display:flex;align-items:center;gap:14px}
+.d4-msg .monogram{width:44px;height:44px;font-size:.9rem}
+.d4-msg p{font-size:.94rem;color:var(--ink)}
+.d4-contact{background:var(--walnut);color:var(--paper);display:flex;align-items:center;gap:12px;padding:18px 26px;text-decoration:none;white-space:nowrap;transition:.2s}
+.d4-contact:hover{background:var(--walnut-hot)}
+.d4-contact b{font-family:var(--mono);font-size:.9rem}
+
+/* ---------- D5: eyebrow-badge quote card, no monogram ---------- */
+.d5-card{
+  margin-top:clamp(30px,5vh,50px);max-width:760px;background:var(--paper-2);border:1px solid var(--line);
+  border-radius:14px;padding:clamp(24px,3.5vw,34px);
+}
+.d5-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--walnut);border:1px solid rgba(138,90,43,.4);padding:6px 12px;margin-bottom:16px;
+}
+.d5-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--walnut)}
+.d5-card p{font-size:1.05rem;color:var(--ink)}
+.d5-card p strong{color:var(--walnut-deep)}
+.d5-foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;flex-wrap:wrap;gap:14px}
+.d5-foot .name{font-family:var(--disp);font-weight:700}
+.d5-btn{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--paper);background:var(--walnut);padding:12px 22px;text-decoration:none;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+</style>
+</head>
+<body>
+
+<section id="problema">
+  <div class="wrap">
+    <div class="sec-index">01 / Ismerős?</div>
+    <h2>5 jel, hogy a motorod <span class="amber">segítségért kiált</span></h2>
+    <p class="sec-lead">Ha csak egyet is felismersz az alábbiak közül, valószínűleg már most is ezzel küzdesz — és pontosan tudjuk, min mész keresztül.</p>
+    <div class="symptoms">
+      <div class="symptom"><div class="sy-photo"><span class="sy-n">01</span><img src="../images/before-koksz-szivocsatorna.jpg" alt=""></div><div class="sy-body"><h3>Tapod a gázt, semmi</h3><p>Fél másodpercet vár, mielőtt bármi történne.</p></div></div>
+      <div class="symptom"><div class="sy-photo"><span class="sy-n">02</span><img src="../images/before-szelepek-koksz.jpg" alt=""></div><div class="sy-body"><h3>Remeg, mintha küszködne</h3><p>Rázkódás lámpánál, ingadozó alapjárat.</p></div></div>
+      <div class="symptom"><div class="sy-photo"><span class="sy-n">03</span><img src="../images/before-csatorna-koszos.jpg" alt=""></div><div class="sy-body"><h3>Egyre többet fizetsz</h3><p>Ugyanaz az út, mégis gyakrabban tankolsz.</p></div></div>
+      <div class="symptom"><div class="sy-photo"><span class="sy-n">04</span><img src="../images/process-endoszkop.jpg" alt=""></div><div class="sy-body"><h3>Reggel könyörögsz, induljon</h3><p>Hidegben rángat, akadozik.</p></div></div>
+      <div class="symptom"><div class="sy-photo"><span class="sy-n">05</span><img src="../images/process-motorter-bmw.jpg" alt=""></div><div class="sy-body"><h3>Megint a Check Engine</h3><p>Törlik a hibakódot, visszajön.</p></div></div>
+    </div>
+
+    <!-- ===== VARIANT A ===== -->
+    <span class="variant-label">A — Aláírt idézet-kártya</span>
+    <div class="quote-card">
+      <span class="quote-mark">"</span>
+      <p>Ha idáig eljutottál, valószínűleg már máshol is jártál — és nem kaptál igazi választ. <strong>Hidd el, ezt is meg tudjuk oldani.</strong> Nem adalék, nem trükk: a gyökerét kezeljük a problémának, bontás nélkül — és én személyesen állok mögötte minden munkának.</p>
+      <div class="signature-row">
+        <div class="monogram">RZ</div>
+        <div><div class="sig-name">Rüsztök Zoltán</div><div class="sig-role">Tulajdonos · Dióhéjas Motortisztítás Ózd</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <!-- ===== VARIANT B ===== -->
+    <span class="variant-label">B — Split banner, kapcsolat-kártyával</span>
+    <div class="split-banner">
+      <div class="split-msg">
+        <p>Ha idáig eljutottál, valószínűleg már máshol is jártál — és nem kaptál igazi választ. Megértjük, mennyire idegesítő, ha a saját autódban nem bízol többé. <strong>Hidd el, segítek megoldani — személyesen, elejétől a végéig.</strong></p>
+      </div>
+      <div class="split-contact">
+        <div class="monogram">RZ</div>
+        <div class="sig-name">Rüsztök Zoltán</div>
+        <div class="sig-role">Tulajdonos</div>
+        <a href="tel:+36708031160" class="split-phone">+36 70 803 1160</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <!-- ===== VARIANT C ===== -->
+    <span class="variant-label">C — Minimál, aláírt CTA sor</span>
+    <div class="inline-cta">
+      <p>Ha idáig eljutottál, valószínűleg már máshol is jártál — és nem kaptál igazi választ. Mi pontosan azért csináljuk ezt, mert megértjük, mennyire idegesítő, ha a saját autódban nem bízol többé. <strong>Ez nem adalék, nem trükk: a gyökerét kezeljük a problémának, bontás nélkül.</strong></p>
+      <div class="inline-sign">
+        <div><div class="name">Rüsztök Zoltán</div><div class="role">Segítek megoldani</div></div>
+        <a href="tel:+36708031160" class="inline-cta-btn">Hívj most ▸</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <!-- ===== VARIANT D ===== -->
+    <span class="variant-label">D — Vízszintes "testimonial" csík</span>
+    <div class="strip">
+      <div class="monogram">RZ</div>
+      <div class="strip-text">
+        <p><strong>Rüsztök Zoltán vagyok</strong> — hidd el, ezt is meg tudjuk oldani. Bontás nélkül, a gyökerét kezelve.</p>
+        <span>Személyesen felelek minden munkáért</span>
+      </div>
+      <a href="tel:+36708031160" class="strip-btn">Segítek ▸</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <!-- ===== VARIANT D1 ===== -->
+    <span class="variant-label">D1 — Pulzáló gyűrűs avatar (sticky-call stílus)</span>
+    <div class="d1-strip">
+      <div class="d1-avatar"><span class="ring"></span><span class="core">RZ</span></div>
+      <div class="d1-text">
+        <p><strong>Rüsztök Zoltán vagyok</strong> — hidd el, ezt is meg tudjuk oldani, bontás nélkül.</p>
+        <span>Személyesen felelek minden munkáért</span>
+      </div>
+      <a href="tel:+36708031160" class="d1-btn">Segítek ▸</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <!-- ===== VARIANT D2 ===== -->
+    <span class="variant-label">D2 — Bal oldali akcentcsíkos sáv</span>
+    <div class="d2-strip">
+      <div class="d2-mono">RZ</div>
+      <div class="d2-text">
+        <p>Ha idáig eljutottál, hidd el, <strong>ezt is meg tudjuk oldani</strong> — bontás nélkül, a gyökerét kezelve.</p>
+        <b>Rüsztök Zoltán · Tulajdonos</b>
+      </div>
+      <a href="tel:+36708031160" class="d2-btn">Hívj most ▸</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <!-- ===== VARIANT D3 ===== -->
+    <span class="variant-label">D3 — Beszédbuborék, telefon-ikonnal</span>
+    <div class="d3-strip">
+      <div class="d3-bubble">
+        <p><strong>Rüsztök Zoltán vagyok</strong> — hidd el, ezt is meg tudjuk oldani.</p>
+        <span>Segítek megoldani, bontás nélkül</span>
+      </div>
+      <a href="tel:+36708031160" class="d3-call" aria-label="Hívás"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <!-- ===== VARIANT D4 ===== -->
+    <span class="variant-label">D4 — Kéttónusú, szegmentált pirula</span>
+    <div class="d4-strip">
+      <div class="d4-msg">
+        <div class="monogram">RZ</div>
+        <p><strong>Rüsztök Zoltán vagyok</strong> — hidd el, ezt is meg tudjuk oldani.</p>
+      </div>
+      <a href="tel:+36708031160" class="d4-contact"><b>+36 70 803 1160</b></a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <!-- ===== VARIANT D5 ===== -->
+    <span class="variant-label">D5 — Eyebrow-jelvényes idézet-kártya</span>
+    <div class="d5-card">
+      <div class="d5-eyebrow">Személyesen felelek érte</div>
+      <p>Ha idáig eljutottál, valószínűleg már máshol is jártál — és nem kaptál igazi választ. <strong>Hidd el, ezt is meg tudjuk oldani</strong>, bontás nélkül, a gyökerét kezelve.</p>
+      <div class="d5-foot">
+        <div class="name">Rüsztök Zoltán</div>
+        <a href="tel:+36708031160" class="d5-btn">Hívj most ▸</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

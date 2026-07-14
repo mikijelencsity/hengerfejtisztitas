@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koncepció 4 — Folyamat háttér (Ken Burns)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--ink:#241c12;--walnut:#8a5a2b;--walnut-hot:#a46c33;
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:#000;color:var(--paper);font-family:var(--body)}
+.badge{
+  position:fixed;top:16px;left:16px;z-index:50;font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.16em;text-transform:uppercase;background:rgba(245,240,230,.9);color:var(--ink);
+  padding:6px 12px;border-radius:20px;
+}
+header{height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
+.kb-track{position:absolute;inset:0;z-index:-2}
+.kb-slide{
+  position:absolute;inset:0;opacity:0;
+  animation:kbCycle 16s infinite;
+}
+.kb-slide img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05);
+  animation:kbZoom 16s infinite;
+}
+.kb-slide:nth-child(1){animation-delay:0s}
+.kb-slide:nth-child(1) img{animation-delay:0s}
+.kb-slide:nth-child(2){animation-delay:4s}
+.kb-slide:nth-child(2) img{animation-delay:4s}
+.kb-slide:nth-child(3){animation-delay:8s}
+.kb-slide:nth-child(3) img{animation-delay:8s}
+.kb-slide:nth-child(4){animation-delay:12s}
+.kb-slide:nth-child(4) img{animation-delay:12s}
+@keyframes kbCycle{0%,100%{opacity:0}3%,22%{opacity:1}28%{opacity:0}}
+@keyframes kbZoom{0%{transform:scale(1.0)}100%{transform:scale(1.12)}}
+.hero-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(10,7,3,.88) 0%,rgba(10,7,3,.62) 45%,rgba(10,7,3,.25) 75%)}
+.wrap{max-width:640px;padding:clamp(24px,4vw,64px)}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--walnut-hot);margin-bottom:clamp(16px,3vh,26px);
+  border:1px solid rgba(245,240,230,.3);padding:8px 14px;width:fit-content;
+}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--walnut-hot);border-radius:50%}
+h1{
+  font-family:var(--disp);font-weight:900;font-size:clamp(2rem,6vw,4.6rem);
+  line-height:1.02;letter-spacing:-.015em;text-transform:uppercase;max-width:13ch;color:var(--paper);
+}
+h1 .amber{color:var(--walnut-hot)}
+.hero-sub{max-width:46ch;color:rgba(245,240,230,.78);margin-top:clamp(16px,2.6vh,24px);font-size:clamp(.9rem,1.3vw,1.05rem)}
+.hero-sub strong{color:var(--paper);font-weight:600}
+.hero-actions{display:flex;gap:14px;margin-top:clamp(22px,3.4vh,34px);flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  padding:15px 26px;text-decoration:none;transition:.25s;display:inline-flex;align-items:center;gap:10px;
+}
+.btn-solid{color:var(--paper);background:var(--walnut);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+.btn-solid:hover{background:var(--walnut-hot)}
+.btn-ghost{color:var(--paper);border:1px solid rgba(245,240,230,.4)}
+.btn-ghost:hover{border-color:var(--walnut-hot);color:var(--walnut-hot)}
+.kb-note{position:absolute;bottom:20px;right:24px;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,230,.5)}
+</style>
+</head>
+<body>
+<div class="badge">4 / Folyamat háttér (élő felvétel szimuláció)</div>
+<header>
+  <div class="kb-track">
+    <div class="kb-slide"><img src="../images/process-maszkolas.jpg" alt="Maszkolás"></div>
+    <div class="kb-slide"><img src="../images/process-szoras-utan.jpg" alt="Szórás után"></div>
+    <div class="kb-slide"><img src="../images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés"></div>
+    <div class="kb-slide"><img src="../images/process-hengerfej-sor.jpg" alt="Hengerfej-sor"></div>
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="wrap">
+    <div class="hero-tag">Bontás nélküli technológia · Ózd</div>
+    <h1>A motorod<br>megfullad<br>a <span class="amber">koksztól.</span></h1>
+    <p class="hero-sub">Dióhéjas szívószelep-tisztítás <strong>GDI / TSI / TFSI</strong> és dízelmotorokhoz — hengerfej-bontás nélkül.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-solid">Kérj árajánlatot ▸</a>
+      <a href="#" class="btn btn-ghost">Nézd meg az eredményt</a>
+    </div>
+  </div>
+  <div class="kb-note">élő munkafolyamat — automatikus váltás</div>
+</header>
+</body>
+</html>

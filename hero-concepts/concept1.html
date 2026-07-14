@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koncepció 1 — Minimalista manifesztó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
+  --walnut:#8a5a2b;--walnut-hot:#a46c33;--line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--body);
+  display:flex;flex-direction:column;
+}
+.badge{
+  position:fixed;top:16px;left:16px;z-index:50;font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--paper);
+  padding:6px 12px;border-radius:20px;
+}
+header{
+  flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:40px 24px;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(ellipse 70% 60% at 50% 30%,rgba(138,90,43,.14),transparent 65%),var(--paper);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--walnut);margin-bottom:clamp(20px,4vh,32px);
+  border:1px solid rgba(138,90,43,.4);padding:9px 16px;background:rgba(250,246,238,.6);
+}
+.hero-tag::before{content:'';width:7px;height:7px;background:var(--walnut);border-radius:50%}
+h1{
+  font-family:var(--disp);font-weight:900;font-size:clamp(2rem,8vw,6.4rem);
+  line-height:1.0;letter-spacing:-.015em;text-transform:uppercase;max-width:16ch;
+}
+h1 .amber{color:var(--walnut)}
+.hero-sub{
+  max-width:56ch;color:var(--ink-dim);margin-top:clamp(18px,3vh,28px);
+  font-size:clamp(.95rem,1.6vw,1.15rem);
+}
+.hero-sub strong{color:var(--ink);font-weight:600}
+.hero-actions{display:flex;gap:16px;margin-top:clamp(24px,4vh,40px);flex-wrap:wrap;justify-content:center}
+.btn{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  padding:16px 30px;text-decoration:none;transition:.25s;display:inline-flex;align-items:center;gap:10px;
+}
+.btn-solid{color:var(--paper);background:var(--walnut);clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+.btn-solid:hover{background:var(--walnut-hot);gap:16px}
+.btn-ghost{color:var(--ink);border:1px solid rgba(36,28,18,.3)}
+.btn-ghost:hover{border-color:var(--walnut);color:var(--walnut)}
+</style>
+</head>
+<body>
+<div class="badge">1 / Minimalista manifesztó</div>
+<header>
+  <div class="hero-bg"></div>
+  <div class="hero-tag">Bontás nélküli technológia · Ózd</div>
+  <h1>A motorod<br>megfullad<br>a <span class="amber">koksztól.</span></h1>
+  <p class="hero-sub">Dióhéjas szívószelep-tisztítás <strong>GDI / TSI / TFSI</strong> és dízelmotorokhoz — hengerfej-bontás nélkül.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn btn-solid">Kérj árajánlatot ▸</a>
+    <a href="#" class="btn btn-ghost">Nézd meg az eredményt</a>
+  </div>
+</header>
+</body>
+</html>

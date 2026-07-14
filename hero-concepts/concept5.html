@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koncepció 5 — Interaktív előtte/utána csúszka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--ink:#241c12;--walnut:#8a5a2b;--walnut-hot:#a46c33;
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:#000;color:var(--paper);font-family:var(--body)}
+.badge{
+  position:fixed;top:16px;left:16px;z-index:50;font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.16em;text-transform:uppercase;background:rgba(245,240,230,.9);color:var(--ink);
+  padding:6px 12px;border-radius:20px;
+}
+header{height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;user-select:none}
+.compare{position:absolute;inset:0;z-index:-2}
+.compare .base,.compare .overlay{position:absolute;inset:0}
+.compare img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.05)}
+.compare .overlay{overflow:hidden;width:50%;height:100%}
+.compare .overlay img{position:absolute;top:0;left:0;width:100vw;max-width:none;height:100%;object-fit:cover}
+.hero-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(10,7,3,.85) 0%,rgba(10,7,3,.35) 40%,transparent 70%)}
+.slider-handle{
+  position:absolute;top:0;bottom:0;left:50%;width:0;z-index:2;pointer-events:none;
+}
+.slider-line{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--paper);box-shadow:0 0 0 1px rgba(0,0,0,.2)}
+.slider-knob{
+  position:absolute;top:50%;left:0;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;
+  background:var(--paper);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4);
+  font-family:var(--mono);color:var(--ink);font-size:.9rem;pointer-events:auto;cursor:ew-resize;
+}
+.tag-before,.tag-after{
+  position:absolute;top:20px;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  padding:6px 11px;color:var(--paper);background:rgba(36,28,18,.55);backdrop-filter:blur(4px);z-index:1;
+}
+.tag-before{left:20px}.tag-after{right:20px}
+.wrap{max-width:620px;padding:clamp(24px,4vw,64px);position:relative;z-index:1}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--walnut-hot);margin-bottom:clamp(14px,3vh,22px);
+  border:1px solid rgba(245,240,230,.3);padding:8px 14px;width:fit-content;
+}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--walnut-hot);border-radius:50%}
+h1{
+  font-family:var(--disp);font-weight:900;font-size:clamp(1.8rem,5.4vw,4rem);
+  line-height:1.02;letter-spacing:-.015em;text-transform:uppercase;max-width:13ch;color:var(--paper);
+}
+h1 .amber{color:var(--walnut-hot)}
+.hero-sub{max-width:44ch;color:rgba(245,240,230,.78);margin-top:clamp(12px,2.2vh,20px);font-size:clamp(.85rem,1.2vw,1rem)}
+.hero-sub strong{color:var(--paper);font-weight:600}
+.hero-actions{display:flex;gap:14px;margin-top:clamp(18px,3vh,28px);flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  padding:14px 24px;text-decoration:none;transition:.25s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-solid{color:var(--paper);background:var(--walnut);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+.btn-solid:hover{background:var(--walnut-hot)}
+.btn-ghost{color:var(--paper);border:1px solid rgba(245,240,230,.4)}
+.btn-ghost:hover{border-color:var(--walnut-hot);color:var(--walnut-hot)}
+</style>
+</head>
+<body>
+<div class="badge">5 / Interaktív előtte–utána csúszka</div>
+<header id="hero">
+  <div class="compare" id="compare">
+    <div class="base"><img src="../images/before-koksz-szivocsatorna.jpg" alt="Kokszos szívócsatorna"></div>
+    <div class="overlay" id="overlay"><img src="../images/after-csatorna-tiszta.jpg" alt="Tiszta szívócsatorna"></div>
+  </div>
+  <span class="tag-before">Előtte</span>
+  <span class="tag-after">Utána</span>
+  <div class="hero-scrim"></div>
+  <div class="slider-handle" id="handle">
+    <div class="slider-line"></div>
+    <div class="slider-knob">⇔</div>
+  </div>
+  <div class="wrap">
+    <div class="hero-tag">Bontás nélküli technológia · Ózd</div>
+    <h1>A motorod<br>megfullad<br>a <span class="amber">koksztól.</span></h1>
+    <p class="hero-sub">Dióhéjas szívószelep-tisztítás <strong>GDI / TSI / TFSI</strong> és dízelmotorokhoz — húzd a csúszkát, és nézd meg magad.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-solid">Kérj árajánlatot ▸</a>
+      <a href="#" class="btn btn-ghost">Nézd meg az eredményt</a>
+    </div>
+  </div>
+</header>
+<script>
+(function(){
+  const hero=document.getElementById('hero'),overlay=document.getElementById('overlay'),handle=document.getElementById('handle');
+  let dragging=false;
+  function setPos(clientX){
+    const r=hero.getBoundingClientRect();
+    let pct=Math.min(100,Math.max(0,((clientX-r.left)/r.width)*100));
+    overlay.style.width=pct+'%';
+    handle.style.left=pct+'%';
+  }
+  handle.addEventListener('mousedown',()=>dragging=true);
+  window.addEventListener('mouseup',()=>dragging=false);
+  window.addEventListener('mousemove',e=>{if(dragging)setPos(e.clientX)});
+  handle.addEventListener('touchstart',()=>dragging=true,{passive:true});
+  window.addEventListener('touchend',()=>dragging=false);
+  window.addEventListener('touchmove',e=>{if(dragging)setPos(e.touches[0].clientX)},{passive:true});
+  hero.addEventListener('click',e=>{ if(e.target===handle||handle.contains(e.target))return; setPos(e.clientX); });
+})();
+</script>
+</body>
+</html>

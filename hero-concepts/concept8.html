@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koncepció 8 — Körkeretes, keringő gyűrűvel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
+  --walnut:#8a5a2b;--walnut-hot:#a46c33;--line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:var(--body)}
+.badge{position:fixed;top:16px;left:16px;z-index:50;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:6px 12px;border-radius:20px}
+header{height:100vh;position:relative;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;overflow:hidden;padding:0 clamp(20px,4vw,60px)}
+@media(max-width:900px){header{grid-template-columns:1fr;padding-top:70px}}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(circle at 78% 42%,rgba(138,90,43,.22),transparent 42%),
+  radial-gradient(ellipse 60% 50% at 10% 90%,rgba(138,90,43,.08),transparent 60%),
+  var(--paper);}
+.bg-blob{position:absolute;z-index:-1;right:6%;top:20%;width:min(46vw,520px);aspect-ratio:1/1;
+  background:conic-gradient(from 90deg,rgba(138,90,43,.14),transparent 40%,rgba(138,90,43,.1) 70%,transparent);
+  border-radius:50%;filter:blur(2px);opacity:.9}
+.hero-text{position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--walnut);margin-bottom:clamp(16px,3vh,26px);border:1px solid rgba(138,90,43,.4);padding:8px 14px;width:fit-content}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--walnut);border-radius:50%}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(1.9rem,4.6vw,4.4rem);line-height:1.02;letter-spacing:-.015em;text-transform:uppercase;max-width:13ch}
+h1 .amber{color:var(--walnut)}
+.hero-sub{max-width:44ch;color:var(--ink-dim);margin-top:clamp(16px,2.6vh,24px);font-size:clamp(.88rem,1.2vw,1.05rem)}
+.hero-sub strong{color:var(--ink);font-weight:600}
+.hero-actions{display:flex;gap:14px;margin-top:clamp(22px,3.4vh,34px);flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;padding:15px 28px;text-decoration:none;transition:.25s;display:inline-flex;align-items:center;gap:10px}
+.btn-solid{color:var(--paper);background:var(--walnut);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+.btn-solid:hover{background:var(--walnut-hot);gap:16px}
+.btn-ghost{color:var(--ink);border:1px solid rgba(36,28,18,.3)}
+.btn-ghost:hover{border-color:var(--walnut);color:var(--walnut)}
+.orbit-stage{position:relative;display:flex;align-items:center;justify-content:center;height:min(70vh,540px)}
+.orbit{position:absolute;border-radius:50%;border:1px dashed rgba(138,90,43,.35);animation:spin 26s linear infinite}
+.orbit-1{width:88%;height:88%}
+.orbit-2{width:104%;height:104%;border-style:solid;border-color:rgba(138,90,43,.18);animation-duration:40s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.orbit-dot{position:absolute;top:-6px;left:50%;width:12px;height:12px;background:var(--walnut);border-radius:50%;transform:translateX(-50%);box-shadow:0 0 0 5px rgba(138,90,43,.18)}
+.circle-frame{position:relative;width:70%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:4px solid var(--paper);box-shadow:0 30px 70px rgba(36,28,18,.24)}
+.circle-frame img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.05)}
+.float-badge{
+  position:absolute;bottom:2%;left:-6%;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px 16px;box-shadow:0 16px 34px rgba(36,28,18,.16);font-family:var(--mono);z-index:2;
+}
+.float-badge b{display:block;font-family:var(--disp);font-size:1.3rem;color:var(--walnut)}
+.float-badge span{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+@media(max-width:900px){.float-badge{left:2%}}
+@media(prefers-reduced-motion:reduce){.orbit{animation:none}}
+</style>
+</head>
+<body>
+<div class="badge">8 / Körkeretes, keringő gyűrűvel</div>
+<header>
+  <div class="hero-bg"></div>
+  <div class="bg-blob"></div>
+  <div class="hero-text">
+    <div class="hero-tag">Bontás nélküli technológia · Ózd</div>
+    <h1>A motorod<br>megfullad<br>a <span class="amber">koksztól.</span></h1>
+    <p class="hero-sub">Dióhéjas szívószelep-tisztítás <strong>GDI / TSI / TFSI</strong> és dízelmotorokhoz — hengerfej-bontás nélkül.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-solid">Kérj árajánlatot ▸</a>
+      <a href="#" class="btn btn-ghost">Nézd meg az eredményt</a>
+    </div>
+  </div>
+  <div class="orbit-stage">
+    <div class="orbit orbit-2"></div>
+    <div class="orbit orbit-1"><span class="orbit-dot"></span></div>
+    <div class="circle-frame"><img src="../images/after-kerek-csatorna.jpg" alt="Fémtiszta kerek csatorna"></div>
+    <div class="float-badge"><b>100%</b><span>fémtiszta</span></div>
+  </div>
+</header>
+</body>
+</html>
