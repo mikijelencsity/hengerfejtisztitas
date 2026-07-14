@@ -376,26 +376,24 @@ h2 .amber{color:var(--walnut)}
 .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
 
 /* ---------- problem section ---------- */
-.symptoms-band{
-  margin-top:clamp(50px,8vh,90px);background:var(--walnut-deep);
-  padding:clamp(28px,4vw,44px);position:relative;
-  clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);
-}
-.symptoms{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(245,240,230,.14)}
+.symptoms{margin-top:clamp(50px,8vh,90px);display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 @media(max-width:1080px){.symptoms{grid-template-columns:repeat(2,1fr)}.symptoms .symptom:last-child{grid-column:1 / -1}}
 @media(max-width:560px){.symptoms{grid-template-columns:1fr}.symptoms .symptom:last-child{grid-column:auto}}
 .symptom{
-  background:var(--walnut-deep);padding:30px 26px;transition:background .3s;position:relative;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
 }
-.symptom::before{
-  content:attr(data-i);position:absolute;right:14px;top:6px;font-family:var(--disp);font-weight:900;
-  font-size:2.8rem;color:transparent;-webkit-text-stroke:1px rgba(245,240,230,.22);transition:.3s;
+.symptom:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(36,28,18,.14)}
+.symptom .sy-photo{position:relative;aspect-ratio:4/3;overflow:hidden}
+.symptom .sy-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) sepia(.12) saturate(1.2) contrast(1.05)}
+.symptom .sy-n{
+  position:absolute;top:10px;left:10px;background:var(--walnut);color:var(--paper);
+  font-family:var(--mono);font-weight:700;font-size:.72rem;padding:3px 9px;border-radius:4px;
 }
-.symptom:hover{background:#4a2f13}
-.symptom:hover::before{-webkit-text-stroke-color:rgba(245,240,230,.5)}
-.symptom h3{font-family:var(--body);font-weight:700;font-size:1.02rem;margin-bottom:10px;display:flex;align-items:center;gap:10px;color:var(--paper)}
-.symptom h3::before{content:'⚠';color:var(--walnut-hot);font-size:.9rem}
-.symptom p{font-size:.9rem;color:rgba(245,240,230,.62)}
+.symptom .sy-body{padding:20px 20px 24px}
+.symptom h3{font-family:var(--body);font-weight:700;font-size:1rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.symptom h3::before{content:'▸';color:var(--walnut)}
+.symptom p{font-size:.88rem;color:var(--ink-dim)}
 
 /* ---------- process ---------- */
 .steps{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);counter-reset:step}
@@ -647,16 +645,29 @@ footer a:hover{color:var(--walnut)}
       <h2>5 jel, hogy a motorod <span class="amber">segítségért kiált</span></h2>
       <p class="sec-lead" style="margin-top:8px">Ha csak egyet is felismersz az alábbiak közül, valószínűleg már most is ezzel küzdesz — és pontosan tudjuk, min mész keresztül.</p>
     </div>
-    <div class="symptoms-band rv">
-      <div class="symptoms">
-        <div class="symptom" data-i="01"><h3>Tapod a gázt, és az autó nem reagál</h3><p>Rálépsz, és fél másodpercet vár, mielőtt bármi történne. Tudod, hogy ott vannak a lóerők — csak nem engedi ki őket a motor. Ez a legelárulóbb jel, és a legtöbben ilyenkor kezdenek gyanakodni.</p></div>
-        <div class="symptom" data-i="02"><h3>A motor remeg, mintha küszködne</h3><p>Lámpánál állsz, és érzed, ahogy rázkódik alattad az autó. Kellemetlen, és tudod, hogy ez nem így volt régen — csak nem tudod pontosan, mit lehetne ellene tenni.</p></div>
-        <div class="symptom" data-i="03"><h3>Egyre többet fizetsz a kútnál</h3><p>Ugyanazt az utat jársz, ugyanúgy vezetsz — mégis gyakrabban állsz meg tankolni. Ez nem a képzeleted: a motor egyszerűen többet éget el ugyanahhoz a teljesítményhez.</p></div>
-        <div class="symptom" data-i="04"><h3>Reggelente könyörögsz, hogy induljon</h3><p>Hidegben rángat, akadozik, mielőtt beállna az alapjárat. Ismerős érzés, amikor félsz elfordítani a slusszkulcsot, mert nem tudod, ma pont mennyit kell rá várni.</p></div>
-        <div class="symptom" data-i="05"><h3>Kigyullad a Check Engine, és senki nem tudja megmondani, miért</h3><p>Beviszed diagnosztikára, törlik a hibakódot, pár nap múlva visszajön. Ez a legfrusztrálóbb: amikor úgy érzed, senki nem jut el a probléma gyökeréig — csak a tünetet kezelik.</p></div>
+    <div class="symptoms">
+      <div class="symptom rv" data-i="01">
+        <div class="sy-photo"><span class="sy-n">01</span><img src="images/before-koksz-szivocsatorna.jpg" alt="Kokszos szívócsatorna" loading="lazy" width="1200" height="900"></div>
+        <div class="sy-body"><h3>Tapod a gázt, semmi</h3><p>Fél másodpercet vár, mielőtt bármi történne. A legelárulóbb jel — ilyenkor kezdenek a legtöbben gyanakodni.</p></div>
       </div>
-      <p style="margin-top:clamp(24px,4vh,40px);max-width:70ch;color:rgba(245,240,230,.8);font-size:1.02rem">Ha idáig eljutottál, valószínűleg már máshol is jártál — és nem kaptál igazi választ. Mi pontosan azért csináljuk ezt, mert megértjük, mennyire idegesítő, ha a saját autódban nem bízol többé. <strong style="color:var(--paper)">Ez nem adalék, nem trükk: ez az egyetlen módszer, ami tényleg a gyökerét kezeli a problémának, bontás nélkül.</strong></p>
+      <div class="symptom rv rv-d1" data-i="02">
+        <div class="sy-photo"><span class="sy-n">02</span><img src="images/before-szelepek-koksz.jpg" alt="Kokszos szívószelepek" loading="lazy" width="1200" height="900"></div>
+        <div class="sy-body"><h3>Remeg, mintha küszködne</h3><p>Rázkódás lámpánál, ingadozó alapjárat. Nem így volt régen.</p></div>
+      </div>
+      <div class="symptom rv rv-d2" data-i="03">
+        <div class="sy-photo"><span class="sy-n">03</span><img src="images/before-csatorna-koszos.jpg" alt="Kokszos csatorna" loading="lazy" width="900" height="1200"></div>
+        <div class="sy-body"><h3>Egyre többet fizetsz a kútnál</h3><p>Ugyanaz az út, mégis gyakrabban állsz meg tankolni.</p></div>
+      </div>
+      <div class="symptom rv rv-d3" data-i="04">
+        <div class="sy-photo"><span class="sy-n">04</span><img src="images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés" loading="lazy" width="900" height="1200"></div>
+        <div class="sy-body"><h3>Reggel könyörögsz, induljon</h3><p>Hidegben rángat, akadozik, mielőtt beállna az alapjárat.</p></div>
+      </div>
+      <div class="symptom rv" data-i="05">
+        <div class="sy-photo"><span class="sy-n">05</span><img src="images/process-motorter-bmw.jpg" alt="Motortér" loading="lazy" width="1200" height="900"></div>
+        <div class="sy-body"><h3>Megint a Check Engine</h3><p>Törlik a hibakódot, pár nap múlva visszajön. Senki nem jut el a gyökeréig.</p></div>
+      </div>
     </div>
+    <p class="sec-lead rv" style="margin-top:clamp(30px,5vh,50px);max-width:70ch">Ha idáig eljutottál, valószínűleg már máshol is jártál — és nem kaptál igazi választ. Mi pontosan azért csináljuk ezt, mert megértjük, mennyire idegesítő, ha a saját autódban nem bízol többé. <strong>Ez nem adalék, nem trükk: ez az egyetlen módszer, ami tényleg a gyökerét kezeli a problémának, bontás nélkül.</strong></p>
   </div>
 </section>
 
