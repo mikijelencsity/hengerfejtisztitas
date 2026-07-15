@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rólunk szekció — 5 rendezett variáció</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e6;--paper-2:#ede6d6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
+  --walnut:#8a5a2b;--walnut-hot:#a46c33;--walnut-deep:#5c3a18;--line:rgba(36,28,18,.14);
+  --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif;--body:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(12px,3vw,56px)}
+section{padding:clamp(60px,9vh,110px) 0}
+.variant-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:6px 14px;border-radius:20px;display:inline-block;margin-bottom:6px}
+.divider{border:none;border-top:2px dashed rgba(138,90,43,.35)}
+.sec-index{font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;color:var(--walnut);text-transform:uppercase;display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.sec-index::after{content:'';height:1px;width:64px;background:rgba(138,90,43,.5)}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,4.4vw,3rem);line-height:1.1;text-transform:uppercase;letter-spacing:-.01em}
+h2 .amber{color:var(--walnut)}
+.monogram{border-radius:50%;background:var(--walnut);color:var(--paper);font-family:var(--disp);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-tagpill{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut);border:1px solid rgba(138,90,43,.4);padding:4px 10px;border-radius:3px;white-space:nowrap;display:inline-block}
+
+/* ============ R1: split photo/avatar + bio + stats ============ */
+.r1-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,5vw,64px);align-items:center}
+@media(max-width:760px){.r1-grid{grid-template-columns:1fr;text-align:center}}
+.r1-avatar{width:180px;height:180px;font-size:3rem;margin:0 auto;box-shadow:0 24px 50px rgba(36,28,18,.2)}
+@media(max-width:760px){.r1-avatar{margin:0 auto}}
+.r1-name{font-family:var(--disp);font-weight:700;text-align:center;margin-top:18px;font-size:1.05rem}
+.r1-role{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--walnut);text-align:center;margin-top:4px}
+.r1-bio p{color:var(--ink-dim);max-width:60ch;margin-bottom:26px}
+@media(max-width:760px){.r1-bio p{margin-left:auto;margin-right:auto}}
+.r1-badges{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.r1-badges{justify-content:center}}
+
+/* ============ R2: centered card + stat row ============ */
+.r2-card{max-width:720px;margin:0 auto;text-align:center}
+.r2-avatar{width:96px;height:96px;font-size:1.6rem;margin:0 auto 20px}
+.r2-card h3{font-family:var(--disp);font-weight:700;font-size:1.2rem;margin-bottom:4px}
+.r2-card .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--walnut);margin-bottom:22px}
+.r2-card p{color:var(--ink-dim);margin-bottom:36px}
+.r2-stats{display:flex;justify-content:center;gap:clamp(24px,5vw,60px);border-top:1px solid var(--line);padding-top:28px;flex-wrap:wrap}
+.r2-stats div{text-align:center}
+.r2-stats b{display:block;font-family:var(--disp);font-weight:700;color:var(--walnut);font-size:1rem;margin-bottom:4px}
+.r2-stats span{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* ============ R3: vertical timeline / credential list ============ */
+.r3-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,64px)}
+@media(max-width:760px){.r3-grid{grid-template-columns:1fr}}
+.r3-intro .r3-avatar{width:120px;height:120px;font-size:2rem;margin-bottom:20px}
+.r3-intro h3{font-family:var(--disp);font-weight:700;font-size:1.15rem;margin-bottom:6px}
+.r3-intro .role{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--walnut);margin-bottom:16px}
+.r3-intro p{color:var(--ink-dim)}
+.r3-list{border-left:2px solid var(--line);padding-left:26px;display:flex;flex-direction:column;gap:24px}
+.r3-item{position:relative}
+.r3-item::before{content:'';position:absolute;left:-32px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--walnut);border:3px solid var(--paper);box-shadow:0 0 0 2px var(--line)}
+.r3-item h4{font-family:var(--disp);font-weight:600;text-transform:uppercase;font-size:.92rem;margin-bottom:4px}
+.r3-item p{color:var(--ink-dim);font-size:.9rem}
+
+/* ============ R4: mission quote + stat grid ============ */
+.r4-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,64px);align-items:center}
+@media(max-width:760px){.r4-grid{grid-template-columns:1fr}}
+.r4-quote{font-family:var(--disp);font-weight:700;font-size:clamp(1.2rem,2.6vw,1.6rem);line-height:1.35;text-transform:none;letter-spacing:0}
+.r4-quote .amber{color:var(--walnut)}
+.r4-sign{display:flex;align-items:center;gap:14px;margin-top:26px}
+.r4-sign .monogram{width:44px;height:44px;font-size:.85rem}
+.r4-sign b{display:block;font-family:var(--disp);font-size:.9rem}
+.r4-sign span{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--walnut)}
+.r4-statgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.r4-stat{background:var(--card);padding:24px 20px;text-align:center}
+.r4-stat b{display:block;font-family:var(--disp);font-weight:700;color:var(--walnut);font-size:1.15rem;margin-bottom:6px}
+.r4-stat span{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* ============ R5: compact "business card" layout ============ */
+.r5-card{
+  max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:clamp(30px,5vw,48px);box-shadow:0 24px 50px rgba(36,28,18,.1);
+}
+.r5-top{display:flex;align-items:center;gap:18px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.r5-top .monogram{width:64px;height:64px;font-size:1.15rem}
+.r5-top h3{font-family:var(--disp);font-weight:700;font-size:1.1rem}
+.r5-top .role{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut);margin-top:3px}
+.r5-card p{color:var(--ink-dim);margin-bottom:22px}
+.r5-tags{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.r5-contact{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-top:1px solid var(--line);padding-top:20px}
+.r5-contact a{font-family:var(--disp);font-weight:700;color:var(--walnut);text-decoration:none;font-size:1.05rem}
+.r5-contact span{font-family:var(--mono);font-size:.68rem;color:var(--ink-dim)}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ============ R6: split real photo + bio/stats ============ */
+.r6-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,60px);align-items:center}
+@media(max-width:760px){.r6-grid{grid-template-columns:1fr}}
+.r6-photo{aspect-ratio:4/5;border-radius:16px;overflow:hidden;box-shadow:0 26px 54px rgba(36,28,18,.2)}
+.r6-photo img{filter:saturate(1.02) contrast(1.05)}
+.r6-text p{color:var(--ink-dim);max-width:56ch;margin-bottom:26px}
+.r6-badges{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ============ R7: full-width photo banner + overlapping card ============ */
+.r7-photo{aspect-ratio:21/8;border-radius:16px;overflow:hidden;position:relative}
+.r7-photo img{filter:saturate(.95)}
+.r7-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,7,3,.6),transparent 60%)}
+.r7-card{
+  max-width:760px;margin:-70px auto 0;position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:clamp(26px,4vw,40px);text-align:center;box-shadow:0 20px 50px rgba(36,28,18,.14);
+}
+.r7-card h3{font-family:var(--disp);font-weight:700;font-size:1.1rem;margin-bottom:4px}
+.r7-card .role{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut);margin-bottom:16px}
+.r7-card p{color:var(--ink-dim);margin-bottom:20px}
+.r7-badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+
+/* ============ R8: circular photo + orbiting stat badges ============ */
+.r8-stage{position:relative;display:flex;align-items:center;justify-content:center;margin:0 auto 40px;height:min(50vh,340px)}
+.r8-circle{position:relative;width:min(60vw,260px);aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:4px solid var(--paper);box-shadow:0 26px 54px rgba(36,28,18,.22)}
+.r8-ring{position:absolute;border-radius:50%;border:1px dashed rgba(138,90,43,.3)}
+.r8-r1{width:min(72vw,320px);aspect-ratio:1/1}
+.r8-badge{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;box-shadow:0 14px 30px rgba(36,28,18,.14);font-family:var(--mono);text-align:center}
+.r8-badge b{display:block;font-family:var(--disp);color:var(--walnut);font-size:.95rem}
+.r8-badge span{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+.r8-b1{top:6%;left:2%}
+.r8-b2{bottom:4%;right:0}
+@media(max-width:640px){.r8-badge{position:static;margin:8px auto 0;width:fit-content}}
+.r8-name{text-align:center;font-family:var(--disp);font-weight:700;font-size:1.1rem}
+.r8-role{text-align:center;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--walnut);margin-top:4px;margin-bottom:20px}
+.r8-bio{max-width:60ch;margin:0 auto;text-align:center;color:var(--ink-dim)}
+
+/* ============ R9: dark full-bleed photo, overlaid quote + signature ============ */
+.r9{position:relative;border-radius:18px;overflow:hidden;padding:clamp(50px,8vh,90px) clamp(24px,4vw,60px);color:var(--paper);text-align:center}
+.r9-bg{position:absolute;inset:0;z-index:-2}
+.r9-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,7,3,.82),rgba(10,7,3,.88))}
+.r9-quote{font-family:var(--disp);font-weight:700;font-size:clamp(1.2rem,2.8vw,1.7rem);line-height:1.35;max-width:44ch;margin:0 auto 28px}
+.r9-quote .amber{color:var(--walnut-hot)}
+.r9-sign{display:inline-flex;align-items:center;gap:14px}
+.r9-sign .monogram{width:48px;height:48px;font-size:.9rem}
+.r9-sign b{display:block;font-size:.92rem}
+.r9-sign span{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--walnut-hot)}
+
+/* ============ R10: tilted polaroid photo + bio card ============ */
+.r10-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(40px,6vw,70px);align-items:center}
+@media(max-width:760px){.r10-grid{grid-template-columns:1fr}}
+.r10-stage{position:relative;display:flex;justify-content:center}
+.r10-polaroid{width:82%;aspect-ratio:4/5;background:var(--card);padding:12px 12px 46px;box-shadow:0 26px 54px rgba(36,28,18,.22);transform:rotate(-5deg);border:1px solid var(--line)}
+.r10-polaroid .ph{width:100%;height:100%;overflow:hidden}
+.r10-polaroid span{display:block;text-align:center;margin-top:10px;font-family:var(--mono);font-size:.7rem;color:var(--ink-dim)}
+.r10-text p{color:var(--ink-dim);max-width:56ch;margin-bottom:24px}
+.r10-badges{display:flex;gap:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R1 — Kép/avatar + bio, jelvényekkel</span>
+    <div class="sec-index" style="margin-top:26px">08 / Rólunk</div>
+    <h2 style="margin-bottom:30px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r1-grid">
+      <div>
+        <div class="monogram r1-avatar">ÜZ</div>
+        <div class="r1-name">Üsztök Zoltán</div>
+        <div class="r1-role">Tulajdonos</div>
+      </div>
+      <div class="r1-bio">
+        <p>Egyedül végzem a diagnosztikától az átadásig a teljes munkát — nincs alvállalkozó, nincs "majd megnézi valaki". Amit vállalok, azt endoszkóppal is bizonyítom: fotóval, videóval, hengerről hengerre.</p>
+        <div class="r1-badges">
+          <span class="step-tagpill">Bontásmentes technológia</span>
+          <span class="step-tagpill">Endoszkópos dokumentáció</span>
+          <span class="step-tagpill">Fix, előre tudott ár</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R2 — Középre rendezett kártya + statisztika-sáv</span>
+    <div class="sec-index" style="margin-top:26px;justify-content:center">08 / Rólunk</div>
+    <h2 style="text-align:center;margin-bottom:30px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r2-card">
+      <div class="monogram r2-avatar">ÜZ</div>
+      <h3>Üsztök Zoltán</h3>
+      <div class="role">Tulajdonos</div>
+      <p>Egyedül végzem a diagnosztikától az átadásig a teljes munkát — nincs alvállalkozó. Amit vállalok, azt endoszkóppal is bizonyítom: fotóval, hengerről hengerre.</p>
+      <div class="r2-stats">
+        <div><b>Bontásmentes</b><span>Technológia</span></div>
+        <div><b>Endoszkópos</b><span>Dokumentáció</span></div>
+        <div><b>Fix ár</b><span>Előre tudott</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R3 — Bemutatkozás + függőleges "credential" lista</span>
+    <div class="sec-index" style="margin-top:26px">08 / Rólunk</div>
+    <h2 style="margin-bottom:30px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r3-grid">
+      <div class="r3-intro">
+        <div class="monogram r3-avatar">ÜZ</div>
+        <h3>Üsztök Zoltán</h3>
+        <div class="role">Tulajdonos</div>
+        <p>Egyedül végzem a teljes munkát a diagnosztikától az átadásig — nincs alvállalkozó, nincs kapkodás.</p>
+      </div>
+      <div class="r3-list">
+        <div class="r3-item"><h4>Bontásmentes technológia</h4><p>Csak a szívósort bontom meg, a hengerfej és a vezérlés érintetlen marad.</p></div>
+        <div class="r3-item"><h4>Endoszkópos dokumentáció</h4><p>Minden munkáról fotó és videó készül — hengerről hengerre ellenőrizve.</p></div>
+        <div class="r3-item"><h4>Fix, előre tudott ár</h4><p>Típus és motorkód alapján telefonon pontos árat mondok, meglepetés nélkül.</p></div>
+        <div class="r3-item"><h4>Személyes felelősségvállalás</h4><p>Én veszem fel a telefont, én diagnosztizálok, én adom át kulcsrakészen.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R4 — Mottó/idézet + statisztika-rács</span>
+    <div class="sec-index" style="margin-top:26px">08 / Rólunk</div>
+    <h2 style="margin-bottom:30px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r4-grid">
+      <div>
+        <p class="r4-quote">„Nem adok túl a munkán senkinek — amit elvállalok, <span class="amber">azt magam viszem végig</span>, elejétől a végéig.”</p>
+        <div class="r4-sign">
+          <div class="monogram">ÜZ</div>
+          <div><b>Üsztök Zoltán</b><span>Tulajdonos</span></div>
+        </div>
+      </div>
+      <div class="r4-statgrid">
+        <div class="r4-stat"><b>Bontásmentes</b><span>Technológia</span></div>
+        <div class="r4-stat"><b>Endoszkópos</b><span>Dokumentáció</span></div>
+        <div class="r4-stat"><b>Fix</b><span>Előre tudott ár</span></div>
+        <div class="r4-stat"><b>Személyes</b><span>Felelősségvállalás</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R5 — Kompakt "névjegykártya" elrendezés</span>
+    <div class="sec-index" style="margin-top:26px;justify-content:center">08 / Rólunk</div>
+    <h2 style="text-align:center;margin-bottom:30px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r5-card">
+      <div class="r5-top">
+        <div class="monogram">ÜZ</div>
+        <div><h3>Üsztök Zoltán</h3><div class="role">Tulajdonos</div></div>
+      </div>
+      <p>Egyedül végzem a diagnosztikától az átadásig a teljes munkát — nincs alvállalkozó. Amit vállalok, azt endoszkóppal is bizonyítom.</p>
+      <div class="r5-tags">
+        <span class="step-tagpill">Bontásmentes</span>
+        <span class="step-tagpill">Endoszkópos dok.</span>
+        <span class="step-tagpill">Fix ár</span>
+      </div>
+      <div class="r5-contact">
+        <a href="tel:+36708031160">+36 70 803 1160</a>
+        <span>Ózd és környéke</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R6 — Valós fotó + bio/jelvények egymás mellett</span>
+    <div class="sec-index" style="margin-top:26px">08 / Rólunk</div>
+    <h2 style="margin-bottom:30px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r6-grid">
+      <div class="r6-photo"><img src="../images/process-endoszkop.jpg" alt="Üsztök Zoltán munka közben, endoszkópos ellenőrzés"></div>
+      <div class="r6-text">
+        <h3 style="font-family:var(--disp);font-weight:700;font-size:1.1rem;margin-bottom:4px">Üsztök Zoltán</h3>
+        <div class="step-tagpill" style="margin-bottom:16px">Tulajdonos</div>
+        <p>Egyedül végzem a diagnosztikától az átadásig a teljes munkát — nincs alvállalkozó, nincs "majd megnézi valaki". Amit vállalok, azt endoszkóppal is bizonyítom: fotóval, hengerről hengerre.</p>
+        <div class="r6-badges">
+          <span class="step-tagpill">Bontásmentes technológia</span>
+          <span class="step-tagpill">Endoszkópos dokumentáció</span>
+          <span class="step-tagpill">Fix, előre tudott ár</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R7 — Teljes szélességű fotó-banner, ráúsztatott kártyával</span>
+    <div class="sec-index" style="margin-top:26px;justify-content:center">08 / Rólunk</div>
+    <h2 style="text-align:center;margin-bottom:30px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r7-photo"><img src="../images/process-motorter-bmw.jpg" alt="Motortér az összeszerelés után"></div>
+    <div class="r7-card">
+      <h3>Üsztök Zoltán</h3>
+      <div class="role">Tulajdonos</div>
+      <p>Egyedül végzem a diagnosztikától az átadásig a teljes munkát. Amit vállalok, azt endoszkóppal is bizonyítom — fotóval, hengerről hengerre.</p>
+      <div class="r7-badges">
+        <span class="step-tagpill">Bontásmentes</span>
+        <span class="step-tagpill">Endoszkópos dok.</span>
+        <span class="step-tagpill">Fix ár</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R8 — Kör alakú fotó, keringő statisztika-kártyákkal</span>
+    <div class="sec-index" style="margin-top:26px;justify-content:center">08 / Rólunk</div>
+    <h2 style="text-align:center;margin-bottom:20px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r8-stage">
+      <div class="r8-ring r8-r1"></div>
+      <div class="r8-circle"><img src="../images/process-maszkolas.jpg" alt="Üsztök Zoltán precíz maszkolás közben"></div>
+      <div class="r8-badge r8-b1"><b>Bontásmentes</b><span>Technológia</span></div>
+      <div class="r8-badge r8-b2"><b>Fix ár</b><span>Előre tudott</span></div>
+    </div>
+    <div class="r8-name">Üsztök Zoltán</div>
+    <div class="r8-role">Tulajdonos</div>
+    <p class="r8-bio">Egyedül végzem a teljes munkát a diagnosztikától az átadásig — nincs alvállalkozó, nincs kapkodás.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R9 — Sötét, teli fotó-háttér, ráúsztatott idézettel</span>
+    <div class="r9">
+      <div class="r9-bg"><img src="../images/process-hengerfej-sor.jpg" alt="Hengerfej-sor"></div>
+      <div class="r9-scrim"></div>
+      <p class="r9-quote">„Nem adok túl a munkán senkinek — amit elvállalok, <span class="amber">azt magam viszem végig</span>, elejétől a végéig.”</p>
+      <div class="r9-sign">
+        <div class="monogram">ÜZ</div>
+        <div><b>Üsztök Zoltán</b><span>Tulajdonos</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <span class="variant-label">R10 — Elforgatott polaroid-fotó + bio kártya</span>
+    <div class="sec-index" style="margin-top:26px">08 / Rólunk</div>
+    <h2 style="margin-bottom:30px">Nem egy céget hívsz — <span class="amber">engem hívsz</span></h2>
+    <div class="r10-grid">
+      <div class="r10-stage">
+        <div class="r10-polaroid">
+          <div class="ph"><img src="../images/process-szoras-utan.jpg" alt="Csatorna szórás után"></div>
+          <span>Üsztök Zoltán</span>
+        </div>
+      </div>
+      <div class="r10-text">
+        <div class="step-tagpill" style="margin-bottom:16px">Tulajdonos</div>
+        <p>Egyedül végzem a diagnosztikától az átadásig a teljes munkát — nincs alvállalkozó. Amit vállalok, azt endoszkóppal is bizonyítom: fotóval, hengerről hengerre.</p>
+        <div class="r10-badges">
+          <span class="step-tagpill">Bontásmentes technológia</span>
+          <span class="step-tagpill">Endoszkópos dokumentáció</span>
+          <span class="step-tagpill">Fix, előre tudott ár</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
