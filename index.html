@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dióhéjas Szeleptisztítás Ózd — Bontás nélküli motorkoksztalanítás</title>
-<meta name="description" content="Professzionális dióhéjas szívószelep-tisztítás Ózdon és környékén. GDI, TSI, TFSI és dízelmotorok bontás nélküli koksztalanítása biológiailag lebomló dióhéj-granulátummal. Visszaadom a motor eredeti teljesítményét.">
+<meta name="description" content="Professzionális dióhéjas szívószelep-tisztítás Ózdon és környékén — bontásmentes GDI/TSI/TFSI és dízel-koksztalanítás, eredeti motorteljesítménnyel.">
 <link rel="canonical" href="https://hengerfejtisztitas.hu/">
 <meta name="theme-color" content="#8a5a2b">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -36,9 +36,16 @@
   "description": "Bontás nélküli, dióhéjas szemcseszórásos szívószelep- és szívócsatorna-koksztalanítás GDI, TSI, TFSI és dízelmotorokhoz.",
   "telephone": "+36708031160",
   "url": "https://hengerfejtisztitas.hu/",
+  "image": "https://hengerfejtisztitas.hu/images/after-szelepek-tiszta.jpg",
   "priceRange": "$$",
   "areaServed": {
-    "@type": "City",
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": 48.2206,
+      "longitude": 20.2934
+    },
+    "geoRadius": "30000",
     "name": "Ózd és környéke"
   },
   "address": {
@@ -134,6 +141,7 @@ body{
 }
 ::selection{background:var(--walnut);color:var(--paper)}
 img{display:block;max-width:100%}
+picture{display:block;width:100%;height:100%}
 
 /* ---------- grain + texture ---------- */
 body::before{
@@ -610,11 +618,16 @@ details .faq-body{padding:0 4px 26px;color:var(--ink-dim);max-width:65ch}
 .contact-lead{max-width:56ch;margin:0 auto 44px;text-align:center;color:rgba(245,240,230,.78)}
 .big-phone{
   display:inline-flex;align-items:center;gap:16px;font-family:var(--disp);font-weight:900;
-  font-size:clamp(2rem,6vw,3.6rem);color:var(--paper);text-decoration:none;transition:.3s;
+  font-size:clamp(2rem,6vw,3.6rem);color:var(--paper);text-decoration:none;transition:.3s;white-space:nowrap;
 }
 .big-phone:hover{color:var(--walnut-hot);transform:scale(1.02)}
 .big-phone .bp-ic{width:44px;height:44px;border-radius:50%;background:var(--walnut);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .big-phone .bp-ic svg{width:20px;height:20px;fill:var(--paper)}
+@media(max-width:480px){
+  .big-phone{gap:10px;font-size:clamp(1.15rem,7.2vw,1.7rem)}
+  .big-phone .bp-ic{width:34px;height:34px}
+  .big-phone .bp-ic svg{width:15px;height:15px}
+}
 .ci-rows{display:flex;justify-content:center;gap:clamp(30px,6vw,70px);margin-top:56px;flex-wrap:wrap}
 .ci-rows>div{text-align:center;font-family:var(--mono)}
 .ci-rows b{display:block;font-family:var(--disp);font-weight:700;font-size:1.3rem;color:var(--walnut-hot);margin-bottom:4px;text-transform:none;letter-spacing:normal}
@@ -807,8 +820,8 @@ footer::before{
       </div>
     </div>
     <div class="fan-stage hr hr-5">
-      <div class="polaroid p1"><div class="ph"><img src="images/before-szelepek-koksz.jpg" alt="Kokszos szívószelepek tisztítás előtt" loading="eager" width="1200" height="900"></div><span class="cap">Előtte</span></div>
-      <div class="polaroid p2"><div class="ph"><img src="images/process-maszkolas.jpg" alt="Precíz maszkolás szórás előtt" loading="eager" width="1200" height="900"></div><span class="cap">Folyamat</span></div>
+      <div class="polaroid p1"><div class="ph"><picture><source srcset="images/before-szelepek-koksz.webp" type="image/webp"><img src="images/before-szelepek-koksz.jpg" alt="Kokszos szívószelepek tisztítás előtt" loading="eager" width="1200" height="900"></picture></div><span class="cap">Előtte</span></div>
+      <div class="polaroid p2"><div class="ph"><picture><source srcset="images/process-maszkolas.webp" type="image/webp"><img src="images/process-maszkolas.jpg" alt="Precíz maszkolás szórás előtt" loading="eager" width="1200" height="900"></picture></div><span class="cap">Folyamat</span></div>
       <div class="polaroid p3"><div class="ph"><img src="images/after-szelepek-tiszta.jpg" alt="Szívószelepek dióhéjas tisztítás után" loading="eager" width="1200" height="900"></div><span class="cap">Utána</span></div>
     </div>
   </div>
@@ -832,23 +845,23 @@ footer::before{
     </div>
     <div class="symptoms">
       <div class="symptom rv" data-i="01">
-        <div class="sy-photo"><span class="sy-n">01</span><img src="images/symptom-01-gazpedal.png" alt="Gázpedál a padlóban, késleltetett gázreakció" loading="lazy" width="1448" height="1086"></div>
+        <div class="sy-photo"><span class="sy-n">01</span><picture><source srcset="images/symptom-01-gazpedal.webp" type="image/webp"><img src="images/symptom-01-gazpedal.jpg" alt="Gázpedál a padlóban, késleltetett gázreakció" loading="lazy" width="1448" height="1086"></picture></div>
         <div class="sy-body"><h3>Taposod a gázt, semmi</h3><p>Fél másodpercet vár, mielőtt bármi történne. A legelárulóbb jel — ilyenkor kezdenek a legtöbben gyanakodni.</p></div>
       </div>
       <div class="symptom rv rv-d1" data-i="02">
-        <div class="sy-photo"><span class="sy-n">02</span><img src="images/symptom-02-vezetes-remeg.png" alt="Vezetés közben ingadozó műszerfal, remegő motor" loading="lazy" width="1672" height="941"></div>
+        <div class="sy-photo"><span class="sy-n">02</span><picture><source srcset="images/symptom-02-vezetes-remeg.webp" type="image/webp"><img src="images/symptom-02-vezetes-remeg.jpg" alt="Vezetés közben ingadozó műszerfal, remegő motor" loading="lazy" width="1600" height="900"></picture></div>
         <div class="sy-body"><h3>Remeg, mintha küszködne</h3><p>Rázkódás lámpánál, ingadozó alapjárat. Nem így volt régen.</p></div>
       </div>
       <div class="symptom rv rv-d2" data-i="03">
-        <div class="sy-photo"><span class="sy-n">03</span><img src="images/symptom-03-tankolas.png" alt="Tankolás a benzinkúton, egyre gyakrabban" loading="lazy" width="1448" height="1086"></div>
+        <div class="sy-photo"><span class="sy-n">03</span><picture><source srcset="images/symptom-03-tankolas.webp" type="image/webp"><img src="images/symptom-03-tankolas.jpg" alt="Tankolás a benzinkúton, egyre gyakrabban" loading="lazy" width="1448" height="1086"></picture></div>
         <div class="sy-body"><h3>Egyre többet fizetsz a kútnál</h3><p>Ugyanaz az út, mégis gyakrabban állsz meg tankolni.</p></div>
       </div>
       <div class="symptom rv rv-d3" data-i="04">
-        <div class="sy-photo"><span class="sy-n">04</span><img src="images/symptom-04-inditas.png" alt="Kulcs a gyújtáskapcsolóban, nehéz reggeli indítás" loading="lazy" width="1448" height="1086"></div>
+        <div class="sy-photo"><span class="sy-n">04</span><picture><source srcset="images/symptom-04-inditas.webp" type="image/webp"><img src="images/symptom-04-inditas.jpg" alt="Kulcs a gyújtáskapcsolóban, nehéz reggeli indítás" loading="lazy" width="1448" height="1086"></picture></div>
         <div class="sy-body"><h3>Reggel könyörögsz, induljon</h3><p>Hidegben rángat, akadozik, mielőtt beállna az alapjárat.</p></div>
       </div>
       <div class="symptom rv" data-i="05">
-        <div class="sy-photo"><span class="sy-n">05</span><img src="images/symptom-05-check-engine.png" alt="Világító Check Engine lámpa a műszerfalon" loading="lazy" width="1448" height="1086"></div>
+        <div class="sy-photo"><span class="sy-n">05</span><picture><source srcset="images/symptom-05-check-engine.webp" type="image/webp"><img src="images/symptom-05-check-engine.jpg" alt="Világító Check Engine lámpa a műszerfalon" loading="lazy" width="1448" height="1086"></picture></div>
         <div class="sy-body"><h3>Megint a Check Engine</h3><p>Törlik a hibakódot, pár nap múlva visszajön. Senki nem jut el a gyökeréig.</p></div>
       </div>
     </div>
@@ -880,19 +893,19 @@ footer::before{
     <div class="gm-row left">
       <div class="gm-track">
         <div class="gm-item"><img src="images/before-koksz-szivocsatorna.jpg" alt="Erősen kokszos szívócsatorna tisztítás előtt" loading="lazy" width="1200" height="900"><span class="gm-tag">Előtte</span></div>
-        <div class="gm-item"><img src="images/after-csatorna-tiszta.jpg" alt="Fémtiszta szívócsatorna tisztítás után" loading="lazy" width="1200" height="900"><span class="gm-tag">Utána</span></div>
-        <div class="gm-item"><img src="images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés a szívócsatornában" loading="lazy" width="900" height="1200"><span class="gm-tag">Folyamat</span></div>
-        <div class="gm-item"><img src="images/before-szelepek-koksz.jpg" alt="Kokszos szívószelepek tisztítás előtt" loading="lazy" width="1200" height="900"><span class="gm-tag">Előtte</span></div>
+        <div class="gm-item"><picture><source srcset="images/after-csatorna-tiszta.webp" type="image/webp"><img src="images/after-csatorna-tiszta.jpg" alt="Fémtiszta szívócsatorna tisztítás után" loading="lazy" width="1200" height="900"></picture><span class="gm-tag">Utána</span></div>
+        <div class="gm-item"><picture><source srcset="images/process-endoszkop.webp" type="image/webp"><img src="images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés a szívócsatornában" loading="lazy" width="900" height="1200"></picture><span class="gm-tag">Folyamat</span></div>
+        <div class="gm-item"><picture><source srcset="images/before-szelepek-koksz.webp" type="image/webp"><img src="images/before-szelepek-koksz.jpg" alt="Kokszos szívószelepek tisztítás előtt" loading="lazy" width="1200" height="900"></picture><span class="gm-tag">Előtte</span></div>
         <div class="gm-item"><img src="images/after-szelepek-tiszta.jpg" alt="Szívószelepek dióhéjas tisztítás után" loading="lazy" width="1200" height="900"><span class="gm-tag">Utána</span></div>
-        <div class="gm-item"><img src="images/process-maszkolas.jpg" alt="Precíz maszkolás szórás előtt" loading="lazy" width="1200" height="900"><span class="gm-tag">Folyamat</span></div>
+        <div class="gm-item"><picture><source srcset="images/process-maszkolas.webp" type="image/webp"><img src="images/process-maszkolas.jpg" alt="Precíz maszkolás szórás előtt" loading="lazy" width="1200" height="900"></picture><span class="gm-tag">Folyamat</span></div>
       </div>
     </div>
     <div class="gm-row right">
       <div class="gm-track">
         <div class="gm-item"><img src="images/compare-tiszta-vs-koszos.jpg" alt="Tisztított és kokszos csatorna egymás mellett" loading="lazy" width="1200" height="900"><span class="gm-tag">Összevetés</span></div>
         <div class="gm-item"><img src="images/process-hengerfej-sor.jpg" alt="Hengerfej-sor a bontás után" loading="lazy" width="1200" height="900"><span class="gm-tag">Folyamat</span></div>
-        <div class="gm-item"><img src="images/before-csatorna-koszos.jpg" alt="Kokszos csatorna tisztítás előtt" loading="lazy" width="900" height="1200"><span class="gm-tag">Előtte</span></div>
-        <div class="gm-item"><img src="images/after-kerek-csatorna.jpg" alt="Fémtiszta kerek csatorna tisztítás után" loading="lazy" width="1200" height="900"><span class="gm-tag">Utána</span></div>
+        <div class="gm-item"><picture><source srcset="images/before-csatorna-koszos.webp" type="image/webp"><img src="images/before-csatorna-koszos.jpg" alt="Kokszos csatorna tisztítás előtt" loading="lazy" width="900" height="1200"></picture><span class="gm-tag">Előtte</span></div>
+        <div class="gm-item"><picture><source srcset="images/after-kerek-csatorna.webp" type="image/webp"><img src="images/after-kerek-csatorna.jpg" alt="Fémtiszta kerek csatorna tisztítás után" loading="lazy" width="1200" height="900"></picture><span class="gm-tag">Utána</span></div>
         <div class="gm-item"><img src="images/process-szoras-utan.jpg" alt="Csatorna közvetlenül a szórás után" loading="lazy" width="1200" height="900"><span class="gm-tag">Folyamat</span></div>
         <div class="gm-item"><img src="images/process-motorter-bmw.jpg" alt="Motortér a szívósor bontása után" loading="lazy" width="1200" height="900"><span class="gm-tag">Folyamat</span></div>
       </div>

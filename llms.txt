@@ -1,0 +1,37 @@
+# Dióhéjas Szeleptisztítás Ózd
+
+> Bontás nélküli, dióhéjas szemcseszórásos szívószelep- és szívócsatorna-koksztalanítás GDI, TSI, TFSI és dízelmotorokhoz, Ózdon és környékén (Borsod-Abaúj-Zemplén megye).
+
+## Szolgáltatás
+
+- **Mit csinálunk:** A közvetlen befecskendezéses benzin- (GDI/TSI/TFSI) és dízelmotorok szívószelepein és szívócsatornáiban lerakódó koksz eltávolítása, biológiailag lebomló, őrölt dióhéj-granulátum nagynyomású levegővel történő szórásával.
+- **Miért van erre szükség:** A közvetlen befecskendezésű motoroknál az üzemanyag nem mossa át a szívószelepeket, ezért azokon idővel kokszréteg rakódik le, ami teljesítménycsökkenést, egyenetlen alapjáratot, nehéz hidegindítást és megnövekedett fogyasztást okoz.
+- **Módszer:** A szívósort leszerelik (csak ennyi bontás történik, a hengerfej és a vezérlés érintetlen marad), a nem tisztítandó nyílásokat lezárják, az adott henger szelepeit zárt állásba forgatják, majd dióhéj-granulátumot szórnak a csatornákba, miközben ipari vákuum egyidejűleg elszívja a leváló kokszot és a szóróanyagot — zárt körfolyamatban, így szennyeződés nem juthat az égéstérbe.
+- **Ellenőrzés:** A tisztítás előtt és után is endoszkópos kamerával vizsgálják a csatornákat, hengerről hengerre, fotó- és videódokumentációval.
+- **Munkaidő:** Motortípustól függően jellemzően 3–5 óra, a legtöbb autót aznap átadják.
+- **Gyakoriság:** Közvetlen befecskendezésű motoroknál kb. 80–100 ezer kilométerenként ajánlott, sok városi/rövid távú használat esetén ez rövidülhet.
+- **Ár:** A motor felépítésétől és a szívósor bontásának munkaigényétől függ; telefonos egyeztetés (típus + motorkód alapján) után fix, előre tudott árat adnak.
+
+## Kompatibilis motorok
+
+- VW / Audi / Škoda / Seat: 1.2/1.4/1.5 TSI, 1.8/2.0 TFSI (EA888), 2.0/3.0 TDI, 3.0 TFSI V6
+- BMW / Mini: N43/N53, N54/N55/B48/B58, N47/B47 dízel, Mini Cooper S (N14/N18)
+- Hyundai / Kia / Ford: 1.6/2.0 GDI és T-GDI, 1.0/1.5 EcoBoost, 2.0 EcoBlue, 1.6 CRDi
+- Egyéb: Mercedes CGI, Opel/PSA turbóbenzin, Mazda Skyactiv-G, Toyota D-4D
+
+## Kapcsolat
+
+- **Vállalkozó:** Üsztök Zoltán
+- **Telefon:** +36 70 803 1160
+- **Szolgáltatási terület:** Ózd és környéke, Borsod-Abaúj-Zemplén vármegye
+- **Weboldal:** https://hengerfejtisztitas.hu/
+
+## Gyakori kérdések
+
+- **Bekerülhet dióhéj a motorba?** Nem — a szelepek zárt állásban vannak a szórás alatt, a szórás és elszívás zárt körben zajlik, a végén endoszkóppal ellenőrzik, hogy nem maradt szóróanyag.
+- **Elég egy üzemanyag-adalék vagy "hidrogénes tisztítás"?** GDI/TSI motoroknál nem — az adalék a szívószelepeket meg sem érinti; a dióhéjas szórás az egyetlen bontásmentes, kamerával ellenőrizhető módszer.
+- **Mit vesz észre az ügyfél a tisztítás után?** Visszatér a gázreakció, kisimul az alapjárat, könnyebb a hidegindítás, jellemzően csökken a fogyasztás.
+
+## Egyéb oldalak
+
+- [Adatkezelési tájékoztató](https://hengerfejtisztitas.hu/adatkezeles.html): a személyes adatok kezelésének feltételei — nem tartalmaz szolgáltatási információt.

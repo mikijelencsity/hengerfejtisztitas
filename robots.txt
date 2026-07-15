@@ -1,4 +1,30 @@
 User-agent: *
 Allow: /
 
+# AI kereső- és válaszmotorok (ChatGPT, Perplexity, Google AI Overviews, Claude stb.)
+# — engedélyezve, hogy pontosan tudjanak hivatkozni ránk
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://hengerfejtisztitas.hu/sitemap.xml
