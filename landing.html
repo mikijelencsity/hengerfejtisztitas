@@ -101,6 +101,30 @@ h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.1rem,6.5vw,3.8rem);
   .hp-arrow{font-size:1.2rem}
 }
 
+/* ---------- consequences ---------- */
+.consequences{background:var(--walnut-deep);padding:clamp(40px,6vh,60px) 0;text-align:center}
+.cq-title{font-family:var(--disp);font-weight:900;font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.2;text-transform:uppercase;color:var(--paper);max-width:20ch;margin:0 auto 18px}
+.amber-lt{color:#dda574}
+.cq-arrow{font-size:1.6rem;color:rgba(245,240,230,.35);margin-bottom:22px}
+.cq-list{list-style:none;display:flex;flex-direction:column;gap:14px;max-width:360px;margin:0 auto}
+.cq-list li{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--body);font-weight:700;font-size:1.05rem;color:var(--paper)}
+.cq-list li::before{content:'✕';color:#d97757;font-weight:700}
+
+/* ---------- scroll reveal ---------- */
+.reveal-init{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal-init.in-view{opacity:1;transform:translateY(0)}
+
+/* ---------- sticky cta (desktop) ---------- */
+.sticky-cta{position:fixed;right:26px;bottom:26px;z-index:150;opacity:0;transform:translateY(14px);pointer-events:none;transition:.3s ease}
+.sticky-cta.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.sticky-cta a{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:.84rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--paper);background:var(--walnut);padding:16px 26px;
+  border-radius:30px;text-decoration:none;box-shadow:0 14px 32px rgba(36,28,18,.28);transition:.25s;
+}
+.sticky-cta a:hover{background:var(--walnut-hot)}
+@media(max-width:899px){.sticky-cta{display:none}}
+
 /* ---------- problem ---------- */
 .problem{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 h2{font-family:var(--disp);font-weight:900;font-size:clamp(1.7rem,4.5vw,2.8rem);line-height:1.15;text-transform:uppercase;text-align:center;max-width:20ch;margin:0 auto 40px}
@@ -263,6 +287,18 @@ body{padding-bottom:64px}
   </div>
 </section>
 
+<section class="consequences">
+  <div class="wrap">
+    <h2 class="cq-title">Mi történik, <span class="amber-lt">ha nem tisztíttatod ki?</span></h2>
+    <div class="cq-arrow">↓</div>
+    <ul class="cq-list">
+      <li>Nő a fogyasztás</li>
+      <li>Csökken a teljesítmény</li>
+      <li>Drága motorhibához vezethet</li>
+    </ul>
+  </div>
+</section>
+
 <section class="problem">
   <div class="wrap">
     <h2>Ismerős valamelyik? <span class="amber">Akkor ez rólad szól.</span></h2>
@@ -396,6 +432,10 @@ body{padding-bottom:64px}
   <a href="#ajanlat" class="sb-form">Felmérés</a>
 </div>
 
+<div class="sticky-cta" id="stickyCta">
+  <a href="#ajanlat">Kérek ingyenes állapotfelmérést ▸</a>
+</div>
+
 <script>
 document.getElementById('leadForm').addEventListener('submit', function(e){
   e.preventDefault();
@@ -416,6 +456,27 @@ document.getElementById('quickForm').addEventListener('submit', function(e){
   document.getElementById('ajanlat').scrollIntoView({behavior:'smooth'});
   document.getElementById('f-name').focus();
 });
+
+if('IntersectionObserver' in window){
+  document.querySelectorAll('section:not(.hero)').forEach(el => el.classList.add('reveal-init'));
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal-init').forEach(el => revealObserver.observe(el));
+
+  const stickyCta = document.getElementById('stickyCta');
+  const hero = document.querySelector('.hero');
+  const formSec = document.getElementById('ajanlat');
+  let heroVisible = true, formVisible = false;
+  const updateSticky = () => stickyCta.classList.toggle('show', !heroVisible && !formVisible);
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; updateSticky(); }).observe(hero);
+  new IntersectionObserver(([e]) => { formVisible = e.isIntersecting; updateSticky(); }, {threshold:.15}).observe(formSec);
+}
 </script>
 
 </body>
