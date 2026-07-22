@@ -23,7 +23,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Archivo:wght@400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#f5f0e6;--paper-2:#ede6d6;--card:#faf6ee;--ink:#241c12;--ink-dim:#71634f;
@@ -148,7 +148,8 @@ h2{font-family:var(--disp);font-weight:900;font-size:clamp(1.7rem,4.5vw,2.8rem);
   transition:.2s;
 }
 a.chl-phone:hover{background:rgba(245,240,230,.12);border-color:rgba(245,240,230,.35)}
-.chl-ic{font-size:1.6rem;flex-shrink:0}
+.chl-ic{flex-shrink:0;width:26px;height:26px}
+.chl-ic svg{width:100%;height:100%;fill:var(--paper)}
 .chl-item b{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,240,230,.6);margin-bottom:4px;font-weight:400}
 .chl-item span{display:block;font-family:var(--disp);font-weight:700;font-size:1.15rem;color:var(--paper)}
 
@@ -208,6 +209,10 @@ body{padding-bottom:64px}
 @media(min-width:900px){
   .sticky-bar{display:none}
   body{padding-bottom:0}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 </style>
 </head>
@@ -311,11 +316,11 @@ body{padding-bottom:64px}
   <div class="wrap">
     <div class="contact-hl-grid">
       <div class="chl-item">
-        <div class="chl-ic">📍</div>
+        <div class="chl-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
         <div><b>Szolgáltatási terület</b><span>Ózd és környéke, Borsod-Abaúj-Zemplén vm.</span></div>
       </div>
       <a href="tel:+36708031160" class="chl-item chl-phone">
-        <div class="chl-ic">📞</div>
+        <div class="chl-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/></svg></div>
         <div><b>Hívj most</b><span>+36 70 803 1160</span></div>
       </a>
     </div>
