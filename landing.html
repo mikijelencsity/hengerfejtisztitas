@@ -103,13 +103,65 @@ h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.1rem,6.5vw,3.8rem);
 }
 
 /* ---------- consequences ---------- */
-.consequences{background:var(--walnut-deep);padding:clamp(40px,6vh,60px) 0;text-align:center}
-.cq-title{font-family:var(--disp);font-weight:900;font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.2;text-transform:uppercase;color:var(--paper);max-width:20ch;margin:0 auto 18px}
+.consequences{
+  position:relative;overflow:hidden;text-align:center;padding:clamp(60px,9vh,90px) 0;
+  background:radial-gradient(ellipse 75% 65% at 50% 20%,rgba(232,60,30,.4),transparent 60%),#150a06;
+}
+.cq-pulse{position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 50% 18%,rgba(232,72,31,.55),transparent 70%);animation:cqpulse 2s ease-in-out infinite}
+@keyframes cqpulse{0%,100%{opacity:.55}50%{opacity:1}}
+.cq-inner{position:relative;z-index:1}
+.cq-badge{
+  display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.18em;
+  text-transform:uppercase;color:#fff;background:#e8481f;padding:9px 18px;border-radius:30px;margin-bottom:26px;
+  box-shadow:0 0 0 0 rgba(232,72,31,.6);animation:cqbadgepulse 2s ease-in-out infinite;
+}
+@keyframes cqbadgepulse{0%{box-shadow:0 0 0 0 rgba(232,72,31,.55)}70%{box-shadow:0 0 0 14px rgba(232,72,31,0)}100%{box-shadow:0 0 0 0 rgba(232,72,31,0)}}
+.cq-badge .b{width:7px;height:7px;border-radius:50%;background:#fff;animation:cqblink 1s steps(2) infinite}
+@keyframes cqblink{50%{opacity:.2}}
+.cq-title{font-family:var(--disp);font-weight:900;font-size:clamp(2.2rem,5.8vw,3.6rem);text-transform:uppercase;color:#fff;max-width:18ch;margin:0 auto 64px;line-height:1.05;text-shadow:0 0 40px rgba(232,72,31,.5)}
 .amber-lt{color:#dda574}
-.cq-arrow{font-size:1.6rem;color:rgba(245,240,230,.35);margin-bottom:22px}
-.cq-list{list-style:none;display:flex;flex-direction:column;gap:18px;max-width:620px;margin:0 auto}
-.cq-list li{display:flex;align-items:center;justify-content:center;gap:14px;font-family:var(--disp);font-weight:700;font-size:clamp(1.15rem,2.6vw,1.55rem);text-transform:uppercase;color:var(--paper)}
-.cq-list li::before{content:'✕';color:#d97757;font-weight:700}
+
+.cq-stage{position:relative;max-width:920px;margin:0 auto;min-height:300px;display:flex;align-items:flex-start;justify-content:center;padding-top:10px}
+.cq-car{width:min(380px,62%);position:relative;z-index:1;margin-top:-30px;filter:drop-shadow(0 24px 30px rgba(0,0,0,.55))}
+.cq-car svg{width:100%;height:auto;display:block}
+
+.cq-bubble{
+  position:absolute;max-width:250px;background:linear-gradient(#3a160a,#1c0b06);border:2px solid #e8481f;border-radius:16px;
+  padding:18px 20px 18px 54px;text-align:left;box-shadow:0 20px 42px rgba(0,0,0,.55),0 0 0 0 rgba(232,72,31,.5);
+  animation:cqbubblepulse 2.2s ease-in-out infinite;
+}
+@keyframes cqbubblepulse{0%{box-shadow:0 20px 42px rgba(0,0,0,.55),0 0 0 0 rgba(232,72,31,.45)}70%{box-shadow:0 20px 42px rgba(0,0,0,.55),0 0 0 10px rgba(232,72,31,0)}100%{box-shadow:0 20px 42px rgba(0,0,0,.55),0 0 0 0 rgba(232,72,31,0)}}
+.cq-bubble h3{font-family:var(--disp);font-weight:900;font-size:1.14rem;text-transform:uppercase;color:#fff;line-height:1.2;letter-spacing:-.01em}
+.cq-bubble .xchip{
+  position:absolute;left:-18px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
+  background:#e8481f;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;
+  color:#fff;font-size:1.2rem;box-shadow:0 0 0 4px #1c0b06,0 6px 16px rgba(232,72,31,.6);
+}
+
+.cq-b1{top:0%;left:-2%;transform:rotate(-3deg)}
+.cq-b1::after{content:'';position:absolute;bottom:-16px;right:34px;width:0;height:0;border:9px solid transparent;border-top-color:#e8481f;transform:rotate(28deg)}
+.cq-b2{top:-6%;right:-2%;transform:rotate(3deg)}
+.cq-b2::after{content:'';position:absolute;bottom:-16px;left:34px;width:0;height:0;border:9px solid transparent;border-top-color:#e8481f;transform:rotate(-28deg)}
+.cq-b3{bottom:-8%;left:50%;transform:translateX(-50%) rotate(-2deg)}
+.cq-b3::after{content:'';position:absolute;top:-16px;left:50%;margin-left:-9px;width:0;height:0;border:9px solid transparent;border-bottom-color:#e8481f}
+@media(max-width:760px){
+  .cq-bubble::after{display:none}
+  .cq-stage{flex-direction:column;gap:22px;min-height:0;padding-top:0;align-items:stretch}
+  .cq-bubble{position:relative;top:auto;left:auto;right:auto;bottom:auto;max-width:100%;transform:none!important;margin:0 6px}
+  .cq-car{width:70%;max-width:280px;margin:6px auto}
+}
+@media(max-width:400px){
+  .cq-bubble{padding:16px 16px 16px 50px}
+  .cq-bubble .xchip{width:34px;height:34px;font-size:1rem;left:-14px}
+  .cq-bubble h3{font-size:1rem}
+}
+
+.cq-cta{
+  margin-top:60px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:1.02rem;
+  letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#e8481f;padding:21px 44px;text-decoration:none;
+  border-radius:8px;box-shadow:0 0 0 0 rgba(232,72,31,.6);animation:cqbtn 2s ease-in-out infinite;
+}
+@keyframes cqbtn{0%{box-shadow:0 0 0 0 rgba(232,72,31,.55)}70%{box-shadow:0 0 0 18px rgba(232,72,31,0)}100%{box-shadow:0 0 0 0 rgba(232,72,31,0)}}
 
 /* ---------- scroll reveal ---------- */
 .reveal-init{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
@@ -290,14 +342,41 @@ body{padding-bottom:64px}
 </section>
 
 <section class="consequences">
-  <div class="wrap">
-    <h2 class="cq-title">Mi történik, <span class="amber-lt">ha nem tisztíttatod ki?</span></h2>
-    <div class="cq-arrow">↓</div>
-    <ul class="cq-list">
-      <li>Nő a fogyasztás</li>
-      <li>Csökken a teljesítmény</li>
-      <li>Drága motorhibához vezethet</li>
-    </ul>
+  <div class="cq-pulse"></div>
+  <div class="cq-inner wrap">
+    <div class="cq-badge"><span class="b"></span> Figyelmeztetés</div>
+    <h2 class="cq-title">Mi történik, ha nem tisztíttatod ki?</h2>
+    <div class="cq-stage">
+      <div class="cq-bubble cq-b1">
+        <span class="xchip">✕</span>
+        <h3>Nő a fogyasztás</h3>
+      </div>
+      <div class="cq-bubble cq-b2">
+        <span class="xchip">✕</span>
+        <h3>Csökken a teljesítmény</h3>
+      </div>
+      <div class="cq-car">
+        <svg viewBox="0 0 320 140">
+          <ellipse cx="160" cy="128" rx="132" ry="9" fill="rgba(0,0,0,.45)"/>
+          <path d="M15,100 C8,100 4,94 4,87 C4,80 9,75 16,73 L55,64 L95,28 C104,19 116,14 129,14 L205,14 C217,14 228,20 235,30 L255,64 L296,72 C304,74 309,81 309,89 C309,96 303,101 296,101 Z" fill="#2a1108" stroke="#e8481f" stroke-width="1.4" stroke-opacity=".55"/>
+          <path d="M100,28 L129,20 L129,55 L78,55 Z" fill="#f5f0e6" fill-opacity=".9"/>
+          <path d="M137,20 L205,20 L230,55 L137,55 Z" fill="#f5f0e6" fill-opacity=".9"/>
+          <rect x="131" y="20" width="4" height="35" fill="#2a1108"/>
+          <rect x="150" y="66" width="16" height="4" rx="2" fill="#f5f0e6" fill-opacity=".5"/>
+          <ellipse cx="16" cy="80" rx="7" ry="5" fill="#ffcf8a"/>
+          <ellipse cx="302" cy="83" rx="6" ry="5" fill="#e8481f"/>
+          <circle cx="72" cy="102" r="21" fill="#150a06" stroke="#f5f0e6" stroke-width="2" stroke-opacity=".5"/>
+          <circle cx="72" cy="102" r="8" fill="#f5f0e6" fill-opacity=".7"/>
+          <circle cx="248" cy="102" r="21" fill="#150a06" stroke="#f5f0e6" stroke-width="2" stroke-opacity=".5"/>
+          <circle cx="248" cy="102" r="8" fill="#f5f0e6" fill-opacity=".7"/>
+        </svg>
+      </div>
+      <div class="cq-bubble cq-b3">
+        <span class="xchip">✕</span>
+        <h3>Drága motorhibához vezethet</h3>
+      </div>
+    </div>
+    <a href="#ajanlat" class="cq-cta">Kérek ingyenes állapotfelmérést ▸</a>
   </div>
 </section>
 
