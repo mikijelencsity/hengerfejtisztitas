@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dióhéjas Szeleptisztítás Ózd — Kérj ingyenes állapotfelmérést</title>
-<meta name="description" content="A motorod kokszot eszik? Bontás nélküli, dióhéjas szívószelep-tisztítás Ózdon, 1–2 óra alatt. Kérj ingyenes állapotfelmérést most — hívlak vissza 2 percen belül.">
+<title>Dióhéjas Szeleptisztítás Ózd — Kérj állapotfelmérést</title>
+<meta name="description" content="A motorod kokszot eszik? Bontás nélküli, dióhéjas szívószelep-tisztítás Ózdon, 1–2 óra alatt. Kérj állapotfelmérést most — hívlak vissza 2 percen belül.">
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Dióhéjas Szeleptisztítás Ózd — Kérj ingyenes állapotfelmérést">
-<meta property="og:description" content="A motorod kokszot eszik? Bontás nélküli, dióhéjas szívószelep-tisztítás Ózdon, 1–2 óra alatt. Kérj ingyenes állapotfelmérést most — hívlak vissza 2 percen belül.">
+<meta property="og:title" content="Dióhéjas Szeleptisztítás Ózd — Kérj állapotfelmérést">
+<meta property="og:description" content="A motorod kokszot eszik? Bontás nélküli, dióhéjas szívószelep-tisztítás Ózdon, 1–2 óra alatt. Kérj állapotfelmérést most — hívlak vissza 2 percen belül.">
 <meta property="og:image" content="https://hengerfejtisztitas.hu/images/after-szelepek-tiszta.jpg">
 <meta property="og:url" content="https://hengerfejtisztitas.hu/landing.html">
 <meta property="og:locale" content="hu_HU">
@@ -193,14 +193,6 @@ h2{font-family:var(--disp);font-weight:900;font-size:clamp(1.7rem,4.5vw,2.8rem);
 /* ---------- solution ---------- */
 .solution-lead{text-align:center;max-width:64ch;margin:0 auto 44px;color:var(--ink-dim);font-size:1.1rem}
 .solution-lead strong{color:var(--ink)}
-.solution-badges{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-.badge{
-  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 20px;text-align:center;
-  flex:1;min-width:180px;max-width:240px;
-}
-.badge .ic{font-size:1.6rem;color:var(--walnut);margin-bottom:10px}
-.badge h4{font-family:var(--disp);font-weight:700;font-size:.98rem;margin-bottom:6px;text-transform:uppercase}
-.badge p{color:var(--ink-dim);font-size:.86rem}
 
 /* ---------- personal trust ---------- */
 .trust-card{
@@ -321,7 +313,7 @@ body{padding-bottom:64px}
       <li>Fix, előre tudott ár</li>
     </ul>
     <div class="hero-ctas">
-      <a href="#ajanlat" class="btn btn-solid">Kérek ingyenes állapotfelmérést ▸</a>
+      <a href="#ajanlat" class="btn btn-solid">Kérek állapotfelmérést ▸</a>
       <a href="tel:+36708031160" class="btn btn-ghost">Hívlak inkább most</a>
     </div>
     <div class="hero-proof">
@@ -376,7 +368,7 @@ body{padding-bottom:64px}
         <h3>Drága motorhibához vezethet</h3>
       </div>
     </div>
-    <a href="#ajanlat" class="cq-cta">Kérek ingyenes állapotfelmérést ▸</a>
+    <a href="#ajanlat" class="cq-cta">Kérek állapotfelmérést ▸</a>
   </div>
 </section>
 
@@ -404,15 +396,19 @@ body{padding-bottom:64px}
   </div>
 </section>
 
-<section>
+<section class="form-sec" id="egyutt">
   <div class="wrap">
-    <h2>Hogyan oldjuk meg <span class="amber">bontás nélkül?</span></h2>
-    <p class="solution-lead">Apró, kemény dióhéj-granulátumot szórunk nyomás alatt a szívócsatornába — ez lepattintja a rárakódott kokszot, miközben azonnal el is szívjuk. A szelep és a hengerfej felülete nem sérül.</p>
-    <div class="solution-badges">
-      <div class="badge"><div class="ic">◆</div><h4>Nem karcol</h4><p>A dióhéj keménysége épp annyi, hogy a kokszot lepattintja — a fémet nem.</p></div>
-      <div class="badge"><div class="ic">◈</div><h4>Zárt rendszer</h4><p>Szórás és elszívás egyszerre — semmi nem marad a szívórendszerben.</p></div>
-      <div class="badge"><div class="ic">✦</div><h4>Endoszkópos ellenőrzés</h4><p>Előtte-utána kamerás dokumentációt kapsz, nem csak ígéretet.</p></div>
-      <div class="badge"><div class="ic">▣</div><h4>1–2 óra alatt kész</h4><p>Bontás nélkül, jellemzően aznap viheted is a kocsit.</p></div>
+    <div class="form-card">
+      <h2 style="margin-bottom:6px">Oldjuk meg <span class="amber">együtt</span></h2>
+      <p class="sub">Írd meg a típust és mit tapasztalsz — visszahívlak 2 percen belül, típus és motorkód alapján pontos árat mondok.</p>
+      <form id="leadForm2">
+        <div class="field"><label for="f-name2">Neved</label><input id="f-name2" name="name" type="text" required placeholder="Kovács Péter"></div>
+        <div class="field"><label for="f-phone2">Telefonszámod</label><input id="f-phone2" name="phone" type="tel" required placeholder="+36 30 123 4567"></div>
+        <div class="field"><label for="f-car2">Autó típusa / motorkód</label><input id="f-car2" name="car" type="text" placeholder="pl. VW Golf 7, 1.4 TSI, CZDA"></div>
+        <div class="field"><label for="f-msg2">Üzenet (opcionális)</label><textarea id="f-msg2" name="message" placeholder="Mit tapasztalsz a motorral?"></textarea></div>
+        <button type="submit" class="form-submit">Kérem az állapotfelmérést ▸</button>
+        <p class="form-note">A gomb megnyitja a telefonod SMS-alkalmazását egy előre kitöltött üzenettel — csak el kell küldeni.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -486,7 +482,7 @@ body{padding-bottom:64px}
 <section class="form-sec" id="ajanlat">
   <div class="wrap">
     <div class="form-card">
-      <h2 style="margin-bottom:6px">Kérj ingyenes állapotfelmérést</h2>
+      <h2 style="margin-bottom:6px">Kérj állapotfelmérést</h2>
       <p class="sub">Add meg az adataidat — visszahívlak 2 percen belül, típus és motorkód alapján pontos árat mondok.</p>
       <form id="leadForm">
         <div class="field"><label for="f-name">Neved</label><input id="f-name" name="name" type="text" required placeholder="Kovács Péter"></div>
@@ -514,21 +510,25 @@ body{padding-bottom:64px}
 </div>
 
 <div class="sticky-cta" id="stickyCta">
-  <a href="#ajanlat">Kérek ingyenes állapotfelmérést ▸</a>
+  <a href="#ajanlat">Kérek állapotfelmérést ▸</a>
 </div>
 
 <script>
-document.getElementById('leadForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const name = document.getElementById('f-name').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
-  const car = document.getElementById('f-car').value.trim();
-  const msg = document.getElementById('f-msg').value.trim();
-  let body = `Árajánlatot kérek. Nevem: ${name}. Visszahívó szám: ${phone}.`;
-  if(car) body += ` Autó: ${car}.`;
-  if(msg) body += ` Üzenet: ${msg}.`;
-  window.location.href = 'sms:+36708031160?&body=' + encodeURIComponent(body);
-});
+function bindLeadForm(formId, name, phone, car, msg){
+  document.getElementById(formId).addEventListener('submit', function(e){
+    e.preventDefault();
+    const n = document.getElementById(name).value.trim();
+    const p = document.getElementById(phone).value.trim();
+    const c = document.getElementById(car).value.trim();
+    const m = document.getElementById(msg).value.trim();
+    let body = `Árajánlatot kérek. Nevem: ${n}. Visszahívó szám: ${p}.`;
+    if(c) body += ` Autó: ${c}.`;
+    if(m) body += ` Üzenet: ${m}.`;
+    window.location.href = 'sms:+36708031160?&body=' + encodeURIComponent(body);
+  });
+}
+bindLeadForm('leadForm', 'f-name', 'f-phone', 'f-car', 'f-msg');
+bindLeadForm('leadForm2', 'f-name2', 'f-phone2', 'f-car2', 'f-msg2');
 
 document.getElementById('quickForm').addEventListener('submit', function(e){
   e.preventDefault();
