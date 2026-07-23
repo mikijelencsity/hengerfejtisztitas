@@ -76,6 +76,7 @@ h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.1rem,6.5vw,3.8rem);
 .quick-form button{font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--paper);background:var(--walnut);border:none;padding:14px 20px;cursor:pointer;white-space:nowrap;border-radius:8px;transition:.25s}
 .quick-form button:hover{background:var(--walnut-hot)}
 .qf-note{text-align:center;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:30px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .btn{
   font-family:var(--mono);font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
   padding:18px 34px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:.25s;
@@ -280,6 +281,7 @@ body{padding-bottom:64px}
       <div class="caption">Ez lesz a te motorodból is</div>
     </div>
     <form id="quickForm" class="quick-form">
+      <label for="qf-phone" class="sr-only">Telefonszámod</label>
       <input type="tel" id="qf-phone" placeholder="Telefonszámod" required>
       <button type="submit">Hívj vissza ▸</button>
     </form>
@@ -355,7 +357,7 @@ body{padding-bottom:64px}
         <div class="g-item"><picture><source srcset="images/after-kerek-csatorna.webp" type="image/webp"><img src="images/after-kerek-csatorna.jpg" alt="Fémtiszta szívócsatorna tisztítás után" loading="lazy"></picture><span class="g-tag">Utána</span></div>
       </div>
       <div class="g-pair">
-        <div class="g-item"><img src="images/before-koksz-szivocsatorna.jpg" alt="Erősen kokszos szívócsatorna tisztítás előtt" loading="lazy"><span class="g-tag">Előtte</span></div>
+        <div class="g-item"><picture><source srcset="images/before-koksz-szivocsatorna.webp" type="image/webp"><img src="images/before-koksz-szivocsatorna.jpg" alt="Erősen kokszos szívócsatorna tisztítás előtt" loading="lazy"></picture><span class="g-tag">Előtte</span></div>
         <div class="g-item"><picture><source srcset="images/after-csatorna-tiszta.webp" type="image/webp"><img src="images/after-csatorna-tiszta.jpg" alt="Fémtiszta szívócsatorna tisztítás után" loading="lazy"></picture><span class="g-tag">Utána</span></div>
       </div>
       <div class="g-item g-wide"><picture><source srcset="images/process-endoszkop.webp" type="image/webp"><img src="images/process-endoszkop.jpg" alt="Endoszkópos ellenőrzés munka közben" loading="lazy"></picture><span class="g-tag">Folyamat — endoszkópos ellenőrzés</span></div>
